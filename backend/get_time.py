@@ -37,7 +37,7 @@ def getTime():
     
     return formatted_dates
 
-def get_ordinal_suffix( day):
+def get_ordinal_suffix(day):
     """Returns the correct ordinal suffix for a day number"""
     if 11 <= day <= 13:
         return 'th'

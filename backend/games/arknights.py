@@ -40,6 +40,7 @@ class ArkScraper():
                 print("No HTML content to parse!")
                 return
             
+            
             events = soup.find_all("table", class_=table_text)
             print(f"Currently in {game_name}")
             found_events = []
@@ -68,13 +69,23 @@ class ArkScraper():
             
         The goal of this function is to format the extracted events info in Arknights.
         '''
-        formatted_events = []
+        
+        set_events = set()
         for i in range(len(row_data)):
-            splice_global = row_data[i][1].find("Global:")
+            l = tuple(row_data[i])
+            set_events.add(l)
+            
+        list_events = list(set_events)
+
+        formatted_events = []
+        for i in range(len(list_events)):
+            splice_global = list_events[i][1].find("Global:") # why row_data[i][1]? Because [1] is where the date is stored. It's usually
+                                                           # "EVENT_NAME | CN:2025-12-23GLOBAL:2026-5-23" so we have to get the [1] for the date.
             if splice_global != -1:
-                global_date = row_data[i][1][splice_global:]
-            event_info = (f"Event {i+1}: {row_data[i][0]} | Date: {global_date}")
+                global_date = list_events[i][1][splice_global:]
+            event_info = (f"Event {i+1}: {list_events[i][0]} | Date: {global_date}")
             formatted_events.append(event_info)
+        formatted_events = list(dict.fromkeys(formatted_events))
         return formatted_events
             
     def data_getter(self):

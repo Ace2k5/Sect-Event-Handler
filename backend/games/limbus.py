@@ -49,7 +49,7 @@ class LimbusScraper():
             target_year = dates_format.split()[1]
             
             found_events = []
-            print(f"Current game is {game}")
+            print(f"Currently in {game}")
             events = soup.find_all("table", class_=table_class)
             for table in events:
                 rows = table.find_all("tr")
@@ -66,13 +66,26 @@ class LimbusScraper():
                             
                 
     def format_limbus(self, row_data):
+        '''
+        Args:
+            row_data: A list of events which contains the substrings of current date
+            
+        Format Limbus Company events by deduplicating, cleaning empty strings, 
+        and formatting into readable strings.
+    
+        Table structure is guaranteed: [Event Name, Start Date, End Date]
+        '''
         if row_data is None:
             print("Row data is None on Limbus")
             return
+        
+        # deduplication
         set_events = set()
         for i in range(len(row_data)):
             l = tuple(row_data[i])
             set_events.add(l)
+        
+        # trim empty strings
         list_events = list(set_events)
         clean_list = []
         for events in range(len(list_events)):
