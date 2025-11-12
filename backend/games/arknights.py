@@ -7,7 +7,7 @@ class ArkScraper():
     def __init__(self):
         self.sites = inits.SITES # (TABLE CLASS, URL, GAME)
         self.dates = get_time.getTime()
-        self.data_getter()
+        
             
     def get_response(self, url):
         '''
@@ -67,13 +67,12 @@ class ArkScraper():
             
         The goal of this function is to format the extracted events info in Arknights.
         '''
-        print(row_data)
         formatted_events = []
         for i in range(len(row_data)):
             splice_global = row_data[i][1].find("Global:")
             if splice_global != -1:
                 global_date = row_data[i][1][splice_global:]
-            event_info = (f"Event: {row_data[i][0]} | Date: {global_date}")
+            event_info = (f"Event {i+1}: {row_data[i][0]} | Date: {global_date}")
             formatted_events.append(event_info)
         return formatted_events
             
@@ -84,7 +83,4 @@ class ArkScraper():
         events = self.find_arknights_events(response, table, game, self.dates)
         data = self.format_arknights(events)
         return data
-
-
-a = ArkScraper()
     

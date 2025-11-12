@@ -1,4 +1,4 @@
-from games import arknights
+from .games import arknights
 
 class ScrapeFlow():
     def __init__(self):
@@ -15,6 +15,13 @@ class ScrapeFlow():
         '''
         # Arknights
         try:
-            ark.data_getter()
+            data = ark.data_getter()
+            for i in range(len(data)):
+                print(data[i])
         except Exception as e:
             print(f"Error occured as {e}")
+            
+            
+            
+            
+a = ScrapeFlow()
