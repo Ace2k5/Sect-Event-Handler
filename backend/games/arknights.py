@@ -57,6 +57,7 @@ class ArkScraper():
                                 found_events.append(row_data)
             return found_events
         else:
+            print("Arknights does not exist. Please fix.")
             return
                         
     
