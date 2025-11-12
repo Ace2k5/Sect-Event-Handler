@@ -1,31 +1,13 @@
 import requests
 from bs4 import BeautifulSoup
 from datetime import date
-import inits, get_time
+from .. import inits, get_time
 
-class WebScraper():
+class ArkScraper():
     def __init__(self):
-        sites = inits.SITES # (TABLE CLASS, URL, GAME)
-        dates = get_time.getTime()
-        self.flow(sites, dates)
-    
-    def flow(self, sites, dates):
-        '''
-        Args:
-            sites: a list containing tuples of relevant strings to each individual game ('HTML class', 'URL link', 'Game Name')
-            dates: a list containing multiple formats of yyyy-mm-dd
-        
-        This function is the main flow of the web scraper. Everything web scraping related must be implemented here.
-        '''
-        # Arknights
-        soup = self.get_response(sites[0][1])
-        data = self.find_arknights_events(soup, sites[0][0], sites[0][2], dates)
-        if len(data) > 1:
-            self.format_arknights(data)
-        else:
-            print("Something went wrong with trying to get data from Arknights")
-        # Limbus Company
-        
+        self.sites = inits.SITES # (TABLE CLASS, URL, GAME)
+        self.dates = get_time.getTime()
+        self.data_getter()
             
     def get_response(self, url):
         '''
@@ -86,15 +68,23 @@ class WebScraper():
         The goal of this function is to format the extracted events info in Arknights.
         '''
         print(row_data)
+        formatted_events = []
         for i in range(len(row_data)):
             splice_global = row_data[i][1].find("Global:")
             if splice_global != -1:
                 global_date = row_data[i][1][splice_global:]
-            print(f"Event: {row_data[i][0]} | Date: {global_date}")
-    #############################################################################################################################
-    
-    # Limbus Company
-    
-    
+            event_info = (f"Event: {row_data[i][0]} | Date: {global_date}")
+            formatted_events.append(event_info)
+        return formatted_events
+            
+    def data_getter(self):
+        site_config = self.sites[0]
+        table, url, game = site_config
+        response = self.get_response(url)
+        events = self.find_arknights_events(response, table, game, self.dates)
+        data = self.format_arknights(events)
+        return data
 
-a = WebScraper()
+
+a = ArkScraper()
+    
