@@ -1,7 +1,7 @@
 import requests
 from bs4 import BeautifulSoup
 from datetime import date
-from .. import inits, get_time
+from .. import inits, get_time, utils
 
 class LimbusScraper():
     def __init__(self):
@@ -44,21 +44,21 @@ class LimbusScraper():
             if soup is None:
                 print("Soup is none in Limbus Company")
                 return
-            
-            target_month = dates_format.split()[0]
-            target_year = dates_format.split()[1]
+            # November 2025 turns into:
+            target_month = dates_format.split()[0] # November 
+            target_year = dates_format.split()[1] # 2025
             
             found_events = []
             print(f"Currently in {game}")
             events = soup.find_all("table", class_=table_class)
-            for table in events:
+            for table in events: # iterates everything inside the table_class
                 rows = table.find_all("tr")
-                for row in rows:
-                    cells = row.find_all("td")
+                for row in rows: # delves deeper into tr
+                    cells = row.find_all("td") # gets string from td
                     if cells:
                         row_data = []
                         for cell in cells:
-                            text = cell.get_text(strip=True)
+                            text = cell.get_text(strip=True) # remove unnecessary text
                             row_data.append(text)
                         if target_month in text and target_year in text:
                             found_events.append(row_data)
@@ -80,20 +80,11 @@ class LimbusScraper():
             return
         
         # deduplication
-        set_events = set()
-        for i in range(len(row_data)):
-            l = tuple(row_data[i])
-            set_events.add(l)
+        events = utils.deduplication(row_data)
         
         # trim empty strings
-        list_events = list(set_events)
-        clean_list = []
-        for events in range(len(list_events)):
-            clean_event = []
-            for indices in range(len(list_events[events])):
-                if list_events[events][indices] != '':
-                    clean_event.append(list_events[events][indices])
-            clean_list.append(clean_event)
+        list_events = list(events)
+        clean_list = utils.trimEmptyString(list_events)
             
         formatted_events = []
         for i in range(len(clean_list)):

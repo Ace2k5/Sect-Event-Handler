@@ -1,7 +1,7 @@
 import requests
 from bs4 import BeautifulSoup
 from datetime import date
-from .. import inits, get_time
+from .. import inits, get_time, utils
 
 class ArkScraper():
     def __init__(self):
@@ -70,10 +70,10 @@ class ArkScraper():
         The goal of this function is to format the extracted events info in Arknights.
         '''
         
-        set_events = set()
-        for i in range(len(row_data)):
-            l = tuple(row_data[i])
-            set_events.add(l)
+        set_events = utils.deduplication(row_data)
+        if set_events is None:
+            print("Events is None, deduplication problem")
+            return
             
         list_events = list(set_events)
 
