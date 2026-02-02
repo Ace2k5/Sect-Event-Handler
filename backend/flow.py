@@ -1,4 +1,4 @@
-from .games import arknights, limbus
+from .games_wiki import arknights, limbus
 
 class ScrapeFlow():
     def __init__(self):
@@ -16,8 +16,8 @@ class ScrapeFlow():
         # Arknights
         try:
             data = ark.data_getter()
-            for i in range(len(data)):
-                print(data[i])
+            for i in data:
+                print(f"Event Name: {i['Event']} | CN: {i['CN']} | Global: {i['Global']}")
         except Exception as e:
             print(f"Error occured as {e}")
         # Limbus

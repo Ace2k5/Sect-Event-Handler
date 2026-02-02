@@ -1,41 +1,24 @@
 import requests
+from .base_scraper import BaseScraper
 from bs4 import BeautifulSoup
 from datetime import date
 from .. import inits, get_time, utils
 
-class LimbusScraper():
+class LimbusScraper(BaseScraper):
     def __init__(self):
         self.sites = inits.SITES
         self.dates = get_time.getTime()
-        
-    
-    def get_response(self, url):
-        '''
-        Args:
-            url: Contained inside of a tuple located in inits.py, the 3rd iteration.
-        
-        '''
-        try:
-            response = requests.get(url)
-            if response.status_code == 200:
-                soup = BeautifulSoup(response.text, 'html.parser')
-                return soup
-            else:
-                print(f"Response status ended up being: {response.status_code}")
-                return None
-        except Exception as e:
-            print(f"Error occured as {e}")
-            return None
-        
-    def find_limbus_events(self, soup, table_class, url, game, dates_format):
+
+    def find_events(self, soup, table_class, game, dates_format) -> list:
         '''
             Args:
                 soup: parser for the URL
-                table_text: HTML class
+                table_class: HTML class
                 game_name: Name of the game
                 date_formats: a list containing multiple formats of yyyy-mm-dd
                 
-            The goal of this function is to find the current events inside of the Limbus Company Wiki.
+            returns:
+                A list containing all of the events inside the Limbus Wiki
             
         '''
         
@@ -60,12 +43,11 @@ class LimbusScraper():
                         for cell in cells:
                             text = cell.get_text(strip=True) # remove unnecessary text
                             row_data.append(text)
-                        if target_month in text and target_year in text:
+                        if len(row_data) > 1 and target_month in row_data[1] and target_year in row_data[1]: # protect against single elements and for current date and year.
                             found_events.append(row_data)
             return found_events
-                            
-                
-    def format_limbus(self, row_data):
+
+    def format_events(self, row_data) -> list:
         '''
         Args:
             row_data: A list of events which contains the substrings of current date
@@ -74,6 +56,9 @@ class LimbusScraper():
         and formatting into readable strings.
     
         Table structure is guaranteed: [Event Name, Start Date, End Date]
+
+        returns:
+            A clean list that contains [Event Name, Start Date, End Date]
         '''
         if row_data is None:
             print("Row data is None on Limbus")
@@ -81,6 +66,9 @@ class LimbusScraper():
         
         # deduplication
         events = utils.deduplication(row_data)
+        if events is None:
+            print("Events is None, deduplication problem")
+            return
         
         # trim empty strings
         list_events = list(events)
@@ -88,19 +76,23 @@ class LimbusScraper():
             
         formatted_events = []
         for i in range(len(clean_list)):
-            event_info = (f"Event {i+1}: {clean_list[i][0]} | Date: {clean_list[i][1]} - {clean_list[i][2]}")
-            formatted_events.append(event_info)
+            if len(clean_list[i]) >= 3:
+                event_info = (f"Event {i+1}: {clean_list[i][0]} | Date: {clean_list[i][1]} - {clean_list[i][2]}")
+                formatted_events.append(event_info)
+        if not formatted_events:
+            print("No ongoing events in Limbus Company.")
+            return None
+        
         return formatted_events
-        
-            
-        
     
-    def data_getter(self):
+    def data_getter(self) -> list:
         site_config = self.sites[1]
         table_class, url, game = site_config
         soup = self.get_response(url)
-        data = self.find_limbus_events(soup, table_class, url, game, self.dates[0])
-        formatted_data = self.format_limbus(data)
+        data = self.find_events(soup, table_class, game, self.dates[0])
+        if data is None:
+            return None
+        formatted_data = self.format_events(data)
         return formatted_data
         
         

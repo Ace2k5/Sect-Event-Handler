@@ -50,5 +50,3 @@ def get_ordinal_suffix(day):
         return 'rd'
     else:
         return 'th'
-    
-    
