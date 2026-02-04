@@ -3,14 +3,16 @@ from .base_scraper import BaseScraper
 from bs4 import BeautifulSoup
 from datetime import date
 from .. import inits, get_time, utils
+from pathlib import Path
+import json
+from urllib.parse import urljoin
 
 class ArkScraper(BaseScraper):
     def __init__(self):
         self.sites = inits.SITES # (TABLE CLASS, URL, GAME)
-        self.dates = get_time.getTime()
 
     # Arknights ###################################################################################################################
-    def find_events(self, soup, table_text, game_name, date_formats):
+    def find_events(self, soup, table_text, game_name):
         '''
         Args:
             soup: parser for the URL
@@ -52,7 +54,34 @@ class ArkScraper(BaseScraper):
             print("Arknights does not exist. Please fix.")
             return
                         
-    
+    def find_img(self, soup, url, table_class, game):
+        if game != "Arknights":
+            print("The game args is not Arknights, please fix.")        
+        else:
+            filepath = Path("./arknights_imgs/")
+            filepath.mkdir(parents=True, exist_ok=True)
+            saved_event_imgs = list()
+            for img in soup.find_all("img", class_=table_class):
+                img_url = urljoin(url, img["src"])
+                filename = img["alt"]
+                data = requests.get(img_url).content
+
+                text = filename
+                if "CN" in text:
+                    text_part_temp = text.split("CN", 1)[1].strip()
+                elif "EN" in text:
+                    text_part_temp = text.split("EN", 1)[1].strip()
+                else:
+                    text_part_temp = text.strip()
+                text_part = text_part_temp.split("banner")[0].strip() if "banner" in text_part_temp else text_part_temp.split(".png")[0]
+
+                save_path = filepath / (text_part + ".png")
+
+                with open(save_path, "wb") as file:
+                    file.write(data)
+                saved_event_imgs.append(text_part)
+            return saved_event_imgs
+
     def format_events(self, row_data):
         '''
         Args:
@@ -81,12 +110,18 @@ class ArkScraper(BaseScraper):
                 cn_date_temp = cn_date_part.split("Global:")[0].strip() if "Global:" in cn_date_part else cn_date_part.strip()
                 cn_date = cn_date_temp.split("(")[0].strip()
                 normalized_cn = utils.normalize_date_range(cn_date)
+            else:
+                print(f"Could not normalize CN date in {date_str}")
+                return None
 
             global_date = None
             if "Global:" in date_str:
                 global_date_part = date_str.split("Global:")[1]
                 global_date = global_date_part.split("(")[0].strip()
                 normalized_global = utils.normalize_date_range(global_date)
+            else:
+                print(f"Could not normalize Global date in {date_str}")
+                return None
 
             clean_format.append({
                 "Event": event_name,
@@ -94,12 +129,26 @@ class ArkScraper(BaseScraper):
                 "Global": normalized_global
             })
         return clean_format
+    
+    def link_imgs(self, dictionary_of_events: dict[str, str], list_of_imgs: list[str]):
+        for event in dictionary_of_events:
+            event_name = event["Event"]
+            for imgs in list_of_imgs:
+                if imgs in event_name:
+                    event["Event_PNG"] = imgs
+        return dictionary_of_events
+
             
     def data_getter(self):
         site_config = self.sites[0]
         table, url, game = site_config
-        response = self.get_response(url)
-        events = self.find_events(response, table, game, self.dates)
+        soup = self.get_response(url)
+        events = self.find_events(soup, table, game)
         data = self.format_events(events)
-        return data
+        imgs_name = self.find_img(soup, url, "banner", game)
+
+        formatted_data = self.link_imgs(data, imgs_name)
+
+        print(formatted_data)
+        return formatted_data
     
