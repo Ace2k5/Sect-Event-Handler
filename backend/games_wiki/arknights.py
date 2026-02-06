@@ -79,7 +79,10 @@ class ArkScraper(BaseScraper):
 
                 with open(save_path, "wb") as file:
                     file.write(data)
-                saved_event_imgs.append(text_part)
+                saved_event_imgs.append({
+                    "Image_Name": text_part,
+                    "Image_URL": img_url
+                })
             return saved_event_imgs
 
     def format_events(self, row_data):
@@ -132,10 +135,14 @@ class ArkScraper(BaseScraper):
     
     def link_imgs(self, dictionary_of_events: dict[str, str], list_of_imgs: list[str]):
         for event in dictionary_of_events:
-            event_name = event["Event"]
+            event_name = event["Event"].replace(":", "").replace("-", "").replace("_", "")
             for imgs in list_of_imgs:
-                if imgs in event_name:
-                    event["Event_PNG"] = imgs
+                print(f"{imgs["Image_Name"]}, {imgs["Image_URL"]}")
+                if imgs["Image_Name"] in event_name:
+                    event["Event_PNG"] = imgs["Image_Name"]
+                    event["Event_PNG_URL"] = imgs["Image_URL"]
+
+                    print(f"Added {event["Event_PNG_URL"]} to {event["Event_PNG"]}")
         return dictionary_of_events
 
             
@@ -148,7 +155,6 @@ class ArkScraper(BaseScraper):
         imgs_name = self.find_img(soup, url, "banner", game)
 
         formatted_data = self.link_imgs(data, imgs_name)
-
         print(formatted_data)
         return formatted_data
     

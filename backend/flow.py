@@ -1,4 +1,4 @@
-from .games_wiki import arknights, limbus
+from .games_wiki import arknights, limbus, arknights_webhook
 
 class ScrapeFlow():
     def __init__(self):
@@ -16,6 +16,7 @@ class ScrapeFlow():
         # Arknights
         try:
             data = ark.data_getter()
+            arknights_webhook.send_to_discord(data, "webhook_here")
             for i in data:
                 print(f"Event Name: {i['Event']} | CN: {i['CN']} | Global: {i['Global']}")
         except Exception as e:
