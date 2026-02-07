@@ -2,26 +2,35 @@ import requests
 from .base_scraper import BaseScraper
 from bs4 import BeautifulSoup
 from datetime import date
-from .. import inits, get_time, utils
+from .. import inits,  utils
 from pathlib import Path
-import json
 from urllib.parse import urljoin
 
 class ArkScraper(BaseScraper):
     def __init__(self):
+        '''
+        Initializes the ArkScraper instance.
+        
+        Sets up the sites configuration from inits.SITES which contains
+        tuples of (TABLE_CLASS, URL, GAME) for each game to be scraped.
+        '''
         self.sites = inits.SITES # (TABLE CLASS, URL, GAME)
 
-    # Arknights ###################################################################################################################
     def find_events(self, soup, table_text, game_name):
         '''
+        Extracts event information from the parsed HTML soup.
+        
+        Searches for tables with the specified class and extracts event data,
+        filtering for relevant dates based on a lookback period.
+        
         Args:
-            soup: parser for the URL
-            table_text: HTML class
-            game_name: Name of the game
-            date_formats: a list containing multiple formats of yyyy-mm-dd
+            soup: BeautifulSoup parser object for the URL HTML content
+            table_text: CSS class name of the HTML table to search for
+            game_name: Name of the game (e.g., "Arknights")
             
-        returns:
-            A list containing all of the events of Arknights
+        Returns:
+            List of lists containing event data: [event_name, date_string, ...]
+            Returns None if game_name is not "Arknights" or soup is None
         '''
 
         LOOKBACK_DAYS = 30
@@ -55,6 +64,28 @@ class ArkScraper(BaseScraper):
             return
                         
     def find_img(self, soup, url, table_class, game):
+        '''
+        Downloads and saves event banner images from the wiki.
+        
+        Finds all images with the specified class, downloads them, and saves
+        them locally while cleaning up the filenames.
+        
+        Args:
+            soup: BeautifulSoup parser object containing the HTML content
+            url: Base URL of the website for resolving relative image URLs
+            table_class: CSS class name of images to find (e.g., "banner")
+            game: Name of the game (must be "Arknights")
+            
+        Returns:
+            List of dictionaries with structure:
+            [
+                {
+                    "Image_Name": str (cleaned filename without extension),
+                    "Image_URL": str (full URL to the image)
+                },
+                ...
+            ]
+        '''
         if game != "Arknights":
             print("The game args is not Arknights, please fix.")        
         else:
@@ -87,11 +118,26 @@ class ArkScraper(BaseScraper):
 
     def format_events(self, row_data):
         '''
+        Cleans and normalizes event data into a structured format.
+        
+        Deduplicates events and parses date strings to extract CN and Global
+        release dates, normalizing them into a consistent format.
+        
         Args:
-            row_data: A list containing each events found in Arknights by a pair of strings
+            row_data: List of raw event rows from find_events: [[event_name, date_string], ...]
+                      where date_string contains "CN:" and "Global:" markers
             
-        returns:
-            A list that contains a list [Event Name, Date]
+        Returns:
+            List of dictionaries with structure:
+            [
+                {
+                    "Event": str (event name),
+                    "CN": str (normalized CN date range, e.g., "Sep 04, 2025 – Sep 18, 2025"),
+                    "Global": str (normalized Global date range, e.g., "Feb 10, 2026 – Feb 24, 2026")
+                },
+                ...
+            ]
+            Returns None if date parsing fails
         '''
         
         set_events = utils.deduplication(row_data)
@@ -133,28 +179,74 @@ class ArkScraper(BaseScraper):
             })
         return clean_format
     
-    def link_imgs(self, dictionary_of_events: dict[str, str], list_of_imgs: list[str]):
+    def link_imgs(self, dictionary_of_events: list[dict], list_of_imgs: list[dict]) -> list:
+        '''
+        Links event banner images to their corresponding events.
+        
+        Normalizes event names and matches them with images by comparing the 
+        image name to the normalized event name. When a match is found, adds
+        image metadata directly to the event dictionary.
+        
+        
+        Args:
+            dictionary_of_events: List of event dictionaries with structure:
+                {
+                    "Event": str (event name),
+                    "CN": str (CN date range),
+                    "Global": str (Global date range)
+                }
+                
+            list_of_imgs: List of image dictionaries with structure:
+                {
+                    "Image_Name": str (cleaned image filename),
+                    "Image_URL": str (URL to the image)
+                }
+                    
+        Returns:
+            List of the same event dictionaries with two additional fields added
+            for matched images:
+                "Event_PNG": str (image filename)
+                "Event_PNG_URL": str (image URL)
+        '''
         for event in dictionary_of_events:
+            print(f"Current event: {event['Event']}")
             event_name = event["Event"].replace(":", "").replace("-", "").replace("_", "")
             for imgs in list_of_imgs:
-                print(f"{imgs["Image_Name"]}, {imgs["Image_URL"]}")
+                print(f"Matching {imgs['Image_Name']} to {event_name}")
                 if imgs["Image_Name"] in event_name:
                     event["Event_PNG"] = imgs["Image_Name"]
                     event["Event_PNG_URL"] = imgs["Image_URL"]
 
-                    print(f"Added {event["Event_PNG_URL"]} to {event["Event_PNG"]}")
+                    print(f"Matched {imgs['Image_Name']} to {event_name}.")
+                    print(f"Saved as: {event['Event_PNG']} and {event['Event_PNG_URL']}")
         return dictionary_of_events
 
             
     def data_getter(self):
+        '''
+        Main orchestration method that retrieves and processes all Arknights event data.
+        
+        Executes the full pipeline: fetches the webpage, extracts events,
+        downloads banners, formats data, and links images to events.
+        
+        Returns:
+            List of dictionaries with complete event information:
+            [
+                {
+                    "Matched_Event_IMGS": dict (matched event metadata),
+                    "CN_Date": str (CN release date range),
+                    "Global_Date": str (Global release date range),
+                    "Image_URL": str (URL to event banner image)
+                },
+                ...
+            ]
+        '''
         site_config = self.sites[0]
         table, url, game = site_config
         soup = self.get_response(url)
         events = self.find_events(soup, table, game)
         data = self.format_events(events)
         imgs_name = self.find_img(soup, url, "banner", game)
-
         formatted_data = self.link_imgs(data, imgs_name)
-        print(formatted_data)
         return formatted_data
     

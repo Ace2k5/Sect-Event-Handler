@@ -16,7 +16,7 @@ class ScrapeFlow():
         # Arknights
         try:
             data = ark.data_getter()
-            arknights_webhook.send_to_discord(data, "webhook_here")
+            arknights_webhook.send_to_discord(data, "???")
             for i in data:
                 print(f"Event Name: {i['Event']} | CN: {i['CN']} | Global: {i['Global']}")
         except Exception as e:
@@ -29,8 +29,5 @@ class ScrapeFlow():
             
         except Exception as e:
             print(f"Error occured as {e}")
-            
-            
-            
             
 a = ScrapeFlow()
