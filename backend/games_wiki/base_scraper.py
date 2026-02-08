@@ -1,12 +1,11 @@
 import requests
 from bs4 import BeautifulSoup
 from abc import ABC, abstractmethod
-from .. import inits, get_time
+from .. import inits
 
 class BaseScraper(ABC):
     def __init__(self):
         self.sites = inits.SITES
-        self.dates = get_time.getTime()
     
     def get_response(self, url):
         '''

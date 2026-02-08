@@ -2,13 +2,9 @@ import requests
 from .base_scraper import BaseScraper
 from bs4 import BeautifulSoup
 from datetime import date
-from .. import inits, get_time, utils
+from .. import inits, utils
 
 class LimbusScraper(BaseScraper):
-    def __init__(self):
-        self.sites = inits.SITES
-        self.dates = get_time.getTime()
-
     def find_events(self, soup, table_class, game, dates_format) -> list:
         '''
             Args:

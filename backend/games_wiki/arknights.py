@@ -7,9 +7,6 @@ from pathlib import Path
 from urllib.parse import urljoin
 
 class ArkScraper(BaseScraper):
-    def __init__(self):
-        self.sites = inits.SITES # (TABLE CLASS, URL, GAME)
-
     def find_events(self, soup, table_text, game_name):
         '''
         searches tables for the events
