@@ -7,6 +7,10 @@ from pathlib import Path
 from urllib.parse import urljoin
 
 class ArkScraper(BaseScraper):
+    '''
+    THESE IMPLEMENTATIONS ARE STRICTLY FOR AK ONLY!!!!!!!!
+    '''
+    
     def find_events(self, soup, table_text, game_name):
         '''
         searches tables for the events
@@ -18,7 +22,6 @@ class ArkScraper(BaseScraper):
             
         Returns:
             List of lists containing event data: [event_name, date_string, ...]
-            Returns None if game_name is not "Arknights" or soup is None
         '''
         events = soup.find_all("table", class_=table_text)
         lookbackdays = local_user.user.get('lookback_days', '30')
@@ -32,15 +35,13 @@ class ArkScraper(BaseScraper):
                     row_data = []
                     for cell in cells:
                         text = cell.get_text(strip=True)
+                        print(f"Appending {text} to row_data...")
                         row_data.append(text)
                         if len(row_data) > 1:
-                            date_text = row_data[1]
-                            if utils.is_relevant_date(date_text, lookback_days=lookbackdays):
-                                found_events.append(row_data)
-        
+                            found_events.append(row_data)
         return found_events
                         
-    def find_img(self, soup, url, table_class, game):
+    def find_img(self, soup: BeautifulSoup, url: str, table_class: str, game: str) -> list[dict]:
         '''
         downloads images for local use and saves img url in case we need to request the image again
         
@@ -63,11 +64,15 @@ class ArkScraper(BaseScraper):
         filepath = Path("./arknights_imgs/")
         filepath.mkdir(parents=True, exist_ok=True)
         saved_event_imgs = list()
+        
         for img in soup.find_all("img", class_=table_class):
             img_url = urljoin(url, img["src"])
             filename = img["alt"]
-            data = requests.get(img_url).content
-
+            response = self.session.get(img_url)
+            if not utils.request_error_handling(response):
+                print(f"Could not get image {img}. find_img function.")
+                continue
+            data = response.content
             text = filename
             if "CN" in text:
                 text_part_temp = text.split("CN", 1)[1].strip()
@@ -87,7 +92,7 @@ class ArkScraper(BaseScraper):
             })
         return saved_event_imgs
 
-    def format_events(self, row_data):
+    def format_events(self, row_data: list[list[str]]) -> list[dict]:
         '''
         removes CN and Global in the strings of row_data, only grabs dates(row[1]) and event name(row[0])
         
@@ -110,8 +115,7 @@ class ArkScraper(BaseScraper):
         
         set_events = utils.deduplication(row_data)
         if set_events is None:
-            print("Events is None, deduplication problem")
-            return
+            raise ValueError("Expected a set, None was returned.")
             
         list_events = list(set_events)
 
@@ -127,16 +131,16 @@ class ArkScraper(BaseScraper):
                 cn_date = cn_date_temp.split("(")[0].strip()
                 normalized_cn = utils.normalize_date_range(cn_date)
             else:
-                print(f"Could not normalize CN date in {date_str}")
-                return None
+                raise ValueError(f"Could not normalize CN date in {date_str}, format_events function")
 
             if "Global:" in date_str:
                 global_date_part = date_str.split("Global:")[1]
                 global_date = global_date_part.split("(")[0].strip()
+                if not utils.is_relevant_date(global_date):
+                    continue
                 normalized_global = utils.normalize_date_range(global_date)
             else:
-                print(f"Could not normalize Global date in {date_str}")
-                return None
+                raise ValueError(f"Could not normalize Global date in {date_str}, format_events function")
 
             clean_format.append({
                 "Event": event_name,
@@ -145,7 +149,7 @@ class ArkScraper(BaseScraper):
             })
         return clean_format
     
-    def link_imgs(self, dictionary_of_events: list[dict], list_of_imgs: list[dict]) -> list:
+    def link_imgs(self, dictionary_of_events: list[dict], list_of_imgs: list[dict]) -> list[dict]:
         '''
         links event and imgs by using substring match then append into existing dictionary(dictionary_of_events)
         Args:
@@ -195,12 +199,20 @@ class ArkScraper(BaseScraper):
                 ...
             ]
         '''
-        site_config = self.sites[0]
-        table, url, game = site_config
-        soup = self.get_response(url)
-        events = self.find_events(soup, table, game)
-        data = self.format_events(events)
-        imgs_name = self.find_img(soup, url, "banner", game)
-        formatted_data = self.link_imgs(data, imgs_name)
-        return formatted_data
-    
+        try:
+            site_config = self.sites[0]
+            table, url, game = site_config
+            soup = self.get_response(url)
+            if soup is None:
+                raise ValueError("Could not get HTML data in BaseScraper get_response function.")
+            
+            events = self.find_events(soup, table, game)
+            data = self.format_events(events)
+            imgs_list = self.find_img(soup, url, "banner", game)
+            formatted_data = self.link_imgs(data, imgs_list)
+            
+            self.session.close()
+            return formatted_data
+        except ValueError as e:
+            self.session.close()
+            raise ValueError(f"Value Error occured as {e} in data_getter function")

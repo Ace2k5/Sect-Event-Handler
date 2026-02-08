@@ -1,4 +1,4 @@
 user = {
-    "webhook": "put webhook here",
+    "webhook": "webhook here",
     "lookback_days": 30
 }

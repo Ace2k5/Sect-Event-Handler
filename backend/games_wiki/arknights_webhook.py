@@ -13,29 +13,28 @@ def send_to_discord(data: list):
             }
     '''
     webhook = local_user.user.get("webhook")
-    if webhook is None:
-        print("User has not put any webhook.")
-        raise IndexError
-    
-    for event in data:
-        event_name = event["Event"]
-        cn_date = event["CN"]
-        gb_date = event["Global"]
-        img_url = event.get("Event_PNG_URL", "https://upload.wikimedia.org/wikipedia/commons/1/14/No_Image_Available.jpg?20200913095930") # send a "no-image" png in case no image
-        embed = {
-            "title": event_name,
-            "fields": [
-                {"name": "CN Date", "value":cn_date, "inline":True},
-                {"name": "Global Date", "value":gb_date, "inline":True}
-            ],
-        }
-        if img_url:
-            embed["image"] = {"url": img_url}
+    if webhook.startswith("https"):
+        for event in data:
+            event_name = event["Event"]
+            cn_date = event["CN"]
+            gb_date = event["Global"]
+            img_url = event.get("Event_PNG_URL", "https://upload.wikimedia.org/wikipedia/commons/1/14/No_Image_Available.jpg?20200913095930") # send a "no-image" png in case no image
+            embed = {
+                "title": event_name,
+                "fields": [
+                    {"name": "CN Date", "value":cn_date, "inline":True},
+                    {"name": "Global Date", "value":gb_date, "inline":True}
+                ],
+            }
+            if img_url:
+                embed["image"] = {"url": img_url}
 
-        payload = {
-            "embeds": [embed]}
-        response = requests.post(webhook, json=payload)
-        if response.status_code != 204:
-            print(f"Failed to send: {response.status_code}, {response.text}")
-        else:
-            print(f"Sent: {event_name}")
+            payload = {
+                "embeds": [embed]}
+            response = requests.post(webhook, json=payload)
+            if response.status_code != 204:
+                print(f"Failed to send: {response.status_code}, {response.text}")
+            else:
+                print(f"Sent: {event_name}")
+    else:
+        raise ValueError("Webhook does not start with HTTPS, please input a valid Webhook URL.")

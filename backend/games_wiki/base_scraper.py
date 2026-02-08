@@ -6,6 +6,7 @@ from .. import inits
 class BaseScraper(ABC):
     def __init__(self):
         self.sites = inits.SITES
+        self.session = requests.Session()
     
     def get_response(self, url):
         '''
@@ -16,16 +17,15 @@ class BaseScraper(ABC):
             BeautifulSoup object or None if request fails
         '''
         try:
-            response = requests.get(url)
+            response = self.session.get(url)
             if response.status_code == 200:
                 soup = BeautifulSoup(response.text, 'html.parser')
                 return soup
             else:
                 print(f"Response status: {response.status_code}")
                 return None
-        except requests.exceptions.RequestException as e:
-            print(f"Error occurred: {e}")
-            return None
+        except requests.RequestException as e:
+            raise requests.RequestException(f"get_response returned as {e}")
     
     @abstractmethod
     def find_events(self, soup, table_class, game, dates_format):

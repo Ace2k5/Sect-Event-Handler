@@ -21,13 +21,5 @@ class ScrapeFlow():
                 print(f"Event Name: {i['Event']} | CN: {i['CN']} | Global: {i['Global']}")
         except Exception as e:
             print(f"Error occured as {e}")
-        # Limbus
-        try:
-            data = limbus.data_getter()
-            for i in range(len(data)):
-                print(data[i])
-            
-        except Exception as e:
-            print(f"Error occured as {e}")
             
 a = ScrapeFlow()
