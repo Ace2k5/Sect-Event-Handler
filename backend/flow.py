@@ -21,5 +21,3 @@ class ScrapeFlow():
                 print(f"Event Name: {i['Event']} | CN: {i['CN']} | Global: {i['Global']}")
         except Exception as e:
             print(f"Error occured as {e}")
-            
-a = ScrapeFlow()

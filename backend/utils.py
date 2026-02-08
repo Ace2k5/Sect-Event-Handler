@@ -18,7 +18,6 @@ def parse_date(date_str: str) -> date:
     Args:
         date_str: a string containing a date
     Parses a string into a datetime object regardless of format.
-    Returns None if parsing fails.
     """
     try:
         clean_str = clean_date_string(date_str) # clear ordinals and white space

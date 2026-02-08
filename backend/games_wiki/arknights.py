@@ -24,7 +24,7 @@ class ArkScraper(BaseScraper):
             List of lists containing event data: [event_name, date_string, ...]
         '''
         events = soup.find_all("table", class_=table_text)
-        lookbackdays = local_user.user.get('lookback_days', '30')
+
         print(f"Currently in {game_name}")
         found_events = []
         for table in events:
@@ -112,7 +112,7 @@ class ArkScraper(BaseScraper):
             ]
             Returns None if date parsing fails
         '''
-        
+        lookbackdays = local_user.user.get('lookback_days', 30)
         set_events = utils.deduplication(row_data)
         if set_events is None:
             raise ValueError("Expected a set, None was returned.")
@@ -136,7 +136,7 @@ class ArkScraper(BaseScraper):
             if "Global:" in date_str:
                 global_date_part = date_str.split("Global:")[1]
                 global_date = global_date_part.split("(")[0].strip()
-                if not utils.is_relevant_date(global_date):
+                if not utils.is_relevant_date(global_date, lookbackdays):
                     continue
                 normalized_global = utils.normalize_date_range(global_date)
             else:
@@ -171,17 +171,22 @@ class ArkScraper(BaseScraper):
                 "Event_PNG": str (image filename)
                 "Event_PNG_URL": str (image URL)
         '''
+        
         for event in dictionary_of_events:
             print(f"Current event: {event['Event']}")
             event_name = event["Event"].replace(":", "").replace("-", "").replace("_", "")
+            matched = False
             for imgs in list_of_imgs:
                 print(f"Matching {imgs['Image_Name']} to {event_name}")
                 if imgs["Image_Name"] in event_name:
                     event["Event_PNG"] = imgs["Image_Name"]
                     event["Event_PNG_URL"] = imgs["Image_URL"]
-
+                    matched = True
                     print(f"Matched {imgs['Image_Name']} to {event_name}.")
                     print(f"Saved as: {event['Event_PNG']} and {event['Event_PNG_URL']}")
+                    break
+            if not matched:
+                print(f"No images linked with {event['Event']}")
         return dictionary_of_events
 
             
@@ -210,9 +215,8 @@ class ArkScraper(BaseScraper):
             data = self.format_events(events)
             imgs_list = self.find_img(soup, url, "banner", game)
             formatted_data = self.link_imgs(data, imgs_list)
-            
-            self.session.close()
             return formatted_data
-        except ValueError as e:
+        except Exception:
+            raise
+        finally:
             self.session.close()
-            raise ValueError(f"Value Error occured as {e} in data_getter function")

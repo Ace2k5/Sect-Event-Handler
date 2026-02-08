@@ -90,7 +90,3 @@ class LimbusScraper(BaseScraper):
             return None
         formatted_data = self.format_events(data)
         return formatted_data
-        
-        
-        
-a = LimbusScraper()
