@@ -21,7 +21,7 @@ class ArkScraper(BaseScraper):
             Returns None if game_name is not "Arknights" or soup is None
         '''
         events = soup.find_all("table", class_=table_text)
-        lookback_days = local_user.get('lookback_days', '30')
+        lookbackdays = local_user.get('lookback_days', '30')
         print(f"Currently in {game_name}")
         found_events = []
         for table in events:
@@ -35,7 +35,7 @@ class ArkScraper(BaseScraper):
                         row_data.append(text)
                         if len(row_data) > 1:
                             date_text = row_data[1]
-                            if utils.is_relevant_date(date_text, lookback_days=LOOKBACK_DAYS):
+                            if utils.is_relevant_date(date_text, lookback_days=lookbackdays):
                                 found_events.append(row_data)
         
         return found_events
