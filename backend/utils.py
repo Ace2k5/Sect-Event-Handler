@@ -4,11 +4,9 @@ from datetime import date, timedelta
 
 def clean_date_string(date_str: str) -> str:
     """
+    remove nd, st, th in dates like "Feb 2nd 2026"
     Args:
         date_str: a string containing a date
-
-    Removes ordinal suffixes (st, nd, rd, th) to make parsing easier for standard tools.
-    e.g., "February 2nd, 2026" -> "February 2, 2026"
     """
     return re.sub(r'(\d+)(st|nd|rd|th)', r'\1', date_str)
 
@@ -28,11 +26,11 @@ def parse_date(date_str: str):
     
 def is_relevant_date(date_text: str, lookback_days: int = 30) -> bool:
     """
+    gets date and separates them if they are in a format of "2026/12/2 - 2026/12/3"
+    
     Args:
         date_str: a string containing a date
         lookback_days: number of days we wanna look back
-
-    Checks date if it's relevant or not
     """
     today = date.today()
     cutoff_date = today - timedelta(days=lookback_days)
@@ -102,18 +100,18 @@ def deduplication(row_data: list) -> list:
 def trimEmptyString(list_events: list):
     '''
     Args:
-        list_events = list['', 's', 's']
+        list_events = list
 
-        Gets rid of any empty string
+        Gets rid of any empty string for example "['', 'ssdasdda', 'asdasdad']
     
     '''
     try:
         clean_list = []
-        for events in range(len(list_events)):
+        for index in range(len(list_events)):
             clean_event = []
-            for indices in range(len(list_events[events])):
-                if list_events[events][indices] != '':
-                    clean_event.append(list_events[events][indices])
+            for element in range(len(list_events[index])):
+                if list_events[index][element] != '':
+                    clean_event.append(list_events[index][element])
             clean_list.append(clean_event)
         return clean_list
     except Exception as e:
