@@ -2,7 +2,7 @@ import requests
 from .base_scraper import BaseScraper
 from bs4 import BeautifulSoup
 from datetime import date
-from .. import inits,  utils
+from .. import inits, utils, local_user
 from pathlib import Path
 from urllib.parse import urljoin
 
@@ -20,9 +20,8 @@ class ArkScraper(BaseScraper):
             List of lists containing event data: [event_name, date_string, ...]
             Returns None if game_name is not "Arknights" or soup is None
         '''
-
-        LOOKBACK_DAYS = 30
         events = soup.find_all("table", class_=table_text)
+        lookback_days = local_user.get('lookback_days', '30')
         print(f"Currently in {game_name}")
         found_events = []
         for table in events:
