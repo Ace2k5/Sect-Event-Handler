@@ -1,13 +1,8 @@
 import requests
-
-def send_to_discord(data: list, webhook: str):
+from .. import local_user
+def send_to_discord(data: list):
     '''
-    Sends Arknights event information to Discord via webhook as formatted embeds.
-    
-    Iterates through each event in the data list and creates a Discord embed
-    with the event name, CN date, Global date, and banner image. Posts each
-    embed to the specified Discord webhook.
-    
+    sends to discord webhook obviously
     Args:
         data: List of event dictionaries with structure:
             {
@@ -16,12 +11,12 @@ def send_to_discord(data: list, webhook: str):
                 "Global": str (Global release date),
                 "Event_PNG_URL": str (URL to event banner image, if none sends a "NO IMAGE" image)
             }
-            
-        webhook: str (Discord webhook URL where embeds will be posted)
-    
-    Returns:
-        None. Prints success or error messages for each event posted.
     '''
+    webhook = local_user.user.get("webhook")
+    if webhook is None:
+        print("User has not put any webhook.")
+        raise IndexError
+    
     for event in data:
         event_name = event["Event"]
         cn_date = event["CN"]
