@@ -37,8 +37,8 @@ class ArkScraper(BaseScraper):
                         text = cell.get_text(strip=True)
                         print(f"Appending {text} to row_data...")
                         row_data.append(text)
-                        if len(row_data) > 1:
-                            found_events.append(row_data)
+                    if len(row_data) > 1:
+                        found_events.append(row_data)
         return found_events
                         
     def find_img(self, soup: BeautifulSoup, url: str, table_class: str, game: str) -> list[dict]:
@@ -112,7 +112,7 @@ class ArkScraper(BaseScraper):
             ]
             Returns None if date parsing fails
         '''
-        lookbackdays = self.user_data('lookback_days', 30)
+        lookbackdays = self.user_data.get('lookback_days', 30)
         set_events = utils.deduplication(row_data)
         if set_events is None:
             raise ValueError("Expected a set, None was returned.")
