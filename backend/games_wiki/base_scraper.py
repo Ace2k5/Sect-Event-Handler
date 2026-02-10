@@ -1,10 +1,13 @@
 import requests
 from bs4 import BeautifulSoup
 from abc import ABC, abstractmethod
-from .. import inits
+from .. import inits, json_handler
+from pathlib import  Path
+import json
 
 class BaseScraper(ABC):
     def __init__(self):
+        self.user_data = json_handler.get_user_data()
         self.sites = inits.SITES
         self.session = requests.Session()
     
@@ -30,6 +33,14 @@ class BaseScraper(ABC):
     @abstractmethod
     def find_events(self, soup, table_class, game, dates_format):
         '''Abstract method for finding events - implemented by subclasses'''
+        pass
+    
+    @abstractmethod
+    def find_img(self, soup: BeautifulSoup, url: str, table_class: str, game: str) -> list[dict]:
+        pass
+    
+    @abstractmethod
+    def link_imgs(self, dictionary_of_events: list[dict], list_of_imgs: list[dict]) -> list[dict]:
         pass
     
     @abstractmethod

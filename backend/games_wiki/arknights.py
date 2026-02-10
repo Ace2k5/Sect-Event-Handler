@@ -1,8 +1,9 @@
 import requests
+import json
 from .base_scraper import BaseScraper
 from bs4 import BeautifulSoup
 from datetime import date
-from .. import inits, utils, local_user
+from .. import inits, utils
 from pathlib import Path
 from urllib.parse import urljoin
 
@@ -10,7 +11,6 @@ class ArkScraper(BaseScraper):
     '''
     THESE IMPLEMENTATIONS ARE STRICTLY FOR AK ONLY!!!!!!!!
     '''
-    
     def find_events(self, soup, table_text, game_name):
         '''
         searches tables for the events
@@ -112,7 +112,7 @@ class ArkScraper(BaseScraper):
             ]
             Returns None if date parsing fails
         '''
-        lookbackdays = local_user.user.get('lookback_days', 30)
+        lookbackdays = self.user_data('lookback_days', 30)
         set_events = utils.deduplication(row_data)
         if set_events is None:
             raise ValueError("Expected a set, None was returned.")
