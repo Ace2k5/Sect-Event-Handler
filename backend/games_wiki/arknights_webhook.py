@@ -5,7 +5,7 @@ from .. import json_handler
 
 user_data = json_handler.get_user_data()
 
-def send_to_discord(data: list):
+def send_to_discord(logger: object, data: list):
     '''
     sends to discord webhook obviously
     Args:
@@ -38,8 +38,8 @@ def send_to_discord(data: list):
                 "embeds": [embed]}
             response = requests.post(webhook, json=payload)
             if response.status_code != 204:
-                print(f"Failed to send: {response.status_code}, {response.text}")
+                logger.log_info(f"Failed to send: {response.status_code}, {response.text}")
             else:
-                print(f"Sent: {event_name}")
+                logger.log_info(f"Sent: {event_name}")
     else:
         raise ValueError("Webhook does not start with HTTPS, please input a valid Webhook URL.")

@@ -11,8 +11,8 @@ class ArkScraper(BaseScraper):
     '''
     THESE IMPLEMENTATIONS ARE STRICTLY FOR AK ONLY!!!!!!!!
     '''
-    def __init__(self):
-        super().__init__()
+    def __init__(self, logger):
+        super().__init__(logger=logger)
         self.path_imgs = Path(__file__).parent.parent.parent / "arknights_imgs"
         
     def find_events(self, soup, table_text, game_name):
@@ -29,7 +29,7 @@ class ArkScraper(BaseScraper):
         '''
         events = soup.find_all("table", class_=table_text)
 
-        print(f"Currently in {game_name}")
+        self.logger.log_info(f"Currently in {game_name}")
         found_events = []
         for table in events:
             rows = table.find_all('tr') # find all headers
@@ -39,7 +39,7 @@ class ArkScraper(BaseScraper):
                     row_data = []
                     for cell in cells:
                         text = cell.get_text(strip=True)
-                        print(f"Appending {text} to row_data...")
+                        self.logger.log_info(f"Appending {text} to row_data...")
                         row_data.append(text)
                     if len(row_data) > 1:
                         found_events.append(row_data)
@@ -74,7 +74,7 @@ class ArkScraper(BaseScraper):
             filename = img["alt"]
             response = self.session.get(img_url)
             if not utils.request_error_handling(response):
-                print(f"Could not get image {img}. find_img function.")
+                self.logger.log_warning(f"Could not get image {img}. find_img function.")
                 continue
             data = response.content
             text = filename
@@ -200,20 +200,20 @@ class ArkScraper(BaseScraper):
         '''
         
         for event in dictionary_of_events:
-            print(f"Current event: {event['Event']}")
+            self.logger.log_info(f"Current event: {event['Event']}")
             event_name = event["Event"].replace(":", "").replace("-", "").replace("_", "")
             matched = False
             for imgs in list_of_imgs:
-                print(f"Matching {imgs['Image_Name']} to {event_name}")
+                self.logger.log_info(f"Matching {imgs['Image_Name']} to {event_name}")
                 if imgs["Image_Name"] in event_name:
                     event["Event_PNG"] = imgs["Image_Name"]
                     event["Event_PNG_URL"] = imgs["Image_URL"]
                     matched = True
-                    print(f"Matched {imgs['Image_Name']} to {event_name}.")
-                    print(f"Saved as: {event['Event_PNG']} and {event['Event_PNG_URL']}")
+                    self.logger.log_info(f"Matched {imgs['Image_Name']} to {event_name}.")
+                    self.logger.log_info(f"Saved as: {event['Event_PNG']} and {event['Event_PNG_URL']}")
                     break
             if not matched:
-                print(f"No images linked with {event['Event']}")
+                self.logger.log_warning(f"No images linked with {event['Event']}")
         return dictionary_of_events
 
             

@@ -1,12 +1,13 @@
 from .games_wiki import arknights, limbus, arknights_webhook
-from . import json_handler
+from . import json_handler, logger
 
 class ScrapeFlow():
     def __init__(self):
-        ark_scrape = arknights.ArkScraper()
-        self.flow(ark_scrape)
+        self.logger = logger.Log()
+        ark_scrape = arknights.ArkScraper(self.logger)
+        self.flow(self.logger, ark_scrape)
         
-    def flow(self, ark):
+    def flow(self, logger, ark):
         '''
         Args:
             ark: object of ArkScraper
@@ -17,8 +18,8 @@ class ScrapeFlow():
         '''current_date = json_handler.check_date()
         if not current_date:'''
         data = ark.data_getter()
-        arknights_webhook.send_to_discord(data)
+        arknights_webhook.send_to_discord(logger, data)
         for i in data:
-            print(f"Event Name: {i['Event']} | CN: {i['CN']} | Global: {i['Global']}")
+            logger.info(f"Event Name: {i['Event']} | CN: {i['CN']} | Global: {i['Global']}")
         else:
             pass
