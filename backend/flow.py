@@ -14,14 +14,11 @@ class ScrapeFlow():
         This function is the main flow of the web scraper. Everything web scraping related must be implemented here.
         '''
         # Arknights
-        try:
-            current_date = json_handler.check_date()
-            if not current_date:
-                data = ark.data_getter()
-                arknights_webhook.send_to_discord(data)
-                for i in data:
-                    print(f"Event Name: {i['Event']} | CN: {i['CN']} | Global: {i['Global']}")
-            else:
-                pass
-        except Exception as e:
-            print(f"Error occured as {e}")
+        '''current_date = json_handler.check_date()
+        if not current_date:'''
+        data = ark.data_getter()
+        arknights_webhook.send_to_discord(data)
+        for i in data:
+            print(f"Event Name: {i['Event']} | CN: {i['CN']} | Global: {i['Global']}")
+        else:
+            pass

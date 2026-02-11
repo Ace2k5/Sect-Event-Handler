@@ -11,6 +11,10 @@ class ArkScraper(BaseScraper):
     '''
     THESE IMPLEMENTATIONS ARE STRICTLY FOR AK ONLY!!!!!!!!
     '''
+    def __init__(self):
+        super().__init__()
+        self.path_imgs = Path(__file__).parent.parent.parent / "arknights_imgs"
+        
     def find_events(self, soup, table_text, game_name):
         '''
         searches tables for the events
@@ -61,7 +65,7 @@ class ArkScraper(BaseScraper):
                 ...
             ]
         '''
-        filepath = Path("./arknights_imgs/")
+        filepath = self.path_imgs
         filepath.mkdir(parents=True, exist_ok=True)
         saved_event_imgs = list()
         
@@ -91,6 +95,29 @@ class ArkScraper(BaseScraper):
                 "Image_URL": img_url
             })
         return saved_event_imgs
+
+    def delete_imgs(self, list_of_imgs: list[dict[str, str]]):
+        '''
+        Removes imgs from the arknights_imgs if the event is no longer active.
+        
+        Args:
+            list_of_imgs:
+            List of dictionaries with structure:
+            [
+                {
+                    "Image_Name": str (cleaned filename without extension),
+                    "Image_URL": str (full URL to the image)
+                },
+                ...
+            ]
+        '''
+        
+        filepath = self.path_imgs
+        valid_imgs = set(d['Image_Name'] for d in list_of_imgs)
+        
+        for img_path in filepath.glob("*.png"):
+            if img_path.stem not in valid_imgs:
+                img_path.unlink()
 
     def format_events(self, row_data: list[list[str]]) -> list[dict]:
         '''
@@ -214,6 +241,7 @@ class ArkScraper(BaseScraper):
             events = self.find_events(soup, table, game)
             data = self.format_events(events)
             imgs_list = self.find_img(soup, url, "banner", game)
+            self.delete_imgs(imgs_list)
             formatted_data = self.link_imgs(data, imgs_list)
             return formatted_data
         except Exception:

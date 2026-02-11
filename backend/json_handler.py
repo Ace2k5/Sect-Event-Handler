@@ -2,7 +2,7 @@ import json
 from datetime import date
 from pathlib import Path
 
-JSON_FILE = Path('./backend/local_user.json')
+JSON_FILE = Path(__file__).parent / "local_user.json"
 
 def get_user_data():
     with open(JSON_FILE, "r") as f:
