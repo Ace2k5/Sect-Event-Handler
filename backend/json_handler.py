@@ -5,14 +5,36 @@ from pathlib import Path
 JSON_FILE = Path(__file__).parent / "local_user.json"
 
 def get_user_data():
+    '''
+    Reads and returns user configuration data from local JSON file.
+    
+    Returns:
+        dict: User configuration data containing keys like 'date_today', 'lookback_days', 'webhook'
+    '''
     with open(JSON_FILE, "r") as f:
         return json.load(f)
 
 def save_to_json(data):
+    '''
+    Saves the provided data to the local JSON file.
+    
+    Args:
+        data: Dictionary data to be serialized and written to JSON file
+    '''
     with open(JSON_FILE, "w") as f:
                 json.dump(data, f, indent=4)
 
 def check_date(logger):
+    '''
+    Checks if the current date matches the stored date in user data.
+    Updates the date if different and returns whether user is up to date.
+    
+    Args:
+        logger: Log object for logging messages
+        
+    Returns:
+        bool: True if user is up to date, False if date was updated
+    '''
     user_data = get_user_data()
     format_date = date.today().strftime("%B, %d, %Y")
     try:
@@ -29,6 +51,16 @@ def check_date(logger):
         raise Exception(f"An error has occured as: {e} [check_date function in json_handler]")
         
 def change_lookback(logger):
+    '''
+    Allows user to change the number of days to look back for event scraping.
+    Prints current setting and prompts for new value.
+    
+    Args:
+        logger: Log object for logging messages
+        
+    Returns:
+        int: The number of days to look back (new value or existing if invalid input)
+    '''
     user_data = get_user_data()
     today = date.today()
     format_date = today.strftime("%B, %d, %Y")
@@ -53,6 +85,16 @@ def change_lookback(logger):
         raise Exception(f"An error has occured as: {e} [change_lookback function in json handler]")
 
 def change_webhook(logger):
+    '''
+    Allows user to change the Discord webhook URL.
+    Validates that new webhook starts with 'http' before saving.
+    
+    Args:
+        logger: Log object for logging messages
+        
+    Returns:
+        str: The webhook URL (new value or existing if validation fails)
+    '''
     user_data = get_user_data()
     
     logger.log_info(f"Current webhook is: {user_data['webhook']}.\nInput a new webhook link")

@@ -9,17 +9,17 @@ class ScrapeFlow():
         
     def flow(self, logger, ark):
         '''
-        Args:
-            ark: object of ArkScraper
+        Main execution flow for the web scraper.
         
-        This function is the main flow of the web scraper. Everything web scraping related must be implemented here.
+        Args:
+            logger: Log object for logging messages
+            ark: ArkScraper object for fetching event data
+            
+        Returns:
+            None: Sends data directly to Discord webhook
         '''
         # Arknights
-        '''current_date = json_handler.check_date()
-        if not current_date:'''
         data = ark.data_getter()
         arknights_webhook.send_to_discord(logger, data)
         for i in data:
             logger.info(f"Event Name: {i['Event']} | CN: {i['CN']} | Global: {i['Global']}")
-        else:
-            pass

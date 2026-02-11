@@ -7,15 +7,17 @@ from .. import inits, utils
 class LimbusScraper(BaseScraper):
     def find_events(self, soup, table_class, game, dates_format) -> list:
         '''
-            Args:
-                soup: parser for the URL
-                table_class: HTML class
-                game_name: Name of the game
-                date_formats: a list containing multiple formats of yyyy-mm-dd
-                
-            returns:
-                A list containing all of the events inside the Limbus Wiki
+        Searches for Limbus Company events in the HTML table for a specific month/year.
+        
+        Args:
+            soup: BeautifulSoup parser object for the URL HTML content
+            table_class: CSS class name of the HTML table to search for
+            game: Name of the game (e.g., "Limbus Company")
+            dates_format: String in format "Month Year" (e.g., "November 2025")
             
+        Returns:
+            List of lists containing event data: [[event_name, start_date, end_date], ...]
+            Returns None if soup is None
         '''
         
         if game == "Limbus Company":
@@ -45,16 +47,16 @@ class LimbusScraper(BaseScraper):
 
     def format_events(self, row_data) -> list:
         '''
-        Args:
-            row_data: A list of events which contains the substrings of current date
-            
-        Format Limbus Company events by deduplicating, cleaning empty strings, 
+        Formats Limbus Company events by deduplicating, cleaning empty strings,
         and formatting into readable strings.
-    
-        Table structure is guaranteed: [Event Name, Start Date, End Date]
-
-        returns:
-            A clean list that contains [Event Name, Start Date, End Date]
+        
+        Args:
+            row_data: List of raw event rows from find_events: [[event_name, start_date, end_date], ...]
+                     containing events with current month/year
+        
+        Returns:
+            List of formatted event strings: ["Event 1: Name | Date: Start - End", ...]
+            Returns None if no ongoing events or input is None
         '''
         if row_data is None:
             print("Row data is None on Limbus")
@@ -82,6 +84,13 @@ class LimbusScraper(BaseScraper):
         return formatted_events
     
     def data_getter(self) -> list:
+        '''
+        Main data retrieval flow for Limbus Company events.
+        Fetches webpage, extracts events for current month/year, and formats them.
+        
+        Returns:
+            List of formatted event strings or None if no data found
+        '''
         site_config = self.sites[1]
         table_class, url, game = site_config
         soup = self.get_response(url)

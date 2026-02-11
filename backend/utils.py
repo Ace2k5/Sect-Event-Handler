@@ -4,21 +4,28 @@ from datetime import date, timedelta
 import requests
 
 def clean_date_string(date_str: str) -> str:
-    """
-    remove nd, st, th in dates like "Feb 2nd 2026"
+    '''
+    Removes ordinal suffixes (st, nd, rd, th) from date strings.
+    
     Args:
-        date_str: a string containing a date
-    """
+        date_str: A string containing a date with ordinal suffixes
+        
+    Returns:
+        str: Cleaned date string without ordinal suffixes
+    '''
     return re.sub(r'(\d+)(st|nd|rd|th)', r'\1', date_str)
 
 def parse_date(date_str: str) -> date:
-    """
-    reminder to self: dateutil.parser converts any date format into YEAR-MONTH-DAY 00:00:00 so it can be used with timedelta.
+    '''
+    Parses a string into a datetime.date object regardless of format.
+    Uses dateutil.parser with fuzzy matching to handle various date formats.
     
     Args:
-        date_str: a string containing a date
-    Parses a string into a datetime object regardless of format.
-    """
+        date_str: A string containing a date in any format
+        
+    Returns:
+        date: A datetime.date object parsed from the input string
+    '''
     try:
         clean_str = clean_date_string(date_str) # clear ordinals and white space
         dt = parser.parse(clean_str, fuzzy=True) # fuzzy removes any text that isnt date
@@ -28,17 +35,17 @@ def parse_date(date_str: str) -> date:
     except TypeError as e:
         raise TypeError(f"TypeError occured as {e} in parse_date function")
 def is_relevant_date(date_text: str, lookback_days: int = 30) -> bool:
-    """
-    gets date and separates them. MUST BE in the format of "2026/12/2 - 2026/12/3"
-    or 2026/12/2 ~ 2026/12/3, or 2026/12/2 to 2026/12/3
+    '''
+    Checks if a date range contains dates within the lookback period.
+    Supports various date range separators: " - ", " – ", " ~ ", " to ".
     
     Args:
-        date_str: a string containing a date
-        lookback_days: number of days we wanna look back
+        date_text: A string containing a date or date range
+        lookback_days: Number of days to look back from today (default: 30)
         
-    returns:
-        boolean
-    """
+    Returns:
+        bool: True if the end date is within the lookback period, False otherwise
+    '''
     today = date.today()
     cutoff_date = today - timedelta(days=lookback_days)
     print(f"The cutoff date is {cutoff_date}")
@@ -59,14 +66,15 @@ def is_relevant_date(date_text: str, lookback_days: int = 30) -> bool:
     
 
 def normalize_date_range(date_text: str) -> str:
-    """
+    '''
+    Converts a date string or range to a standardized readable format.
+    
     Args:
-        date_text: a string containing a date
-    Converts a date string or range to readable format.
-    e.g., '2025/08/02 – 2025/08/23' -> 'Aug 02, 2025 – Aug 23, 2025'
-    returns:
-        a string like "Aug 02, 2025 - Aug 23, 2025"
-    """
+        date_text: A string containing a date or date range (e.g., '2025/08/02 – 2025/08/23')
+        
+    Returns:
+        str: Normalized date string in format "Aug 02, 2025 – Aug 23, 2025"
+    '''
     separators = [" – ", "-", "~", " to "]
     parts = [date_text]
     for sep in separators:
@@ -132,6 +140,15 @@ def trimEmptyString(list_events: list) -> list:
         
     
 def request_error_handling(response) -> bool:
+    '''
+    Handles HTTP request errors and returns success status.
+    
+    Args:
+        response: A requests.Response object
+        
+    Returns:
+        bool: True if request was successful, False if an error occurred
+    '''
     try:
         response.raise_for_status()
         return True
