@@ -17,7 +17,7 @@ def send_to_discord(logger: object, data: list):
                 "Event_PNG_URL": str (URL to event banner image, if none sends a "NO IMAGE" image)
             }
     '''
-    webhook = user_data.get("webhook")
+    webhook = user_data.get("arknights_webhook")
     if webhook.startswith("https"):
         for event in data:
             event_name = event["Event"]

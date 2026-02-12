@@ -18,8 +18,10 @@ class ScrapeFlow():
         Returns:
             None: Sends data directly to Discord webhook
         '''
+        check_date = json_handler.check_date(logger) # False if date is not up to date, else true
+        if not check_date:
         # Arknights
-        data = ark.data_getter()
-        arknights_webhook.send_to_discord(logger, data)
-        for i in data:
-            logger.info(f"Event Name: {i['Event']} | CN: {i['CN']} | Global: {i['Global']}")
+            datas = ark.data_getter()
+            arknights_webhook.send_to_discord(logger, data)
+            for data in datas:
+                logger.log_info(f"Event Name: {data['Event']} | CN: {data['CN_Date']} | Global: {data['Global_Date']}")
