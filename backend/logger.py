@@ -54,7 +54,7 @@ class Log():
         Args:
             str: The error message string to log
         '''
-        self.logger.error(str)
+        self.logger.error(str, exc_info=True)
         
     def check_handlers(self):
         '''

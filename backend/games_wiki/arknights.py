@@ -139,7 +139,7 @@ class ArkScraper(BaseScraper):
             ]
             Returns None if date parsing fails
         '''
-        lookbackdays = self.user_data.get('lookback_days', 30)
+        lookbackdays = self.user_data('lookback_days', 30)
         set_events = utils.deduplication(row_data)
         if set_events is None:
             raise ValueError("Expected a set, None was returned.")
