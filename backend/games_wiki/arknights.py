@@ -18,6 +18,13 @@ class ArkScraper(BaseScraper):
     def find_events(self, soup, table_text, game_name):
         '''
         searches tables for the events
+
+        (LOOP BASICALLY GOES LIKE:
+        Tables/ (MAIN TABLE CLASS)
+            Table1/ (THE TABLE INSIDE THE MAIN TABLE CLASS)
+                Row1/ (THE ROW)
+                Cell1 (CONTENTS OF THAT ROW)
+                Cell2)
         
         Args:
             soup: BeautifulSoup parser object for the URL HTML content

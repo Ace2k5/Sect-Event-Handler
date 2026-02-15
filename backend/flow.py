@@ -20,7 +20,7 @@ class ScrapeFlow():
         '''
         check_date = json_handler.check_date(logger) # False if date is not up to date, else true
         try:
-            if not check_date:
+            #if not check_date:
             # Arknights
                 datas = ark.data_getter()
                 arknights_webhook.send_to_discord(logger, datas)
