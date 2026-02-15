@@ -4,83 +4,76 @@ from datetime import date, timedelta
 import requests
 
 def clean_date_string(date_str: str) -> str:
-    '''
-    Removes ordinal suffixes (st, nd, rd, th) from date strings.
-    
+    """
     Args:
-        date_str: A string containing a date with ordinal suffixes
-        
-    Returns:
-        str: Cleaned date string without ordinal suffixes
-    '''
+        date_str: a string containing a date
+
+    Removes ordinal suffixes (st, nd, rd, th) to make parsing easier for standard tools.
+    e.g., "February 2nd, 2026" -> "February 2, 2026"
+    """
     return re.sub(r'(\d+)(st|nd|rd|th)', r'\1', date_str)
 
-def parse_date(date_str: str) -> date:
-    '''
-    Parses a string into a datetime.date object regardless of format.
-    Uses dateutil.parser with fuzzy matching to handle various date formats.
-    
+def parse_date(date_str: str):
+    """
     Args:
-        date_str: A string containing a date in any format
-        
-    Returns:
-        date: A datetime.date object parsed from the input string
-    '''
+        date_str: a string containing a date
+    Parses a string into a datetime object regardless of format.
+    Returns None if parsing fails.
+    """
     try:
         clean_str = clean_date_string(date_str) # clear ordinals and white space
         dt = parser.parse(clean_str, fuzzy=True) # fuzzy removes any text that isnt date
         return dt.date()
-    except ValueError as e:
-        raise ValueError(f"ValueError occured as {e} in parse_date function")
-    except TypeError as e:
-        raise TypeError(f"TypeError occured as {e} in parse_date function")
-def is_relevant_date(date_text: str, lookback_days: int = 30) -> bool:
-    '''
-    Checks if a date range contains dates within the lookback period.
-    Supports various date range separators: " - ", " – ", " ~ ", " to ".
+    except (ValueError, TypeError):
+        return None
     
+def is_relevant_date(date_text: str, lookback_days: int = 30) -> bool:
+    """
     Args:
-        date_text: A string containing a date or date range
-        lookback_days: Number of days to look back from today (default: 30)
-        
-    Returns:
-        bool: True if the end date is within the lookback period, False otherwise
-    '''
+        date_str: a string containing a date
+        lookback_days: number of days we wanna look back
+
+    Checks date if it's relevant or not
+    """
     today = date.today()
     cutoff_date = today - timedelta(days=lookback_days)
-    print(f"The cutoff date is {cutoff_date}")
-    separators = [" - ", " – ", " ~ ", " to "]
-    parts = [date_text]
-    for sep in separators:
-        if sep in date_text:
-            parts = date_text.split(sep)
-            if len(parts) >= 2:
-                start_date = parse_date(parts[0])
-                end_date = parse_date(parts[1])
-                print(f"Comparing {end_date} to {cutoff_date}...")
-            else:
-                start_date = parse_date(date_text)
-                end_date = start_date
-            
-            return end_date >= cutoff_date
-    
 
-def normalize_date_range(date_text: str) -> str:
-    '''
-    Converts a date string or range to a standardized readable format.
-    
-    Args:
-        date_text: A string containing a date or date range (e.g., '2025/08/02 – 2025/08/23')
-        
-    Returns:
-        str: Normalized date string in format "Aug 02, 2025 – Aug 23, 2025"
-    '''
-    separators = [" – ", "-", "~", " to "]
-    parts = [date_text]
+    separators = [" - ", " – ", " ~ ", " to "]
+
     for sep in separators:
         if sep in date_text:
             parts = date_text.split(sep)
             break
+    start_date = None
+    end_date = None
+
+    if len(parts) >= 2:
+        start_date = parse_date(parts[0])
+        end_date = parse_date(parts[1])
+    else:
+        start_date = parse_date(date_text)
+        end_date = start_date
+
+    if end_date:
+        return end_date >= cutoff_date
+    if start_date:
+        return True
+    return False
+
+def normalize_date_range(date_text):
+    """
+    Args:
+        date_text: a string containing a date
+    Converts a date string or range to readable format.
+    e.g., '2025/08/02 – 2025/08/23' -> 'Aug 02, 2025 – Aug 23, 2025'
+    """
+    separators = [" – ", "-", "~", " to "]
+    for sep in separators:
+        if sep in date_text:
+            parts = date_text.split(sep)
+            break
+    else:
+        parts = [date_text]
 
     parsed_dates = []
     for part in parts:
@@ -91,16 +84,8 @@ def normalize_date_range(date_text: str) -> str:
     return " – ".join(parsed_dates) if parsed_dates else ""
 
 
-def deduplication(row_data: list) -> list:
-    '''
-    goes through row_data, if unique add to set and append, else don't do anything.
-    args:
-        row_data (list): contains the messy list of datas
-    returns:
-        unique_list: a list clean of duplicates, every element is unique
-    '''
-    if not isinstance(row_data, list):
-        raise TypeError(f"Expected list, got {type(row_data)} instead in deduplication")
+def deduplication(row_data: list, logger) -> list:
+
     try:
         seen = set()
         unique_list = list()
@@ -109,35 +94,32 @@ def deduplication(row_data: list) -> list:
             if tupled_item not in seen:
                 seen.add(tupled_item)
                 unique_list.append(items)
-        print("Deduplication done.")
+        logger.log_info("Deduplication done.")
         return unique_list
     except Exception as e:
-        raise Exception(f"Exception occured as {e}")
+        logger.log_error(f"Problem occured as {e}")
+        return None
 
-def trimEmptyString(list_events: list) -> list:
+def trimEmptyString(list_events: list, logger):
     '''
     Args:
-        list_events = list
+        list_events = list['', 's', 's']
 
-        Gets rid of any empty string for example "['', 'ssdasdda', 'asdasdad']
-    returns:
-        clean_list: a list without any empty elements
+        Gets rid of any empty string
     
     '''
-    if not isinstance(list_events, list):
-        raise TypeError(f"Expected list, got {type(list_events)} instead in trimEmptyString function")
     try:
         clean_list = []
-        for index in range(len(list_events)):
+        for events in range(len(list_events)):
             clean_event = []
-            for element in range(len(list_events[index])):
-                if list_events[index][element] != '':
-                    clean_event.append(list_events[index][element])
+            for indices in range(len(list_events[events])):
+                if list_events[events][indices] != '':
+                    clean_event.append(list_events[events][indices])
             clean_list.append(clean_event)
         return clean_list
     except Exception as e:
-        raise Exception(f"Problem occured as {e} in trimEmptyString")
-        
+        logger.log_error(f"Problem occured as {e} in trimEmptyString")
+        return None
     
 def request_error_handling(response) -> bool:
     '''

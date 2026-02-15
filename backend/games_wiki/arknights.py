@@ -38,19 +38,25 @@ class ArkScraper(BaseScraper):
 
         self.logger.log_info(f"Currently in {game_name}")
         found_events = []
-        for table in events:
-            rows = table.find_all('tr') # find all headers
-            for row in rows:
-                cells = row.find_all('td') # find all data cells
-                if cells:
-                    row_data = []
-                    for cell in cells:
-                        text = cell.get_text(strip=True)
-                        self.logger.log_info(f"Appending {text} to row_data...")
-                        row_data.append(text)
-                    if len(row_data) > 1:
-                        found_events.append(row_data)
-        return found_events
+        try:
+            for table in events:
+                rows = table.find_all('tr') # find all headers
+                for row in rows:
+                    cells = row.find_all('td') # find all data cells
+                    if cells:
+                        row_data = []
+                        for cell in cells:
+                            text = cell.get_text(strip=True)
+                            self.logger.log_info(f"Appending {text} to row_data...")
+                            row_data.append(text)
+                        if len(row_data) > 1:
+                            found_events.append(row_data)
+            return found_events
+        except requests.ConnectionError as e:
+            self.logger.log_error(f"Connection error: {e}")
+            return None
+        except Exception as e:
+            self.logger.log_error(f"Unknown error occured: {e}")
                         
     def find_img(self, soup: BeautifulSoup, url: str, table_class: str, game: str) -> list[dict]:
         '''
@@ -147,7 +153,7 @@ class ArkScraper(BaseScraper):
             Returns None if date parsing fails
         '''
         lookbackdays = self.user_data.get('lookback_days', 30)
-        set_events = utils.deduplication(row_data)
+        set_events = utils.deduplication(row_data, self.logger)
         if set_events is None:
             raise ValueError("Expected a set, None was returned.")
             
