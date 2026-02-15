@@ -23,10 +23,9 @@ class ScrapeFlow():
             if not check_date:
             # Arknights
                 datas = ark.data_getter()
-                arknights_webhook.send_to_discord(logger, data)
+                arknights_webhook.send_to_discord(logger, datas)
                 for data in datas:
-                    logger.log_info(f"Event Name: {data['Event']} | CN: {data['CN_Date']} | Global: {data['Global_Date']}")
-                    
+                    logger.log_info(f"Event Name: {data['Event']} | CN: {data['CN']} | Global: {data['Global']}")   
         except Exception:
             self.logger.log_error("A failure has occured.")
         

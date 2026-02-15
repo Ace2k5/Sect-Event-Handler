@@ -195,3 +195,163 @@ Traceback (most recent call last):
     lookbackdays = self.user_data('lookback_days', 30)
                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 TypeError: 'dict' object is not callable
+DATE: 2026 - 02 - 15 19:55 | LEVEL: INFO | MSG: Currently in Arknights
+DATE: 2026 - 02 - 15 19:55 | LEVEL: INFO | MSG: Appending [Side Story – Crossover] Somniloquium Serenum to row_data...
+DATE: 2026 - 02 - 15 19:55 | LEVEL: INFO | MSG: Appending CN:2025/09/04 – 2025/09/18Global:2026/02/10 – 2026/02/24 to row_data...
+DATE: 2026 - 02 - 15 19:55 | LEVEL: INFO | MSG: Appending Duel Channel: Honeydew to row_data...
+DATE: 2026 - 02 - 15 19:55 | LEVEL: INFO | MSG: Appending CN:2025/08/28 – 2025/09/14Global:2026/02/03 – 2026/02/17 to row_data...
+DATE: 2026 - 02 - 15 19:55 | LEVEL: ERROR | MSG: A failure has occured.
+Traceback (most recent call last):
+  File "D:\python_scripts\Sect-Event-Handler\backend\flow.py", line 25, in flow
+    datas = ark.data_getter()
+  File "D:\python_scripts\Sect-Event-Handler\backend\games_wiki\arknights.py", line 242, in data_getter
+    data = self.format_events(events)
+  File "D:\python_scripts\Sect-Event-Handler\backend\games_wiki\arknights.py", line 142, in format_events
+    lookbackdays = self.user_data('lookback_days', 30)
+TypeError: 'dict' object is not callable
+DATE: 2026 - 02 - 15 19:56 | LEVEL: INFO | MSG: User is up to date. Current date is: February, 15, 2026
+DATE: 2026 - 02 - 15 19:56 | LEVEL: INFO | MSG: Currently in Arknights
+DATE: 2026 - 02 - 15 19:56 | LEVEL: INFO | MSG: Appending [Side Story – Crossover] Somniloquium Serenum to row_data...
+DATE: 2026 - 02 - 15 19:56 | LEVEL: INFO | MSG: Appending CN:2025/09/04 – 2025/09/18Global:2026/02/10 – 2026/02/24 to row_data...
+DATE: 2026 - 02 - 15 19:56 | LEVEL: INFO | MSG: Appending Duel Channel: Honeydew to row_data...
+DATE: 2026 - 02 - 15 19:56 | LEVEL: INFO | MSG: Appending CN:2025/08/28 – 2025/09/14Global:2026/02/03 – 2026/02/17 to row_data...
+DATE: 2026 - 02 - 15 19:56 | LEVEL: ERROR | MSG: A failure has occured.
+Traceback (most recent call last):
+  File "D:\python_scripts\Sect-Event-Handler\backend\flow.py", line 25, in flow
+    datas = ark.data_getter()
+  File "D:\python_scripts\Sect-Event-Handler\backend\games_wiki\arknights.py", line 242, in data_getter
+    data = self.format_events(events)
+  File "D:\python_scripts\Sect-Event-Handler\backend\games_wiki\arknights.py", line 142, in format_events
+    lookbackdays = self.user_data('lookback_days', 30)
+TypeError: 'dict' object is not callable
+DATE: 2026 - 02 - 15 19:57 | LEVEL: INFO | MSG: User is up to date. Current date is: February, 15, 2026
+DATE: 2026 - 02 - 15 19:57 | LEVEL: INFO | MSG: Currently in Arknights
+DATE: 2026 - 02 - 15 19:57 | LEVEL: INFO | MSG: Appending Duel Channel: Honeydew to row_data...
+DATE: 2026 - 02 - 15 19:57 | LEVEL: INFO | MSG: Appending CN:2025/08/28 – 2025/09/14Global:2026/02/03 – 2026/02/17 to row_data...
+DATE: 2026 - 02 - 15 19:57 | LEVEL: INFO | MSG: Current event: Duel Channel: Honeydew
+DATE: 2026 - 02 - 15 19:57 | LEVEL: INFO | MSG: Matching Somniloquium Serenum to Duel Channel Honeydew
+DATE: 2026 - 02 - 15 19:57 | LEVEL: INFO | MSG: Matching Duel Channel Honeydew to Duel Channel Honeydew
+DATE: 2026 - 02 - 15 19:57 | LEVEL: INFO | MSG: Matched Duel Channel Honeydew to Duel Channel Honeydew.
+DATE: 2026 - 02 - 15 19:57 | LEVEL: INFO | MSG: Saved as: Duel Channel Honeydew and https://arknights.wiki.gg/images/EN_Duel_Channel_Honeydew_banner.png?4bff78
+DATE: 2026 - 02 - 15 19:57 | LEVEL: ERROR | MSG: A failure has occured.
+Traceback (most recent call last):
+  File "D:\python_scripts\Sect-Event-Handler\backend\flow.py", line 26, in flow
+    arknights_webhook.send_to_discord(logger, data)
+                                              ^^^^
+UnboundLocalError: cannot access local variable 'data' where it is not associated with a value
+DATE: 2026 - 02 - 15 19:58 | LEVEL: INFO | MSG: Currently in Arknights
+DATE: 2026 - 02 - 15 19:58 | LEVEL: ERROR | MSG: A failure has occured.
+Traceback (most recent call last):
+  File "D:\python_scripts\Sect-Event-Handler\backend\flow.py", line 25, in flow
+    datas = ark.data_getter()
+  File "D:\python_scripts\Sect-Event-Handler\backend\games_wiki\arknights.py", line 241, in data_getter
+    events = self.find_events(soup, table, game)
+  File "D:\python_scripts\Sect-Event-Handler\backend\games_wiki\arknights.py", line 44, in find_events
+    if len(row_data) > 1:
+           ^^^^^^^^
+UnboundLocalError: cannot access local variable 'row_data' where it is not associated with a value
+DATE: 2026 - 02 - 15 19:59 | LEVEL: INFO | MSG: Currently in Arknights
+DATE: 2026 - 02 - 15 19:59 | LEVEL: INFO | MSG: Appending [Side Story – Crossover] Somniloquium Serenum to row_data...
+DATE: 2026 - 02 - 15 19:59 | LEVEL: INFO | MSG: Appending CN:2025/09/04 – 2025/09/18Global:2026/02/10 – 2026/02/24 to row_data...
+DATE: 2026 - 02 - 15 19:59 | LEVEL: INFO | MSG: Appending Duel Channel: Honeydew to row_data...
+DATE: 2026 - 02 - 15 19:59 | LEVEL: INFO | MSG: Appending CN:2025/08/28 – 2025/09/14Global:2026/02/03 – 2026/02/17 to row_data...
+DATE: 2026 - 02 - 15 19:59 | LEVEL: INFO | MSG: Current event: [Side Story – Crossover] Somniloquium Serenum
+DATE: 2026 - 02 - 15 19:59 | LEVEL: INFO | MSG: Matching Somniloquium Serenum to [Side Story – Crossover] Somniloquium Serenum
+DATE: 2026 - 02 - 15 19:59 | LEVEL: INFO | MSG: Matched Somniloquium Serenum to [Side Story – Crossover] Somniloquium Serenum.
+DATE: 2026 - 02 - 15 19:59 | LEVEL: INFO | MSG: Saved as: Somniloquium Serenum and https://arknights.wiki.gg/images/EN_Somniloquium_Serenum_banner.png?3cb24a
+DATE: 2026 - 02 - 15 19:59 | LEVEL: INFO | MSG: Current event: Duel Channel: Honeydew
+DATE: 2026 - 02 - 15 19:59 | LEVEL: INFO | MSG: Matching Somniloquium Serenum to Duel Channel Honeydew
+DATE: 2026 - 02 - 15 19:59 | LEVEL: INFO | MSG: Matching Duel Channel Honeydew to Duel Channel Honeydew
+DATE: 2026 - 02 - 15 19:59 | LEVEL: INFO | MSG: Matched Duel Channel Honeydew to Duel Channel Honeydew.
+DATE: 2026 - 02 - 15 19:59 | LEVEL: INFO | MSG: Saved as: Duel Channel Honeydew and https://arknights.wiki.gg/images/EN_Duel_Channel_Honeydew_banner.png?4bff78
+DATE: 2026 - 02 - 15 19:59 | LEVEL: INFO | MSG: Sent: [Side Story – Crossover] Somniloquium Serenum
+DATE: 2026 - 02 - 15 19:59 | LEVEL: INFO | MSG: Sent: Duel Channel: Honeydew
+DATE: 2026 - 02 - 15 19:59 | LEVEL: ERROR | MSG: A failure has occured.
+Traceback (most recent call last):
+  File "D:\python_scripts\Sect-Event-Handler\backend\flow.py", line 28, in flow
+    logger.log_info(f"Event Name: {data['Event']} | CN: {data['CN_Date']} | Global: {data['Global_Date']}")
+                                                         ~~~~^^^^^^^^^^^
+KeyError: 'CN_Date'
+DATE: 2026 - 02 - 15 20:00 | LEVEL: INFO | MSG: Currently in Arknights
+DATE: 2026 - 02 - 15 20:00 | LEVEL: INFO | MSG: Appending [Side Story – Crossover] Somniloquium Serenum to row_data...
+DATE: 2026 - 02 - 15 20:00 | LEVEL: INFO | MSG: Appending CN:2025/09/04 – 2025/09/18Global:2026/02/10 – 2026/02/24 to row_data...
+DATE: 2026 - 02 - 15 20:00 | LEVEL: INFO | MSG: Appending Duel Channel: Honeydew to row_data...
+DATE: 2026 - 02 - 15 20:00 | LEVEL: INFO | MSG: Appending CN:2025/08/28 – 2025/09/14Global:2026/02/03 – 2026/02/17 to row_data...
+DATE: 2026 - 02 - 15 20:00 | LEVEL: INFO | MSG: Current event: [Side Story – Crossover] Somniloquium Serenum
+DATE: 2026 - 02 - 15 20:00 | LEVEL: INFO | MSG: Matching Somniloquium Serenum to [Side Story – Crossover] Somniloquium Serenum
+DATE: 2026 - 02 - 15 20:00 | LEVEL: INFO | MSG: Matched Somniloquium Serenum to [Side Story – Crossover] Somniloquium Serenum.
+DATE: 2026 - 02 - 15 20:00 | LEVEL: INFO | MSG: Saved as: Somniloquium Serenum and https://arknights.wiki.gg/images/EN_Somniloquium_Serenum_banner.png?3cb24a
+DATE: 2026 - 02 - 15 20:00 | LEVEL: INFO | MSG: Current event: Duel Channel: Honeydew
+DATE: 2026 - 02 - 15 20:00 | LEVEL: INFO | MSG: Matching Somniloquium Serenum to Duel Channel Honeydew
+DATE: 2026 - 02 - 15 20:00 | LEVEL: INFO | MSG: Matching Duel Channel Honeydew to Duel Channel Honeydew
+DATE: 2026 - 02 - 15 20:00 | LEVEL: INFO | MSG: Matched Duel Channel Honeydew to Duel Channel Honeydew.
+DATE: 2026 - 02 - 15 20:00 | LEVEL: INFO | MSG: Saved as: Duel Channel Honeydew and https://arknights.wiki.gg/images/EN_Duel_Channel_Honeydew_banner.png?4bff78
+DATE: 2026 - 02 - 15 20:00 | LEVEL: INFO | MSG: Sent: [Side Story – Crossover] Somniloquium Serenum
+DATE: 2026 - 02 - 15 20:00 | LEVEL: INFO | MSG: Sent: Duel Channel: Honeydew
+DATE: 2026 - 02 - 15 20:00 | LEVEL: ERROR | MSG: A failure has occured.
+Traceback (most recent call last):
+  File "D:\python_scripts\Sect-Event-Handler\backend\flow.py", line 28, in flow
+    logger.log_info(f"Event Name: {data['Event']} | CN: {data['CN_Date']} | Global: {data['Global_Date']}")
+                                                         ~~~~^^^^^^^^^^^
+KeyError: 'CN_Date'
+DATE: 2026 - 02 - 15 20:01 | LEVEL: INFO | MSG: User is up to date. Current date is: February, 15, 2026
+DATE: 2026 - 02 - 15 20:01 | LEVEL: INFO | MSG: Currently in Arknights
+DATE: 2026 - 02 - 15 20:01 | LEVEL: INFO | MSG: Appending [Side Story – Crossover] Somniloquium Serenum to row_data...
+DATE: 2026 - 02 - 15 20:01 | LEVEL: INFO | MSG: Appending CN:2025/09/04 – 2025/09/18Global:2026/02/10 – 2026/02/24 to row_data...
+DATE: 2026 - 02 - 15 20:01 | LEVEL: INFO | MSG: Appending Duel Channel: Honeydew to row_data...
+DATE: 2026 - 02 - 15 20:01 | LEVEL: INFO | MSG: Appending CN:2025/08/28 – 2025/09/14Global:2026/02/03 – 2026/02/17 to row_data...
+DATE: 2026 - 02 - 15 20:01 | LEVEL: INFO | MSG: Current event: [Side Story – Crossover] Somniloquium Serenum
+DATE: 2026 - 02 - 15 20:01 | LEVEL: INFO | MSG: Matching Somniloquium Serenum to [Side Story – Crossover] Somniloquium Serenum
+DATE: 2026 - 02 - 15 20:01 | LEVEL: INFO | MSG: Matched Somniloquium Serenum to [Side Story – Crossover] Somniloquium Serenum.
+DATE: 2026 - 02 - 15 20:01 | LEVEL: INFO | MSG: Saved as: Somniloquium Serenum and https://arknights.wiki.gg/images/EN_Somniloquium_Serenum_banner.png?3cb24a
+DATE: 2026 - 02 - 15 20:01 | LEVEL: INFO | MSG: Current event: Duel Channel: Honeydew
+DATE: 2026 - 02 - 15 20:01 | LEVEL: INFO | MSG: Matching Somniloquium Serenum to Duel Channel Honeydew
+DATE: 2026 - 02 - 15 20:01 | LEVEL: INFO | MSG: Matching Duel Channel Honeydew to Duel Channel Honeydew
+DATE: 2026 - 02 - 15 20:01 | LEVEL: INFO | MSG: Matched Duel Channel Honeydew to Duel Channel Honeydew.
+DATE: 2026 - 02 - 15 20:01 | LEVEL: INFO | MSG: Saved as: Duel Channel Honeydew and https://arknights.wiki.gg/images/EN_Duel_Channel_Honeydew_banner.png?4bff78
+DATE: 2026 - 02 - 15 20:01 | LEVEL: INFO | MSG: Sent: [Side Story – Crossover] Somniloquium Serenum
+DATE: 2026 - 02 - 15 20:01 | LEVEL: INFO | MSG: Sent: Duel Channel: Honeydew
+DATE: 2026 - 02 - 15 20:01 | LEVEL: ERROR | MSG: A failure has occured.
+Traceback (most recent call last):
+  File "D:\python_scripts\Sect-Event-Handler\backend\flow.py", line 28, in flow
+    logger.log_info(f"Event Name: {data['Event']} | CN: {data['CN_Date']} | Global: {data['Global_Date']}")
+                                                         ~~~~^^^^^^^^^^^
+KeyError: 'CN_Date'
+DATE: 2026 - 02 - 15 20:02 | LEVEL: INFO | MSG: User is up to date. Current date is: February, 15, 2026
+DATE: 2026 - 02 - 15 20:02 | LEVEL: INFO | MSG: Currently in Arknights
+DATE: 2026 - 02 - 15 20:02 | LEVEL: INFO | MSG: Appending [Side Story – Crossover] Somniloquium Serenum to row_data...
+DATE: 2026 - 02 - 15 20:02 | LEVEL: INFO | MSG: Appending CN:2025/09/04 – 2025/09/18Global:2026/02/10 – 2026/02/24 to row_data...
+DATE: 2026 - 02 - 15 20:02 | LEVEL: INFO | MSG: Appending Duel Channel: Honeydew to row_data...
+DATE: 2026 - 02 - 15 20:02 | LEVEL: INFO | MSG: Appending CN:2025/08/28 – 2025/09/14Global:2026/02/03 – 2026/02/17 to row_data...
+DATE: 2026 - 02 - 15 20:02 | LEVEL: INFO | MSG: Current event: [Side Story – Crossover] Somniloquium Serenum
+DATE: 2026 - 02 - 15 20:02 | LEVEL: INFO | MSG: Matching Somniloquium Serenum to [Side Story – Crossover] Somniloquium Serenum
+DATE: 2026 - 02 - 15 20:02 | LEVEL: INFO | MSG: Matched Somniloquium Serenum to [Side Story – Crossover] Somniloquium Serenum.
+DATE: 2026 - 02 - 15 20:02 | LEVEL: INFO | MSG: Saved as: Somniloquium Serenum and https://arknights.wiki.gg/images/EN_Somniloquium_Serenum_banner.png?3cb24a
+DATE: 2026 - 02 - 15 20:02 | LEVEL: INFO | MSG: Current event: Duel Channel: Honeydew
+DATE: 2026 - 02 - 15 20:02 | LEVEL: INFO | MSG: Matching Somniloquium Serenum to Duel Channel Honeydew
+DATE: 2026 - 02 - 15 20:02 | LEVEL: INFO | MSG: Matching Duel Channel Honeydew to Duel Channel Honeydew
+DATE: 2026 - 02 - 15 20:02 | LEVEL: INFO | MSG: Matched Duel Channel Honeydew to Duel Channel Honeydew.
+DATE: 2026 - 02 - 15 20:02 | LEVEL: INFO | MSG: Saved as: Duel Channel Honeydew and https://arknights.wiki.gg/images/EN_Duel_Channel_Honeydew_banner.png?4bff78
+DATE: 2026 - 02 - 15 20:02 | LEVEL: INFO | MSG: Sent: [Side Story – Crossover] Somniloquium Serenum
+DATE: 2026 - 02 - 15 20:02 | LEVEL: INFO | MSG: Sent: Duel Channel: Honeydew
+DATE: 2026 - 02 - 15 20:02 | LEVEL: INFO | MSG: Event Name: [Side Story – Crossover] Somniloquium Serenum | CN: Sep 04, 2025 – Sep 18, 2025 | Global: Feb 10, 2026 – Feb 24, 2026
+DATE: 2026 - 02 - 15 20:02 | LEVEL: INFO | MSG: Event Name: Duel Channel: Honeydew | CN: Aug 28, 2025 – Sep 14, 2025 | Global: Feb 03, 2026 – Feb 17, 2026
+DATE: 2026 - 02 - 15 20:03 | LEVEL: INFO | MSG: User is up to date. Current date is: February, 15, 2026
+DATE: 2026 - 02 - 15 20:03 | LEVEL: INFO | MSG: Currently in Arknights
+DATE: 2026 - 02 - 15 20:03 | LEVEL: INFO | MSG: Appending [Side Story – Crossover] Somniloquium Serenum to row_data...
+DATE: 2026 - 02 - 15 20:03 | LEVEL: INFO | MSG: Appending CN:2025/09/04 – 2025/09/18Global:2026/02/10 – 2026/02/24 to row_data...
+DATE: 2026 - 02 - 15 20:03 | LEVEL: INFO | MSG: Appending Duel Channel: Honeydew to row_data...
+DATE: 2026 - 02 - 15 20:03 | LEVEL: INFO | MSG: Appending CN:2025/08/28 – 2025/09/14Global:2026/02/03 – 2026/02/17 to row_data...
+DATE: 2026 - 02 - 15 20:03 | LEVEL: INFO | MSG: Current event: [Side Story – Crossover] Somniloquium Serenum
+DATE: 2026 - 02 - 15 20:03 | LEVEL: INFO | MSG: Matching Somniloquium Serenum to [Side Story – Crossover] Somniloquium Serenum
+DATE: 2026 - 02 - 15 20:03 | LEVEL: INFO | MSG: Matched Somniloquium Serenum to [Side Story – Crossover] Somniloquium Serenum.
+DATE: 2026 - 02 - 15 20:03 | LEVEL: INFO | MSG: Saved as: Somniloquium Serenum and https://arknights.wiki.gg/images/EN_Somniloquium_Serenum_banner.png?3cb24a
+DATE: 2026 - 02 - 15 20:03 | LEVEL: INFO | MSG: Current event: Duel Channel: Honeydew
+DATE: 2026 - 02 - 15 20:03 | LEVEL: INFO | MSG: Matching Somniloquium Serenum to Duel Channel Honeydew
+DATE: 2026 - 02 - 15 20:03 | LEVEL: INFO | MSG: Matching Duel Channel Honeydew to Duel Channel Honeydew
+DATE: 2026 - 02 - 15 20:03 | LEVEL: INFO | MSG: Matched Duel Channel Honeydew to Duel Channel Honeydew.
+DATE: 2026 - 02 - 15 20:03 | LEVEL: INFO | MSG: Saved as: Duel Channel Honeydew and https://arknights.wiki.gg/images/EN_Duel_Channel_Honeydew_banner.png?4bff78
+DATE: 2026 - 02 - 15 20:03 | LEVEL: INFO | MSG: Sent: [Side Story – Crossover] Somniloquium Serenum
+DATE: 2026 - 02 - 15 20:03 | LEVEL: INFO | MSG: Sent: Duel Channel: Honeydew
+DATE: 2026 - 02 - 15 20:03 | LEVEL: INFO | MSG: Event Name: [Side Story – Crossover] Somniloquium Serenum | CN: Sep 04, 2025 – Sep 18, 2025 | Global: Feb 10, 2026 – Feb 24, 2026
+DATE: 2026 - 02 - 15 20:03 | LEVEL: INFO | MSG: Event Name: Duel Channel: Honeydew | CN: Aug 28, 2025 – Sep 14, 2025 | Global: Feb 03, 2026 – Feb 17, 2026

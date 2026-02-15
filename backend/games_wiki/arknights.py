@@ -139,7 +139,7 @@ class ArkScraper(BaseScraper):
             ]
             Returns None if date parsing fails
         '''
-        lookbackdays = self.user_data('lookback_days', 30)
+        lookbackdays = self.user_data.get('lookback_days', 30)
         set_events = utils.deduplication(row_data)
         if set_events is None:
             raise ValueError("Expected a set, None was returned.")
@@ -224,8 +224,8 @@ class ArkScraper(BaseScraper):
             [
                 {
                     "Matched_Event_IMGS": dict (matched event metadata),
-                    "CN_Date": str (CN release date range (DATE ONLY)),
-                    "Global_Date": str (Global release date range (DATE ONLY)),
+                    "CN": str (CN release date range (DATE ONLY)),
+                    "Global": str (Global release date range (DATE ONLY)),
                     "Image_URL": str (URL to event banner image)
                 },
                 ...
