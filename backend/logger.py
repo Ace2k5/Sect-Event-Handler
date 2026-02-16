@@ -9,7 +9,7 @@ class Log():
     Initializes logging handlers for streaming and file output.
     '''
     def __init__(self):
-        print(f"[DEBUG] Log.__init__ called - Creating new logger instance")
+        print("[DEBUG] Log.__init__ called - Creating new logger instance")
         self.logger = logging.getLogger(__name__)
         self.logger.setLevel(logging.INFO)
         

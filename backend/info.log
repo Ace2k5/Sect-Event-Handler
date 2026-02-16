@@ -499,3 +499,144 @@ DATE: 2026 - 02 - 16 00:03 | LEVEL: INFO | MSG: Sent: [Side Story – Crossover]
 DATE: 2026 - 02 - 16 00:03 | LEVEL: INFO | MSG: Sent: Duel Channel: Honeydew
 DATE: 2026 - 02 - 16 00:03 | LEVEL: INFO | MSG: Event Name: [Side Story – Crossover] Somniloquium Serenum | CN: Sep 04, 2025 – Sep 18, 2025 | Global: Feb 10, 2026 – Feb 24, 2026
 DATE: 2026 - 02 - 16 00:03 | LEVEL: INFO | MSG: Event Name: Duel Channel: Honeydew | CN: Aug 28, 2025 – Sep 14, 2025 | Global: Feb 03, 2026 – Feb 17, 2026
+DATE: 2026 - 02 - 16 14:35 | LEVEL: INFO | MSG: User is up to date. Current date is: February, 16, 2026
+DATE: 2026 - 02 - 16 14:35 | LEVEL: INFO | MSG: Currently in Arknights
+DATE: 2026 - 02 - 16 14:35 | LEVEL: INFO | MSG: Appending [Side Story – Crossover] Somniloquium Serenum to row_data...
+DATE: 2026 - 02 - 16 14:35 | LEVEL: INFO | MSG: Appending CN:2025/09/04 – 2025/09/18Global:2026/02/10 – 2026/02/24 to row_data...
+DATE: 2026 - 02 - 16 14:35 | LEVEL: INFO | MSG: Appending Duel Channel: Honeydew to row_data...
+DATE: 2026 - 02 - 16 14:35 | LEVEL: INFO | MSG: Appending CN:2025/08/28 – 2025/09/14Global:2026/02/03 – 2026/02/17 to row_data...
+DATE: 2026 - 02 - 16 14:35 | LEVEL: INFO | MSG: Deduplication done.
+DATE: 2026 - 02 - 16 14:35 | LEVEL: ERROR | MSG: A failure has occured.
+Traceback (most recent call last):
+  File "D:\python_scripts\Sect-Event-Handler\backend\flow.py", line 25, in flow
+    datas = self.ark_scrape.data_getter()
+  File "D:\python_scripts\Sect-Event-Handler\backend\games_wiki\arknights.py", line 256, in data_getter
+    imgs_list = self.find_img(soup, url, "banner", game)
+  File "D:\python_scripts\Sect-Event-Handler\backend\games_wiki\arknights.py", line 89, in find_img
+    if not utils.request_error_handling(response, self.logger):
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: request_error_handling() takes 1 positional argument but 2 were given
+DATE: 2026 - 02 - 16 14:36 | LEVEL: INFO | MSG: User is up to date. Current date is: February, 16, 2026
+DATE: 2026 - 02 - 16 14:36 | LEVEL: INFO | MSG: Currently in Arknights
+DATE: 2026 - 02 - 16 14:36 | LEVEL: INFO | MSG: Appending [Side Story – Crossover] Somniloquium Serenum to row_data...
+DATE: 2026 - 02 - 16 14:36 | LEVEL: INFO | MSG: Appending CN:2025/09/04 – 2025/09/18Global:2026/02/10 – 2026/02/24 to row_data...
+DATE: 2026 - 02 - 16 14:36 | LEVEL: INFO | MSG: Appending Duel Channel: Honeydew to row_data...
+DATE: 2026 - 02 - 16 14:36 | LEVEL: INFO | MSG: Appending CN:2025/08/28 – 2025/09/14Global:2026/02/03 – 2026/02/17 to row_data...
+DATE: 2026 - 02 - 16 14:36 | LEVEL: INFO | MSG: Deduplication done.
+DATE: 2026 - 02 - 16 14:36 | LEVEL: INFO | MSG: Current event: [Side Story – Crossover] Somniloquium Serenum
+DATE: 2026 - 02 - 16 14:36 | LEVEL: INFO | MSG: Matching Somniloquium Serenum to [Side Story – Crossover] Somniloquium Serenum
+DATE: 2026 - 02 - 16 14:36 | LEVEL: INFO | MSG: Matched Somniloquium Serenum to [Side Story – Crossover] Somniloquium Serenum.
+DATE: 2026 - 02 - 16 14:36 | LEVEL: INFO | MSG: Saved as: Somniloquium Serenum and https://arknights.wiki.gg/images/EN_Somniloquium_Serenum_banner.png?3cb24a
+DATE: 2026 - 02 - 16 14:36 | LEVEL: INFO | MSG: Current event: Duel Channel: Honeydew
+DATE: 2026 - 02 - 16 14:36 | LEVEL: INFO | MSG: Matching Somniloquium Serenum to Duel Channel Honeydew
+DATE: 2026 - 02 - 16 14:36 | LEVEL: INFO | MSG: Matching Duel Channel Honeydew to Duel Channel Honeydew
+DATE: 2026 - 02 - 16 14:36 | LEVEL: INFO | MSG: Matched Duel Channel Honeydew to Duel Channel Honeydew.
+DATE: 2026 - 02 - 16 14:36 | LEVEL: INFO | MSG: Saved as: Duel Channel Honeydew and https://arknights.wiki.gg/images/EN_Duel_Channel_Honeydew_banner.png?4bff78
+DATE: 2026 - 02 - 16 14:36 | LEVEL: INFO | MSG: Sent: [Side Story – Crossover] Somniloquium Serenum
+DATE: 2026 - 02 - 16 14:36 | LEVEL: INFO | MSG: Sent: Duel Channel: Honeydew
+DATE: 2026 - 02 - 16 14:36 | LEVEL: INFO | MSG: Event Name: [Side Story – Crossover] Somniloquium Serenum | CN: Sep 04, 2025 – Sep 18, 2025 | Global: Feb 10, 2026 – Feb 24, 2026
+DATE: 2026 - 02 - 16 14:36 | LEVEL: INFO | MSG: Event Name: Duel Channel: Honeydew | CN: Aug 28, 2025 – Sep 14, 2025 | Global: Feb 03, 2026 – Feb 17, 2026
+DATE: 2026 - 02 - 16 14:42 | LEVEL: INFO | MSG: User is up to date. Current date is: February, 16, 2026
+DATE: 2026 - 02 - 16 14:42 | LEVEL: INFO | MSG: Currently in Arknights
+DATE: 2026 - 02 - 16 14:42 | LEVEL: INFO | MSG: Appending [Side Story – Crossover] Somniloquium Serenum to row_data...
+DATE: 2026 - 02 - 16 14:42 | LEVEL: INFO | MSG: Appending CN:2025/09/04 – 2025/09/18Global:2026/02/10 – 2026/02/24 to row_data...
+DATE: 2026 - 02 - 16 14:42 | LEVEL: INFO | MSG: Appending Duel Channel: Honeydew to row_data...
+DATE: 2026 - 02 - 16 14:42 | LEVEL: INFO | MSG: Appending CN:2025/08/28 – 2025/09/14Global:2026/02/03 – 2026/02/17 to row_data...
+DATE: 2026 - 02 - 16 14:42 | LEVEL: INFO | MSG: Deduplication done.
+DATE: 2026 - 02 - 16 14:42 | LEVEL: INFO | MSG: Current event: [Side Story – Crossover] Somniloquium Serenum
+DATE: 2026 - 02 - 16 14:42 | LEVEL: INFO | MSG: Matching Somniloquium Serenum to [Side Story – Crossover] Somniloquium Serenum
+DATE: 2026 - 02 - 16 14:42 | LEVEL: INFO | MSG: Matched Somniloquium Serenum to [Side Story – Crossover] Somniloquium Serenum.
+DATE: 2026 - 02 - 16 14:42 | LEVEL: INFO | MSG: Saved as: Somniloquium Serenum and https://arknights.wiki.gg/images/EN_Somniloquium_Serenum_banner.png?3cb24a
+DATE: 2026 - 02 - 16 14:42 | LEVEL: INFO | MSG: Current event: Duel Channel: Honeydew
+DATE: 2026 - 02 - 16 14:42 | LEVEL: INFO | MSG: Matching Somniloquium Serenum to Duel Channel Honeydew
+DATE: 2026 - 02 - 16 14:42 | LEVEL: INFO | MSG: Matching Duel Channel Honeydew to Duel Channel Honeydew
+DATE: 2026 - 02 - 16 14:42 | LEVEL: INFO | MSG: Matched Duel Channel Honeydew to Duel Channel Honeydew.
+DATE: 2026 - 02 - 16 14:42 | LEVEL: INFO | MSG: Saved as: Duel Channel Honeydew and https://arknights.wiki.gg/images/EN_Duel_Channel_Honeydew_banner.png?4bff78
+DATE: 2026 - 02 - 16 14:42 | LEVEL: INFO | MSG: Sent: [Side Story – Crossover] Somniloquium Serenum
+DATE: 2026 - 02 - 16 14:42 | LEVEL: INFO | MSG: Sent: Duel Channel: Honeydew
+DATE: 2026 - 02 - 16 14:42 | LEVEL: INFO | MSG: Event Name: [Side Story – Crossover] Somniloquium Serenum | CN: Sep 04, 2025 – Sep 18, 2025 | Global: Feb 10, 2026 – Feb 24, 2026
+DATE: 2026 - 02 - 16 14:42 | LEVEL: INFO | MSG: Event Name: Duel Channel: Honeydew | CN: Aug 28, 2025 – Sep 14, 2025 | Global: Feb 03, 2026 – Feb 17, 2026
+DATE: 2026 - 02 - 16 14:50 | LEVEL: INFO | MSG: User is up to date. Current date is: February, 16, 2026
+DATE: 2026 - 02 - 16 14:50 | LEVEL: INFO | MSG: Currently in Arknights
+DATE: 2026 - 02 - 16 14:50 | LEVEL: INFO | MSG: Appending [Side Story – Crossover] Somniloquium Serenum to row_data...
+DATE: 2026 - 02 - 16 14:50 | LEVEL: INFO | MSG: Appending CN:2025/09/04 – 2025/09/18Global:2026/02/10 – 2026/02/24 to row_data...
+DATE: 2026 - 02 - 16 14:50 | LEVEL: INFO | MSG: Appending Duel Channel: Honeydew to row_data...
+DATE: 2026 - 02 - 16 14:50 | LEVEL: INFO | MSG: Appending CN:2025/08/28 – 2025/09/14Global:2026/02/03 – 2026/02/17 to row_data...
+DATE: 2026 - 02 - 16 14:50 | LEVEL: INFO | MSG: Deduplication done.
+DATE: 2026 - 02 - 16 14:50 | LEVEL: INFO | MSG: Current event: [Side Story – Crossover] Somniloquium Serenum
+DATE: 2026 - 02 - 16 14:50 | LEVEL: INFO | MSG: Matching Somniloquium Serenum to [Side Story – Crossover] Somniloquium Serenum
+DATE: 2026 - 02 - 16 14:50 | LEVEL: INFO | MSG: Matched Somniloquium Serenum to [Side Story – Crossover] Somniloquium Serenum.
+DATE: 2026 - 02 - 16 14:50 | LEVEL: INFO | MSG: Saved as: Somniloquium Serenum and https://arknights.wiki.gg/images/EN_Somniloquium_Serenum_banner.png?3cb24a
+DATE: 2026 - 02 - 16 14:50 | LEVEL: INFO | MSG: Current event: Duel Channel: Honeydew
+DATE: 2026 - 02 - 16 14:50 | LEVEL: INFO | MSG: Matching Somniloquium Serenum to Duel Channel Honeydew
+DATE: 2026 - 02 - 16 14:50 | LEVEL: INFO | MSG: Matching Duel Channel Honeydew to Duel Channel Honeydew
+DATE: 2026 - 02 - 16 14:50 | LEVEL: INFO | MSG: Matched Duel Channel Honeydew to Duel Channel Honeydew.
+DATE: 2026 - 02 - 16 14:50 | LEVEL: INFO | MSG: Saved as: Duel Channel Honeydew and https://arknights.wiki.gg/images/EN_Duel_Channel_Honeydew_banner.png?4bff78
+DATE: 2026 - 02 - 16 14:50 | LEVEL: INFO | MSG: Sent: [Side Story – Crossover] Somniloquium Serenum
+DATE: 2026 - 02 - 16 14:50 | LEVEL: INFO | MSG: Sent: Duel Channel: Honeydew
+DATE: 2026 - 02 - 16 14:50 | LEVEL: INFO | MSG: Event Name: [Side Story – Crossover] Somniloquium Serenum | CN: Sep 04, 2025 – Sep 18, 2025 | Global: Feb 10, 2026 – Feb 24, 2026
+DATE: 2026 - 02 - 16 14:50 | LEVEL: INFO | MSG: Event Name: Duel Channel: Honeydew | CN: Aug 28, 2025 – Sep 14, 2025 | Global: Feb 03, 2026 – Feb 17, 2026
+DATE: 2026 - 02 - 16 14:51 | LEVEL: INFO | MSG: User is up to date. Current date is: February, 16, 2026
+DATE: 2026 - 02 - 16 14:51 | LEVEL: INFO | MSG: Currently in Arknights
+DATE: 2026 - 02 - 16 14:51 | LEVEL: INFO | MSG: Appending [Side Story – Crossover] Somniloquium Serenum to row_data...
+DATE: 2026 - 02 - 16 14:51 | LEVEL: INFO | MSG: Appending CN:2025/09/04 – 2025/09/18Global:2026/02/10 – 2026/02/24 to row_data...
+DATE: 2026 - 02 - 16 14:51 | LEVEL: INFO | MSG: Appending Duel Channel: Honeydew to row_data...
+DATE: 2026 - 02 - 16 14:51 | LEVEL: INFO | MSG: Appending CN:2025/08/28 – 2025/09/14Global:2026/02/03 – 2026/02/17 to row_data...
+DATE: 2026 - 02 - 16 14:51 | LEVEL: INFO | MSG: Deduplication done.
+DATE: 2026 - 02 - 16 14:51 | LEVEL: INFO | MSG: Current event: [Side Story – Crossover] Somniloquium Serenum
+DATE: 2026 - 02 - 16 14:51 | LEVEL: INFO | MSG: Matching Somniloquium Serenum to [Side Story – Crossover] Somniloquium Serenum
+DATE: 2026 - 02 - 16 14:51 | LEVEL: INFO | MSG: Matched Somniloquium Serenum to [Side Story – Crossover] Somniloquium Serenum.
+DATE: 2026 - 02 - 16 14:51 | LEVEL: INFO | MSG: Saved as: Somniloquium Serenum and https://arknights.wiki.gg/images/EN_Somniloquium_Serenum_banner.png?3cb24a
+DATE: 2026 - 02 - 16 14:51 | LEVEL: INFO | MSG: Current event: Duel Channel: Honeydew
+DATE: 2026 - 02 - 16 14:51 | LEVEL: INFO | MSG: Matching Somniloquium Serenum to Duel Channel Honeydew
+DATE: 2026 - 02 - 16 14:51 | LEVEL: INFO | MSG: Matching Duel Channel Honeydew to Duel Channel Honeydew
+DATE: 2026 - 02 - 16 14:51 | LEVEL: INFO | MSG: Matched Duel Channel Honeydew to Duel Channel Honeydew.
+DATE: 2026 - 02 - 16 14:51 | LEVEL: INFO | MSG: Saved as: Duel Channel Honeydew and https://arknights.wiki.gg/images/EN_Duel_Channel_Honeydew_banner.png?4bff78
+DATE: 2026 - 02 - 16 14:51 | LEVEL: INFO | MSG: Sent: [Side Story – Crossover] Somniloquium Serenum
+DATE: 2026 - 02 - 16 14:51 | LEVEL: INFO | MSG: Sent: Duel Channel: Honeydew
+DATE: 2026 - 02 - 16 14:51 | LEVEL: INFO | MSG: Event Name: [Side Story – Crossover] Somniloquium Serenum | CN: Sep 04, 2025 – Sep 18, 2025 | Global: Feb 10, 2026 – Feb 24, 2026
+DATE: 2026 - 02 - 16 14:51 | LEVEL: INFO | MSG: Event Name: Duel Channel: Honeydew | CN: Aug 28, 2025 – Sep 14, 2025 | Global: Feb 03, 2026 – Feb 17, 2026
+DATE: 2026 - 02 - 16 14:52 | LEVEL: INFO | MSG: User is up to date. Current date is: February, 16, 2026
+DATE: 2026 - 02 - 16 14:52 | LEVEL: INFO | MSG: Currently in Arknights
+DATE: 2026 - 02 - 16 14:52 | LEVEL: ERROR | MSG: A failure has occured.
+Traceback (most recent call last):
+  File "D:\python_scripts\Sect-Event-Handler\backend\flow.py", line 24, in flow
+    datas = self.ark_scrape.data_getter()
+  File "D:\python_scripts\Sect-Event-Handler\backend\games_wiki\arknights.py", line 278, in data_getter
+    events = self.find_events(soup, table, game)
+  File "D:\python_scripts\Sect-Event-Handler\backend\games_wiki\arknights.py", line 41, in find_events
+    self.window.log_menu(f"Currently in {game_name}")
+    ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: 'PySide6.QtWidgets.QTextEdit' object is not callable
+DATE: 2026 - 02 - 16 14:55 | LEVEL: INFO | MSG: User is up to date. Current date is: February, 16, 2026
+DATE: 2026 - 02 - 16 14:55 | LEVEL: INFO | MSG: Currently in Arknights
+DATE: 2026 - 02 - 16 14:55 | LEVEL: ERROR | MSG: A failure has occured.
+Traceback (most recent call last):
+  File "D:\python_scripts\Sect-Event-Handler\backend\flow.py", line 24, in flow
+    datas = self.ark_scrape.data_getter()
+  File "D:\python_scripts\Sect-Event-Handler\backend\games_wiki\arknights.py", line 278, in data_getter
+    events = self.find_events(soup, table, game)
+  File "D:\python_scripts\Sect-Event-Handler\backend\games_wiki\arknights.py", line 41, in find_events
+    self.window.log_menu(f"Currently in {game_name}")
+    ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: 'PySide6.QtWidgets.QTextEdit' object is not callable
+DATE: 2026 - 02 - 16 14:55 | LEVEL: INFO | MSG: User is up to date. Current date is: February, 16, 2026
+DATE: 2026 - 02 - 16 14:55 | LEVEL: INFO | MSG: Currently in Arknights
+DATE: 2026 - 02 - 16 14:55 | LEVEL: INFO | MSG: Appending [Side Story – Crossover] Somniloquium Serenum to row_data...
+DATE: 2026 - 02 - 16 14:55 | LEVEL: INFO | MSG: Appending CN:2025/09/04 – 2025/09/18Global:2026/02/10 – 2026/02/24 to row_data...
+DATE: 2026 - 02 - 16 14:55 | LEVEL: INFO | MSG: Appending Duel Channel: Honeydew to row_data...
+DATE: 2026 - 02 - 16 14:55 | LEVEL: INFO | MSG: Appending CN:2025/08/28 – 2025/09/14Global:2026/02/03 – 2026/02/17 to row_data...
+DATE: 2026 - 02 - 16 14:55 | LEVEL: INFO | MSG: Deduplication done.
+DATE: 2026 - 02 - 16 14:55 | LEVEL: INFO | MSG: Current event: [Side Story – Crossover] Somniloquium Serenum
+DATE: 2026 - 02 - 16 14:55 | LEVEL: INFO | MSG: Matching Somniloquium Serenum to [Side Story – Crossover] Somniloquium Serenum
+DATE: 2026 - 02 - 16 14:55 | LEVEL: INFO | MSG: Matched Somniloquium Serenum to [Side Story – Crossover] Somniloquium Serenum.
+DATE: 2026 - 02 - 16 14:55 | LEVEL: INFO | MSG: Saved as: Somniloquium Serenum and https://arknights.wiki.gg/images/EN_Somniloquium_Serenum_banner.png?3cb24a
+DATE: 2026 - 02 - 16 14:55 | LEVEL: INFO | MSG: Current event: Duel Channel: Honeydew
+DATE: 2026 - 02 - 16 14:55 | LEVEL: INFO | MSG: Matching Somniloquium Serenum to Duel Channel Honeydew
+DATE: 2026 - 02 - 16 14:55 | LEVEL: INFO | MSG: Matching Duel Channel Honeydew to Duel Channel Honeydew
+DATE: 2026 - 02 - 16 14:55 | LEVEL: INFO | MSG: Matched Duel Channel Honeydew to Duel Channel Honeydew.
+DATE: 2026 - 02 - 16 14:55 | LEVEL: INFO | MSG: Saved as: Duel Channel Honeydew and https://arknights.wiki.gg/images/EN_Duel_Channel_Honeydew_banner.png?4bff78
+DATE: 2026 - 02 - 16 14:55 | LEVEL: INFO | MSG: Sent: [Side Story – Crossover] Somniloquium Serenum
+DATE: 2026 - 02 - 16 14:55 | LEVEL: INFO | MSG: Sent: Duel Channel: Honeydew
+DATE: 2026 - 02 - 16 14:55 | LEVEL: INFO | MSG: Event Name: [Side Story – Crossover] Somniloquium Serenum | CN: Sep 04, 2025 – Sep 18, 2025 | Global: Feb 10, 2026 – Feb 24, 2026
+DATE: 2026 - 02 - 16 14:55 | LEVEL: INFO | MSG: Event Name: Duel Channel: Honeydew | CN: Aug 28, 2025 – Sep 14, 2025 | Global: Feb 03, 2026 – Feb 17, 2026

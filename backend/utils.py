@@ -121,7 +121,7 @@ def trimEmptyString(list_events: list, logger):
         logger.log_error(f"Problem occured as {e} in trimEmptyString")
         return None
     
-def request_error_handling(response) -> bool:
+def request_error_handling(response, logger) -> bool:
     '''
     Handles HTTP request errors and returns success status.
     
@@ -135,11 +135,11 @@ def request_error_handling(response) -> bool:
         response.raise_for_status()
         return True
     except requests.HTTPError as http_err:
-        print(f"HTTP error occurred: {http_err}")
+        logger.log_error(f"HTTP error occurred: {http_err}")
     except requests.ConnectionError as conn_err:
-        print(f"Error Connecting: {conn_err}")
+        logger.log_error(f"Error Connecting: {conn_err}")
     except requests.Timeout as time_err:
-        print(f"Timeout Error: {time_err}")
+        logger.log_error(f"Timeout Error: {time_err}")
     except requests.RequestException as err:
-        print(f"An unexpected error occurred: {err}")
+        logger.log_error(f"An unexpected error occurred: {err}")
     return False

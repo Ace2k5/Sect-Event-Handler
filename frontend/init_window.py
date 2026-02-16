@@ -3,7 +3,8 @@ from PySide6.QtCore import Qt
 from PySide6.QtWidgets import (QApplication, QWidget, QVBoxLayout,
                                 QHBoxLayout, QPushButton, QTextEdit,
                                 QSizePolicy)
-import settings
+from . import settings
+from backend import flow
 
 class Window(QWidget):
     def __init__(self):
@@ -25,24 +26,32 @@ class Window(QWidget):
         self._set_stylesheet()
         self._set_up_buttons(vbox1, vbox2)
 
-        layout.addLayout(vbox1)
-        layout.addLayout(vbox2)
-    
+        layout.addLayout(vbox1, 2)
+        layout.addLayout(vbox2, 3)
+
     def test(self):
-        self.log_menu.append("TEST TEST TEST")
+        runner = flow.ScrapeFlow(window=self)
+        runner.flow(forced=True)
 
     def _set_up_buttons(self, vbox1, vbox2):
-        button = QPushButton()
-        button.setText("TEST")
+        self.event_button = QPushButton()
+        self.webhook_button = QPushButton()
+        self.event_button.setText("Force Send Events")
+        self.webhook_button.setText("Manage Webhooks")
+
+        self.event_button.setFixedHeight(50)
+        self.webhook_button.setFixedHeight(50)
         
         self.log_menu = QTextEdit()
         self.log_menu.setReadOnly(True)
-        self.log_menu.setFixedWidth(600)
+        self.log_menu.setMinimumWidth(100)
         self.log_menu.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Expanding)
 
-        vbox1.addWidget(button, alignment=Qt.AlignVCenter)
-        vbox2.addWidget(self.log_menu, alignment=Qt.AlignVCenter)
-        button.clicked.connect(self.test)
+        vbox1.addWidget(self.event_button)
+        vbox1.addWidget(self.webhook_button)
+        vbox1.addStretch()
+        vbox2.addWidget(self.log_menu)
+        self.event_button.clicked.connect(lambda: self.test())
 
     def _set_stylesheet(self):
         self.setStyleSheet('''
@@ -52,11 +61,13 @@ class Window(QWidget):
                         }
                             
                         QPushButton {
-                            color: white;    
+                            color: white;
+                            font-size: 12px;
+                            background-color: #141417;
                         }
                            
                         QTextEdit {
-                           background-color: #08080F;
+                           background-color: #141417;
                            }
                         ''')
 

@@ -1,32 +1,33 @@
-from .games_wiki import arknights, limbus, arknights_webhook
+from .games_wiki import arknights, arknights_webhook
 from . import json_handler, logger
 
 class ScrapeFlow():
-    def __init__(self):
+    def __init__(self, window=None):
+        self.window = window
         self.logger = logger.Log()
-        ark_scrape = arknights.ArkScraper(self.logger)
-        self.flow(self.logger, ark_scrape)
+        self.ark_scrape = arknights.ArkScraper(self.logger, window=self.window)
         
-    def flow(self, logger, ark):
+    def flow(self, forced=False):
         '''
         Main execution flow for the web scraper.
         
         Args:
-            logger: Log object for logging messages
-            ark: ArkScraper object for fetching event data
+            forced=False: helps manage between task scheduler and GUI
             
         Returns:
             None: Sends data directly to Discord webhook
         '''
-        check_date = json_handler.check_date(logger) # False if date is not up to date, else true
+        check_date = json_handler.check_date(self.logger) # False if date is not up to date, else true
         try:
-            #if not check_date:
+            if not check_date or forced:
             # Arknights
-                datas = ark.data_getter()
-                arknights_webhook.send_to_discord(logger, datas)
+                datas = self.ark_scrape.data_getter()
+                arknights_webhook.send_to_discord(self.logger, datas)
                 for data in datas:
-                    logger.log_info(f"Event Name: {data['Event']} | CN: {data['CN']} | Global: {data['Global']}")   
+                    self.logger.log_info(f"Event Name: {data['Event']} | CN: {data['CN']} | Global: {data['Global']}")   
         except Exception:
             self.logger.log_error("A failure has occured.")
         
-a = ScrapeFlow()
+if __name__ == "__main__": # for windows task scheduler
+    runner = ScrapeFlow()
+    runner.flow(forced=False)

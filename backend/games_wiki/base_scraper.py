@@ -6,7 +6,8 @@ from pathlib import  Path
 import json
 
 class BaseScraper(ABC):
-    def __init__(self, logger):
+    def __init__(self, logger, window=None):
+        self.window = window
         self.user_data = json_handler.get_user_data()
         self.sites = inits.SITES
         self.session = requests.Session()
@@ -29,8 +30,12 @@ class BaseScraper(ABC):
                 return soup
             else:
                 self.logger.info(f"Response status: {response.status_code}")
+                if self.window:
+                    self.window.log_menu.append(f"Response status: {response.status_code}")
                 return None
         except requests.RequestException as e:
+            if self.window:
+                self.window.log_menu.append(f"get_response returned as {e}")
             raise requests.RequestException(f"get_response returned as {e}")
     
     @abstractmethod
