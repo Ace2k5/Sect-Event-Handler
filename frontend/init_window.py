@@ -1,14 +1,15 @@
 import sys
-from PySide6.QtCore import Qt
+from PySide6.QtCore import Qt, QThreadPool
 from PySide6.QtWidgets import (QApplication, QWidget, QVBoxLayout,
                                 QHBoxLayout, QPushButton, QTextEdit,
                                 QSizePolicy)
-from . import settings
+from . import settings, worker
 from backend import flow
 
 class Window(QWidget):
     def __init__(self):
         super().__init__()
+        self.pool = QThreadPool()
         self._init_window_settings()
         
     def _init_window_settings(self):
@@ -30,8 +31,14 @@ class Window(QWidget):
         layout.addLayout(vbox2, 3)
 
     def test(self):
-        runner = flow.ScrapeFlow(window=self)
-        runner.flow(forced=True)
+        def job(signals):
+            runner = flow.ScrapeFlow(signals)
+            runner.flow(forced=True)
+        
+        work = worker.Worker(job)
+
+        work.signals.log.connect(self.log_menu.append)
+        self.pool.start(work)
 
     def _set_up_buttons(self, vbox1, vbox2):
         self.event_button = QPushButton()

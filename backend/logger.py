@@ -8,10 +8,11 @@ class Log():
     Custom logging class that provides both console and file logging capabilities.
     Initializes logging handlers for streaming and file output.
     '''
-    def __init__(self):
+    def __init__(self, signals=None):
         print("[DEBUG] Log.__init__ called - Creating new logger instance")
         self.logger = logging.getLogger(__name__)
         self.logger.setLevel(logging.INFO)
+        self.signals = signals
         
         console_handler = logging.StreamHandler()
         file_handler = logging.FileHandler(Path(__file__).parent / "info.log", mode='a', encoding='UTF-8')
@@ -37,6 +38,8 @@ class Log():
             str: The message string to log
         '''
         self.logger.info(str)
+        if self.signals:
+            self.signals.log.emit(f"INFO: {str}")
         
     def log_warning(self, str: str):
         '''
@@ -46,6 +49,8 @@ class Log():
             str: The warning message string to log
         '''
         self.logger.warning(str)
+        if self.signals:
+            self.signals.log.emit(f"WARNING: {str}")
         
     def log_error(self, str: str):
         '''
@@ -55,6 +60,8 @@ class Log():
             str: The error message string to log
         '''
         self.logger.error(str, exc_info=True)
+        if self.signals:
+            self.signals.log.emit(f"ERORR: {str}")
         
     def check_handlers(self):
         '''

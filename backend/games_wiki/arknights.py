@@ -11,8 +11,8 @@ class ArkScraper(BaseScraper):
     '''
     THESE IMPLEMENTATIONS ARE STRICTLY FOR AK ONLY!!!!!!!!
     '''
-    def __init__(self, logger, window=None):
-        super().__init__(logger=logger, window=window)
+    def __init__(self, logger):
+        super().__init__(logger=logger)
         self.path_imgs = Path(__file__).parent.parent.parent / "arknights_imgs"
         
     def find_events(self, soup, table_text, game_name):
@@ -37,8 +37,6 @@ class ArkScraper(BaseScraper):
         events = soup.find_all("table", class_=table_text)
 
         self.logger.log_info(f"Currently in {game_name}")
-        if self.window:
-            self.window.log_menu.append(f"Currently in {game_name}")
         found_events = []
         try:
             for table in events:
@@ -50,21 +48,15 @@ class ArkScraper(BaseScraper):
                         for cell in cells:
                             text = cell.get_text(strip=True)
                             self.logger.log_info(f"Appending {text} to row_data...")
-                            if self.window:
-                                self.window.log_menu.append(f"Appending {text} to row_data...")
                             row_data.append(text)
                         if len(row_data) > 1:
                             found_events.append(row_data)
             return found_events
         except requests.ConnectionError as e:
             self.logger.log_error(f"Connection error: {e}")
-            if self.window:
-                self.window.log_menu.append(f"Connection error: {e}")
             return None
         except Exception as e:
             self.logger.log_error(f"Unknown error occured: {e}")
-            if self.window:
-                self.window.log_menu.append(f"Unknown error occured: {e}")
                         
     def find_img(self, soup: BeautifulSoup, url: str, table_class: str, game: str) -> list[dict]:
         '''
@@ -96,8 +88,6 @@ class ArkScraper(BaseScraper):
             response = self.session.get(img_url)
             if not utils.request_error_handling(response, self.logger):
                 self.logger.log_warning(f"Could not get image {img}. find_img function.")
-                if self.window:
-                    self.window.log_menu.append(f"Could not get image {img}. find_img function.")
                 continue
             data = response.content
             text = filename
@@ -165,8 +155,6 @@ class ArkScraper(BaseScraper):
         lookbackdays = self.user_data.get('lookback_days', 30)
         set_events = utils.deduplication(row_data, self.logger)
         if set_events is None:
-            if self.window:
-                self.window.log_menu.append("Expected a set, None was returned.")
             raise ValueError("Expected a set, None was returned.")
             
         list_events = list(set_events)
@@ -183,8 +171,6 @@ class ArkScraper(BaseScraper):
                 cn_date = cn_date_temp.split("(")[0].strip()
                 normalized_cn = utils.normalize_date_range(cn_date)
             else:
-                if self.window:
-                    self.window.log_menu.append(f"Could not normalize CN date in {date_str}, format_events function.")
                 raise ValueError(f"Could not normalize CN date in {date_str}, format_events function")
 
             if "Global:" in date_str:
@@ -194,8 +180,6 @@ class ArkScraper(BaseScraper):
                     continue
                 normalized_global = utils.normalize_date_range(global_date)
             else:
-                if self.window:
-                    self.window.log_menu.append(f"Could not normalize Global date in {date_str}, format_events function")
                 raise ValueError(f"Could not normalize Global date in {date_str}, format_events function")
 
             clean_format.append({
@@ -234,23 +218,15 @@ class ArkScraper(BaseScraper):
             matched = False
             for imgs in list_of_imgs:
                 self.logger.log_info(f"Matching {imgs['Image_Name']} to {event_name}")
-                if self.window:
-                    self.window.log_menu.append(f"Matching {imgs['Image_Name']} to {event_name}")
                 if imgs["Image_Name"] in event_name:
                     event["Event_PNG"] = imgs["Image_Name"]
                     event["Event_PNG_URL"] = imgs["Image_URL"]
                     matched = True
                     self.logger.log_info(f"Matched {imgs['Image_Name']} to {event_name}.")
-                    if self.window:
-                        self.window.log_menu.append(f"Matched {imgs['Image_Name']} to {event_name}")
                     self.logger.log_info(f"Saved as: {event['Event_PNG']} and {event['Event_PNG_URL']}")
-                    if self.window:
-                        self.window.log_menu.append(f"Saved as {event['Event_PNG']} and {event['Event_PNG_URL']}")
                     break
             if not matched:
                 self.logger.log_warning(f"No images linked with {event['Event']}")
-                if self.window:
-                        self.window.log_menu.append(f"No images linked with {event['Event']}")
         return dictionary_of_events
 
             

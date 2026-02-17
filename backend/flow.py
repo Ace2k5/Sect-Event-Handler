@@ -2,10 +2,9 @@ from .games_wiki import arknights, arknights_webhook
 from . import json_handler, logger
 
 class ScrapeFlow():
-    def __init__(self, window=None):
-        self.window = window
-        self.logger = logger.Log()
-        self.ark_scrape = arknights.ArkScraper(self.logger, window=self.window)
+    def __init__(self, signals=None):
+        self.logger = logger.Log(signals=signals)
+        self.ark_scrape = arknights.ArkScraper(self.logger)
         
     def flow(self, forced=False):
         '''
@@ -24,7 +23,7 @@ class ScrapeFlow():
                 datas = self.ark_scrape.data_getter()
                 arknights_webhook.send_to_discord(self.logger, datas)
                 for data in datas:
-                    self.logger.log_info(f"Event Name: {data['Event']} | CN: {data['CN']} | Global: {data['Global']}")   
+                    self.logger.log_info(f"Event Name: {data['Event']} | CN: {data['CN']} | Global: {data['Global']}")
         except Exception:
             self.logger.log_error("A failure has occured.")
         
