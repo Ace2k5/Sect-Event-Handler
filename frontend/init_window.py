@@ -30,15 +30,16 @@ class Window(QWidget):
         layout.addLayout(vbox1, 2)
         layout.addLayout(vbox2, 3)
 
-    def test(self):
-        def job(signals):
-            runner = flow.ScrapeFlow(signals)
-            runner.flow(forced=True)
-        
-        work = worker.Worker(job)
+    # Worker thread
+    def job(self, signals):
+        runner = flow.ScrapeFlow(signals)
+        runner.flow(forced=True)
 
+    def worker_thread(self):
+        work = worker.Worker(self.job)
         work.signals.log.connect(self.log_menu.append)
         self.pool.start(work)
+    ######################################################
 
     def _set_up_buttons(self, vbox1, vbox2):
         self.event_button = QPushButton()
@@ -58,7 +59,7 @@ class Window(QWidget):
         vbox1.addWidget(self.webhook_button)
         vbox1.addStretch()
         vbox2.addWidget(self.log_menu)
-        self.event_button.clicked.connect(lambda: self.test())
+        self.event_button.clicked.connect(lambda: self.worker_thread())
 
     def _set_stylesheet(self):
         self.setStyleSheet('''

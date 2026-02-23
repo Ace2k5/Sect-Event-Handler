@@ -51,38 +51,6 @@ class BaseScraper(ABC):
         pass
     
     @abstractmethod
-    def find_img(self, soup: BeautifulSoup, url: str, table_class: str, game: str) -> list[dict]:
-        '''
-        Abstract method for downloading and linking event images.
-        Implemented by subclasses for game-specific image handling.
-        
-        Args:
-            soup: BeautifulSoup parser object
-            url: Base URL of the game wiki
-            table_class: CSS class name of images to find
-            game: Name of the game
-        
-        Returns:
-            List of dictionaries with Image_Name and Image_URL
-        '''
-        pass
-    
-    @abstractmethod
-    def link_imgs(self, dictionary_of_events: list[dict], list_of_imgs: list[dict]) -> list[dict]:
-        '''
-        Abstract method for linking images to events.
-        Implemented by subclasses.
-        
-        Args:
-            dictionary_of_events: List of event dictionaries
-            list_of_imgs: List of image dictionaries
-        
-        Returns:
-            List of events with image URLs linked
-        '''
-        pass
-    
-    @abstractmethod
     def format_events(self, row_data):
         '''
         Abstract method for formatting raw event data.

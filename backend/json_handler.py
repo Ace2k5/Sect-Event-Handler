@@ -84,7 +84,7 @@ def change_lookback(logger):
     except Exception as e:
         raise Exception(f"An error has occured as: {e} [change_lookback function in json handler]")
 
-def change_webhook(logger):
+def change_webhook(logger, game):
     '''
     Allows user to change the Discord webhook URL.
     Validates that new webhook starts with 'http' before saving.
@@ -97,7 +97,7 @@ def change_webhook(logger):
     '''
     user_data = get_user_data()
     
-    logger.log_info(f"Current webhook is: {user_data['webhook']}.\nInput a new webhook link")
+    logger.log_info(f"Current webhook is: {user_data[f'{game}_webhook']}.\nInput a new webhook link")
     
     new_webhook = input()
     if not new_webhook.startswith("http"):

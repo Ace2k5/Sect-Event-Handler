@@ -716,3 +716,415 @@ DATE: 2026 - 02 - 17 19:38 | LEVEL: INFO | MSG: Sent: [Side Story – Crossover]
 DATE: 2026 - 02 - 17 19:38 | LEVEL: INFO | MSG: Sent: Duel Channel: Honeydew
 DATE: 2026 - 02 - 17 19:38 | LEVEL: INFO | MSG: Event Name: [Side Story – Crossover] Somniloquium Serenum | CN: Sep 04, 2025 – Sep 18, 2025 | Global: Feb 10, 2026 – Feb 24, 2026
 DATE: 2026 - 02 - 17 19:38 | LEVEL: INFO | MSG: Event Name: Duel Channel: Honeydew | CN: Aug 28, 2025 – Sep 14, 2025 | Global: Feb 03, 2026 – Feb 17, 2026
+DATE: 2026 - 02 - 17 19:55 | LEVEL: INFO | MSG: Currently in Arknights
+DATE: 2026 - 02 - 17 19:55 | LEVEL: INFO | MSG: Appending [Side Story – Crossover] Somniloquium Serenum to row_data...
+DATE: 2026 - 02 - 17 19:55 | LEVEL: INFO | MSG: Appending CN:2025/09/04 – 2025/09/18Global:2026/02/10 – 2026/02/24 to row_data...
+DATE: 2026 - 02 - 17 19:55 | LEVEL: INFO | MSG: Appending Duel Channel: Honeydew to row_data...
+DATE: 2026 - 02 - 17 19:55 | LEVEL: INFO | MSG: Appending CN:2025/08/28 – 2025/09/14Global:2026/02/03 – 2026/02/17 to row_data...
+DATE: 2026 - 02 - 17 19:55 | LEVEL: INFO | MSG: Deduplication done.
+DATE: 2026 - 02 - 17 19:55 | LEVEL: INFO | MSG: Current event: [Side Story – Crossover] Somniloquium Serenum
+DATE: 2026 - 02 - 17 19:55 | LEVEL: INFO | MSG: Matching Somniloquium Serenum to [Side Story – Crossover] Somniloquium Serenum
+DATE: 2026 - 02 - 17 19:55 | LEVEL: INFO | MSG: Matched Somniloquium Serenum to [Side Story – Crossover] Somniloquium Serenum.
+DATE: 2026 - 02 - 17 19:55 | LEVEL: INFO | MSG: Saved as: Somniloquium Serenum and https://arknights.wiki.gg/images/EN_Somniloquium_Serenum_banner.png?3cb24a
+DATE: 2026 - 02 - 17 19:55 | LEVEL: INFO | MSG: Current event: Duel Channel: Honeydew
+DATE: 2026 - 02 - 17 19:55 | LEVEL: INFO | MSG: Matching Somniloquium Serenum to Duel Channel Honeydew
+DATE: 2026 - 02 - 17 19:55 | LEVEL: INFO | MSG: Matching Duel Channel Honeydew to Duel Channel Honeydew
+DATE: 2026 - 02 - 17 19:55 | LEVEL: INFO | MSG: Matched Duel Channel Honeydew to Duel Channel Honeydew.
+DATE: 2026 - 02 - 17 19:55 | LEVEL: INFO | MSG: Saved as: Duel Channel Honeydew and https://arknights.wiki.gg/images/EN_Duel_Channel_Honeydew_banner.png?4bff78
+DATE: 2026 - 02 - 17 19:55 | LEVEL: INFO | MSG: Sent: [Side Story – Crossover] Somniloquium Serenum
+DATE: 2026 - 02 - 17 19:55 | LEVEL: INFO | MSG: Sent: Duel Channel: Honeydew
+DATE: 2026 - 02 - 17 19:55 | LEVEL: INFO | MSG: Event Name: [Side Story – Crossover] Somniloquium Serenum | CN: Sep 04, 2025 – Sep 18, 2025 | Global: Feb 10, 2026 – Feb 24, 2026
+DATE: 2026 - 02 - 17 19:55 | LEVEL: INFO | MSG: Event Name: Duel Channel: Honeydew | CN: Aug 28, 2025 – Sep 14, 2025 | Global: Feb 03, 2026 – Feb 17, 2026
+DATE: 2026 - 02 - 23 13:44 | LEVEL: INFO | MSG: Currently in Arknights
+DATE: 2026 - 02 - 23 13:44 | LEVEL: INFO | MSG: Appending [Side Story – Crossover] Somniloquium Serenum to row_data...
+DATE: 2026 - 02 - 23 13:44 | LEVEL: INFO | MSG: Appending CN:2025/09/04 – 2025/09/18Global:2026/02/10 – 2026/02/24 to row_data...
+DATE: 2026 - 02 - 23 13:44 | LEVEL: INFO | MSG: Appending [Rerun] Ending a Grand Overture Rerun to row_data...
+DATE: 2026 - 02 - 23 13:44 | LEVEL: INFO | MSG: Appending CN:2025/09/19 – 2025/09/29Global:2026/02/24 – 2026/03/06 to row_data...
+DATE: 2026 - 02 - 23 13:44 | LEVEL: INFO | MSG: Deduplication done.
+DATE: 2026 - 02 - 23 13:44 | LEVEL: ERROR | MSG: A failure has occured.
+Traceback (most recent call last):
+  File "D:\python_scripts\Sect-Event-Handler\backend\flow.py", line 23, in flow
+    datas = self.ark_scrape.data_getter()
+  File "D:\python_scripts\Sect-Event-Handler\backend\games_wiki\arknights.py", line 256, in data_getter
+    imgs_list = self.find_img(soup, url, "banner", game)
+  File "D:\python_scripts\Sect-Event-Handler\backend\games_wiki\arknights.py", line 89, in find_img
+    if not utils.request_error_handling(response, self.logger):
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: module 'backend.utils' has no attribute 'request_error_handling'. Did you mean: 'request_error_shandling'?
+DATE: 2026 - 02 - 23 13:45 | LEVEL: INFO | MSG: User is up to date. Current date is: February, 23, 2026
+DATE: 2026 - 02 - 23 13:45 | LEVEL: INFO | MSG: Currently in Arknights
+DATE: 2026 - 02 - 23 13:45 | LEVEL: INFO | MSG: Appending [Side Story – Crossover] Somniloquium Serenum to row_data...
+DATE: 2026 - 02 - 23 13:45 | LEVEL: INFO | MSG: Appending CN:2025/09/04 – 2025/09/18Global:2026/02/10 – 2026/02/24 to row_data...
+DATE: 2026 - 02 - 23 13:45 | LEVEL: INFO | MSG: Appending [Rerun] Ending a Grand Overture Rerun to row_data...
+DATE: 2026 - 02 - 23 13:45 | LEVEL: INFO | MSG: Appending CN:2025/09/19 – 2025/09/29Global:2026/02/24 – 2026/03/06 to row_data...
+DATE: 2026 - 02 - 23 13:45 | LEVEL: INFO | MSG: Deduplication done.
+DATE: 2026 - 02 - 23 13:45 | LEVEL: INFO | MSG: Current event: [Side Story – Crossover] Somniloquium Serenum
+DATE: 2026 - 02 - 23 13:45 | LEVEL: INFO | MSG: Matching Somniloquium Serenum to [Side Story – Crossover] Somniloquium Serenum
+DATE: 2026 - 02 - 23 13:45 | LEVEL: INFO | MSG: Matched Somniloquium Serenum to [Side Story – Crossover] Somniloquium Serenum.
+DATE: 2026 - 02 - 23 13:45 | LEVEL: INFO | MSG: Saved as: Somniloquium Serenum and https://arknights.wiki.gg/images/EN_Somniloquium_Serenum_banner.png?3cb24a
+DATE: 2026 - 02 - 23 13:45 | LEVEL: INFO | MSG: Current event: [Rerun] Ending a Grand Overture Rerun
+DATE: 2026 - 02 - 23 13:45 | LEVEL: INFO | MSG: Matching Somniloquium Serenum to [Rerun] Ending a Grand Overture Rerun
+DATE: 2026 - 02 - 23 13:45 | LEVEL: INFO | MSG: Matching Ending a Grand Overture Rerun to [Rerun] Ending a Grand Overture Rerun
+DATE: 2026 - 02 - 23 13:45 | LEVEL: INFO | MSG: Matched Ending a Grand Overture Rerun to [Rerun] Ending a Grand Overture Rerun.
+DATE: 2026 - 02 - 23 13:45 | LEVEL: INFO | MSG: Saved as: Ending a Grand Overture Rerun and https://arknights.wiki.gg/images/EN_Ending_a_Grand_Overture_Rerun_banner.png?178e50
+DATE: 2026 - 02 - 23 13:45 | LEVEL: INFO | MSG: Sent: [Side Story – Crossover] Somniloquium Serenum
+DATE: 2026 - 02 - 23 13:45 | LEVEL: INFO | MSG: Sent: [Rerun] Ending a Grand Overture Rerun
+DATE: 2026 - 02 - 23 13:45 | LEVEL: INFO | MSG: Event Name: [Side Story – Crossover] Somniloquium Serenum | CN: Sep 04, 2025 – Sep 18, 2025 | Global: Feb 10, 2026 – Feb 24, 2026
+DATE: 2026 - 02 - 23 13:45 | LEVEL: INFO | MSG: Event Name: [Rerun] Ending a Grand Overture Rerun | CN: Sep 19, 2025 – Sep 29, 2025 | Global: Feb 24, 2026 – Mar 06, 2026
+DATE: 2026 - 02 - 23 13:46 | LEVEL: INFO | MSG: User is up to date. Current date is: February, 23, 2026
+DATE: 2026 - 02 - 23 13:46 | LEVEL: INFO | MSG: Currently in Arknights
+DATE: 2026 - 02 - 23 13:46 | LEVEL: INFO | MSG: Appending [Side Story – Crossover] Somniloquium Serenum to row_data...
+DATE: 2026 - 02 - 23 13:46 | LEVEL: INFO | MSG: Appending CN:2025/09/04 – 2025/09/18Global:2026/02/10 – 2026/02/24 to row_data...
+DATE: 2026 - 02 - 23 13:46 | LEVEL: INFO | MSG: Appending [Rerun] Ending a Grand Overture Rerun to row_data...
+DATE: 2026 - 02 - 23 13:46 | LEVEL: INFO | MSG: Appending CN:2025/09/19 – 2025/09/29Global:2026/02/24 – 2026/03/06 to row_data...
+DATE: 2026 - 02 - 23 13:46 | LEVEL: INFO | MSG: Deduplication done.
+DATE: 2026 - 02 - 23 13:46 | LEVEL: INFO | MSG: Current event: [Side Story – Crossover] Somniloquium Serenum
+DATE: 2026 - 02 - 23 13:46 | LEVEL: INFO | MSG: Matching Somniloquium Serenum to [Side Story – Crossover] Somniloquium Serenum
+DATE: 2026 - 02 - 23 13:46 | LEVEL: INFO | MSG: Matched Somniloquium Serenum to [Side Story – Crossover] Somniloquium Serenum.
+DATE: 2026 - 02 - 23 13:46 | LEVEL: INFO | MSG: Saved as: Somniloquium Serenum and https://arknights.wiki.gg/images/EN_Somniloquium_Serenum_banner.png?3cb24a
+DATE: 2026 - 02 - 23 13:46 | LEVEL: INFO | MSG: Current event: [Rerun] Ending a Grand Overture Rerun
+DATE: 2026 - 02 - 23 13:46 | LEVEL: INFO | MSG: Matching Somniloquium Serenum to [Rerun] Ending a Grand Overture Rerun
+DATE: 2026 - 02 - 23 13:46 | LEVEL: INFO | MSG: Matching Ending a Grand Overture Rerun to [Rerun] Ending a Grand Overture Rerun
+DATE: 2026 - 02 - 23 13:46 | LEVEL: INFO | MSG: Matched Ending a Grand Overture Rerun to [Rerun] Ending a Grand Overture Rerun.
+DATE: 2026 - 02 - 23 13:46 | LEVEL: INFO | MSG: Saved as: Ending a Grand Overture Rerun and https://arknights.wiki.gg/images/EN_Ending_a_Grand_Overture_Rerun_banner.png?178e50
+DATE: 2026 - 02 - 23 13:46 | LEVEL: INFO | MSG: Sent: [Side Story – Crossover] Somniloquium Serenum
+DATE: 2026 - 02 - 23 13:46 | LEVEL: INFO | MSG: Sent: [Rerun] Ending a Grand Overture Rerun
+DATE: 2026 - 02 - 23 13:46 | LEVEL: INFO | MSG: 
+
+DATE: 2026 - 02 - 23 13:46 | LEVEL: INFO | MSG: Event Name: [Side Story – Crossover] Somniloquium Serenum | CN: Sep 04, 2025 – Sep 18, 2025 | Global: Feb 10, 2026 – Feb 24, 2026
+DATE: 2026 - 02 - 23 13:46 | LEVEL: INFO | MSG: Event Name: [Rerun] Ending a Grand Overture Rerun | CN: Sep 19, 2025 – Sep 29, 2025 | Global: Feb 24, 2026 – Mar 06, 2026
+DATE: 2026 - 02 - 23 14:05 | LEVEL: INFO | MSG: User is up to date. Current date is: February, 23, 2026
+DATE: 2026 - 02 - 23 14:05 | LEVEL: INFO | MSG: Currently in Arknights
+DATE: 2026 - 02 - 23 14:05 | LEVEL: INFO | MSG: Appending [Side Story – Crossover] Somniloquium Serenum to row_data...
+DATE: 2026 - 02 - 23 14:05 | LEVEL: INFO | MSG: Appending CN:2025/09/04 – 2025/09/18Global:2026/02/10 – 2026/02/24 to row_data...
+DATE: 2026 - 02 - 23 14:05 | LEVEL: INFO | MSG: Appending [Rerun] Ending a Grand Overture Rerun to row_data...
+DATE: 2026 - 02 - 23 14:05 | LEVEL: INFO | MSG: Appending CN:2025/09/19 – 2025/09/29Global:2026/02/24 – 2026/03/06 to row_data...
+DATE: 2026 - 02 - 23 14:05 | LEVEL: INFO | MSG: Deduplication done.
+DATE: 2026 - 02 - 23 14:05 | LEVEL: INFO | MSG: Current event: [Side Story – Crossover] Somniloquium Serenum
+DATE: 2026 - 02 - 23 14:05 | LEVEL: INFO | MSG: Matching Somniloquium Serenum to [Side Story – Crossover] Somniloquium Serenum
+DATE: 2026 - 02 - 23 14:05 | LEVEL: INFO | MSG: Matched Somniloquium Serenum to [Side Story – Crossover] Somniloquium Serenum.
+DATE: 2026 - 02 - 23 14:05 | LEVEL: INFO | MSG: Saved as: Somniloquium Serenum and https://arknights.wiki.gg/images/EN_Somniloquium_Serenum_banner.png?3cb24a
+DATE: 2026 - 02 - 23 14:05 | LEVEL: INFO | MSG: Current event: [Rerun] Ending a Grand Overture Rerun
+DATE: 2026 - 02 - 23 14:05 | LEVEL: INFO | MSG: Matching Somniloquium Serenum to [Rerun] Ending a Grand Overture Rerun
+DATE: 2026 - 02 - 23 14:05 | LEVEL: INFO | MSG: Matching Ending a Grand Overture Rerun to [Rerun] Ending a Grand Overture Rerun
+DATE: 2026 - 02 - 23 14:05 | LEVEL: INFO | MSG: Matched Ending a Grand Overture Rerun to [Rerun] Ending a Grand Overture Rerun.
+DATE: 2026 - 02 - 23 14:05 | LEVEL: INFO | MSG: Saved as: Ending a Grand Overture Rerun and https://arknights.wiki.gg/images/EN_Ending_a_Grand_Overture_Rerun_banner.png?178e50
+DATE: 2026 - 02 - 23 14:05 | LEVEL: INFO | MSG: Sent: [Side Story – Crossover] Somniloquium Serenum
+DATE: 2026 - 02 - 23 14:05 | LEVEL: INFO | MSG: Sent: [Rerun] Ending a Grand Overture Rerun
+DATE: 2026 - 02 - 23 14:05 | LEVEL: INFO | MSG: Event Name: [Side Story – Crossover] Somniloquium Serenum | CN: Sep 04, 2025 – Sep 18, 2025 | Global: Feb 10, 2026 – Feb 24, 2026
+DATE: 2026 - 02 - 23 14:05 | LEVEL: INFO | MSG: Event Name: [Rerun] Ending a Grand Overture Rerun | CN: Sep 19, 2025 – Sep 29, 2025 | Global: Feb 24, 2026 – Mar 06, 2026
+DATE: 2026 - 02 - 23 14:17 | LEVEL: ERROR | MSG: A failure has occured.
+Traceback (most recent call last):
+  File "D:\python_scripts\Sect-Event-Handler\backend\flow.py", line 23, in flow
+    datas = self.ark_scrape.data_getter()
+  File "D:\python_scripts\Sect-Event-Handler\backend\games_wiki\arknights.py", line 135, in data_getter
+    table, url = site_config
+    ^^^^^^^^^^
+ValueError: too many values to unpack (expected 2)
+DATE: 2026 - 02 - 23 14:19 | LEVEL: INFO | MSG: User is up to date. Current date is: February, 23, 2026
+DATE: 2026 - 02 - 23 14:19 | LEVEL: INFO | MSG: Currently in Arknights
+DATE: 2026 - 02 - 23 14:19 | LEVEL: INFO | MSG: Appending [Side Story – Crossover] Somniloquium Serenum to row_data...
+DATE: 2026 - 02 - 23 14:19 | LEVEL: INFO | MSG: Appending CN:2025/09/04 – 2025/09/18Global:2026/02/10 – 2026/02/24 to row_data...
+DATE: 2026 - 02 - 23 14:19 | LEVEL: INFO | MSG: Appending [Rerun] Ending a Grand Overture Rerun to row_data...
+DATE: 2026 - 02 - 23 14:19 | LEVEL: INFO | MSG: Appending CN:2025/09/19 – 2025/09/29Global:2026/02/24 – 2026/03/06 to row_data...
+DATE: 2026 - 02 - 23 14:19 | LEVEL: INFO | MSG: Deduplication done.
+DATE: 2026 - 02 - 23 14:19 | LEVEL: ERROR | MSG: A failure has occured.
+Traceback (most recent call last):
+  File "D:\python_scripts\Sect-Event-Handler\backend\flow.py", line 23, in flow
+    datas = self.ark_scrape.data_getter()
+  File "D:\python_scripts\Sect-Event-Handler\backend\games_wiki\arknights.py", line 142, in data_getter
+    formatted_data = self.link_imgs(data)
+                     ^^^^^^^^^^^^^^
+AttributeError: 'ArkScraper' object has no attribute 'link_imgs'
+DATE: 2026 - 02 - 23 14:29 | LEVEL: INFO | MSG: User is up to date. Current date is: February, 23, 2026
+DATE: 2026 - 02 - 23 14:29 | LEVEL: INFO | MSG: Currently in Arknights
+DATE: 2026 - 02 - 23 14:29 | LEVEL: INFO | MSG: Appending [Side Story – Crossover] Somniloquium Serenum to row_data...
+DATE: 2026 - 02 - 23 14:29 | LEVEL: INFO | MSG: Appending CN:2025/09/04 – 2025/09/18Global:2026/02/10 – 2026/02/24 to row_data...
+DATE: 2026 - 02 - 23 14:29 | LEVEL: INFO | MSG: Appending [Rerun] Ending a Grand Overture Rerun to row_data...
+DATE: 2026 - 02 - 23 14:29 | LEVEL: INFO | MSG: Appending CN:2025/09/19 – 2025/09/29Global:2026/02/24 – 2026/03/06 to row_data...
+DATE: 2026 - 02 - 23 14:29 | LEVEL: INFO | MSG: Deduplication done.
+DATE: 2026 - 02 - 23 14:29 | LEVEL: INFO | MSG: Current event: [Side Story – Crossover] Somniloquium Serenum
+DATE: 2026 - 02 - 23 14:29 | LEVEL: WARNING | MSG: No images linked with [Side Story – Crossover] Somniloquium Serenum
+DATE: 2026 - 02 - 23 14:29 | LEVEL: INFO | MSG: Current event: [Rerun] Ending a Grand Overture Rerun
+DATE: 2026 - 02 - 23 14:29 | LEVEL: WARNING | MSG: No images linked with [Rerun] Ending a Grand Overture Rerun
+DATE: 2026 - 02 - 23 14:29 | LEVEL: INFO | MSG: Sent: [Side Story – Crossover] Somniloquium Serenum
+DATE: 2026 - 02 - 23 14:29 | LEVEL: INFO | MSG: Sent: [Rerun] Ending a Grand Overture Rerun
+DATE: 2026 - 02 - 23 14:29 | LEVEL: INFO | MSG: Event Name: [Side Story – Crossover] Somniloquium Serenum | CN: Sep 04, 2025 – Sep 18, 2025 | Global: Feb 10, 2026 – Feb 24, 2026
+DATE: 2026 - 02 - 23 14:29 | LEVEL: INFO | MSG: Event Name: [Rerun] Ending a Grand Overture Rerun | CN: Sep 19, 2025 – Sep 29, 2025 | Global: Feb 24, 2026 – Mar 06, 2026
+DATE: 2026 - 02 - 23 14:32 | LEVEL: INFO | MSG: User is up to date. Current date is: February, 23, 2026
+DATE: 2026 - 02 - 23 14:32 | LEVEL: INFO | MSG: Currently in Arknights
+DATE: 2026 - 02 - 23 14:32 | LEVEL: INFO | MSG: Appending [Side Story – Crossover] Somniloquium Serenum to row_data...
+DATE: 2026 - 02 - 23 14:32 | LEVEL: INFO | MSG: Appending CN:2025/09/04 – 2025/09/18Global:2026/02/10 – 2026/02/24 to row_data...
+DATE: 2026 - 02 - 23 14:32 | LEVEL: INFO | MSG: Appending [Rerun] Ending a Grand Overture Rerun to row_data...
+DATE: 2026 - 02 - 23 14:32 | LEVEL: INFO | MSG: Appending CN:2025/09/19 – 2025/09/29Global:2026/02/24 – 2026/03/06 to row_data...
+DATE: 2026 - 02 - 23 14:32 | LEVEL: INFO | MSG: Deduplication done.
+DATE: 2026 - 02 - 23 14:32 | LEVEL: INFO | MSG: Current event: [Side Story – Crossover] Somniloquium Serenum
+DATE: 2026 - 02 - 23 14:32 | LEVEL: WARNING | MSG: No images linked with [Side Story – Crossover] Somniloquium Serenum
+DATE: 2026 - 02 - 23 14:32 | LEVEL: INFO | MSG: Current event: [Rerun] Ending a Grand Overture Rerun
+DATE: 2026 - 02 - 23 14:32 | LEVEL: WARNING | MSG: No images linked with [Rerun] Ending a Grand Overture Rerun
+DATE: 2026 - 02 - 23 14:32 | LEVEL: INFO | MSG: Sent: [Side Story – Crossover] Somniloquium Serenum
+DATE: 2026 - 02 - 23 14:32 | LEVEL: INFO | MSG: Sent: [Rerun] Ending a Grand Overture Rerun
+DATE: 2026 - 02 - 23 14:32 | LEVEL: INFO | MSG: Event Name: [Side Story – Crossover] Somniloquium Serenum | CN: Sep 04, 2025 – Sep 18, 2025 | Global: Feb 10, 2026 – Feb 24, 2026
+DATE: 2026 - 02 - 23 14:32 | LEVEL: INFO | MSG: Event Name: [Rerun] Ending a Grand Overture Rerun | CN: Sep 19, 2025 – Sep 29, 2025 | Global: Feb 24, 2026 – Mar 06, 2026
+DATE: 2026 - 02 - 23 14:34 | LEVEL: INFO | MSG: User is up to date. Current date is: February, 23, 2026
+DATE: 2026 - 02 - 23 14:34 | LEVEL: INFO | MSG: Currently in Arknights
+DATE: 2026 - 02 - 23 14:34 | LEVEL: INFO | MSG: Appending [Side Story – Crossover] Somniloquium Serenum to row_data...
+DATE: 2026 - 02 - 23 14:34 | LEVEL: INFO | MSG: Appending CN:2025/09/04 – 2025/09/18Global:2026/02/10 – 2026/02/24 to row_data...
+DATE: 2026 - 02 - 23 14:34 | LEVEL: INFO | MSG: Appending [Rerun] Ending a Grand Overture Rerun to row_data...
+DATE: 2026 - 02 - 23 14:34 | LEVEL: INFO | MSG: Appending CN:2025/09/19 – 2025/09/29Global:2026/02/24 – 2026/03/06 to row_data...
+DATE: 2026 - 02 - 23 14:34 | LEVEL: INFO | MSG: Deduplication done.
+DATE: 2026 - 02 - 23 14:34 | LEVEL: INFO | MSG: Current event: [Side Story – Crossover] Somniloquium Serenum
+DATE: 2026 - 02 - 23 14:34 | LEVEL: WARNING | MSG: No images linked with [Side Story – Crossover] Somniloquium Serenum
+DATE: 2026 - 02 - 23 14:34 | LEVEL: INFO | MSG: Current event: [Rerun] Ending a Grand Overture Rerun
+DATE: 2026 - 02 - 23 14:34 | LEVEL: WARNING | MSG: No images linked with [Rerun] Ending a Grand Overture Rerun
+DATE: 2026 - 02 - 23 14:34 | LEVEL: INFO | MSG: Sent: [Side Story – Crossover] Somniloquium Serenum
+DATE: 2026 - 02 - 23 14:34 | LEVEL: INFO | MSG: Sent: [Rerun] Ending a Grand Overture Rerun
+DATE: 2026 - 02 - 23 14:34 | LEVEL: INFO | MSG: Event Name: [Side Story – Crossover] Somniloquium Serenum | CN: Sep 04, 2025 – Sep 18, 2025 | Global: Feb 10, 2026 – Feb 24, 2026
+DATE: 2026 - 02 - 23 14:34 | LEVEL: INFO | MSG: Event Name: [Rerun] Ending a Grand Overture Rerun | CN: Sep 19, 2025 – Sep 29, 2025 | Global: Feb 24, 2026 – Mar 06, 2026
+DATE: 2026 - 02 - 23 14:36 | LEVEL: INFO | MSG: User is up to date. Current date is: February, 23, 2026
+DATE: 2026 - 02 - 23 14:36 | LEVEL: INFO | MSG: User is up to date. Current date is: February, 23, 2026
+DATE: 2026 - 02 - 23 14:36 | LEVEL: INFO | MSG: Currently in Arknights
+DATE: 2026 - 02 - 23 14:36 | LEVEL: INFO | MSG: Appending [Side Story – Crossover] Somniloquium Serenum to row_data...
+DATE: 2026 - 02 - 23 14:36 | LEVEL: INFO | MSG: Appending CN:2025/09/04 – 2025/09/18Global:2026/02/10 – 2026/02/24 to row_data...
+DATE: 2026 - 02 - 23 14:36 | LEVEL: INFO | MSG: Appending [Rerun] Ending a Grand Overture Rerun to row_data...
+DATE: 2026 - 02 - 23 14:36 | LEVEL: INFO | MSG: Appending CN:2025/09/19 – 2025/09/29Global:2026/02/24 – 2026/03/06 to row_data...
+DATE: 2026 - 02 - 23 14:36 | LEVEL: INFO | MSG: Deduplication done.
+DATE: 2026 - 02 - 23 14:36 | LEVEL: INFO | MSG: Current event: [Side Story – Crossover] Somniloquium Serenum
+DATE: 2026 - 02 - 23 14:36 | LEVEL: WARNING | MSG: No images linked with [Side Story – Crossover] Somniloquium Serenum
+DATE: 2026 - 02 - 23 14:36 | LEVEL: INFO | MSG: Current event: [Rerun] Ending a Grand Overture Rerun
+DATE: 2026 - 02 - 23 14:36 | LEVEL: WARNING | MSG: No images linked with [Rerun] Ending a Grand Overture Rerun
+DATE: 2026 - 02 - 23 14:36 | LEVEL: INFO | MSG: Sent: [Side Story – Crossover] Somniloquium Serenum
+DATE: 2026 - 02 - 23 14:36 | LEVEL: INFO | MSG: Sent: [Rerun] Ending a Grand Overture Rerun
+DATE: 2026 - 02 - 23 14:36 | LEVEL: INFO | MSG: Event Name: [Side Story – Crossover] Somniloquium Serenum | CN: Sep 04, 2025 – Sep 18, 2025 | Global: Feb 10, 2026 – Feb 24, 2026
+DATE: 2026 - 02 - 23 14:36 | LEVEL: INFO | MSG: Event Name: [Rerun] Ending a Grand Overture Rerun | CN: Sep 19, 2025 – Sep 29, 2025 | Global: Feb 24, 2026 – Mar 06, 2026
+DATE: 2026 - 02 - 23 14:37 | LEVEL: INFO | MSG: Currently in Arknights
+DATE: 2026 - 02 - 23 14:37 | LEVEL: INFO | MSG: Appending [Side Story – Crossover] Somniloquium Serenum to row_data...
+DATE: 2026 - 02 - 23 14:37 | LEVEL: INFO | MSG: Appending CN:2025/09/04 – 2025/09/18Global:2026/02/10 – 2026/02/24 to row_data...
+DATE: 2026 - 02 - 23 14:37 | LEVEL: INFO | MSG: Appending [Rerun] Ending a Grand Overture Rerun to row_data...
+DATE: 2026 - 02 - 23 14:37 | LEVEL: INFO | MSG: Appending CN:2025/09/19 – 2025/09/29Global:2026/02/24 – 2026/03/06 to row_data...
+DATE: 2026 - 02 - 23 14:37 | LEVEL: INFO | MSG: Deduplication done.
+DATE: 2026 - 02 - 23 14:37 | LEVEL: INFO | MSG: Current event: [Side Story – Crossover] Somniloquium Serenum
+DATE: 2026 - 02 - 23 14:37 | LEVEL: WARNING | MSG: No images linked with [Side Story – Crossover] Somniloquium Serenum
+DATE: 2026 - 02 - 23 14:37 | LEVEL: INFO | MSG: Current event: [Rerun] Ending a Grand Overture Rerun
+DATE: 2026 - 02 - 23 14:37 | LEVEL: WARNING | MSG: No images linked with [Rerun] Ending a Grand Overture Rerun
+DATE: 2026 - 02 - 23 14:37 | LEVEL: INFO | MSG: Sent: [Side Story – Crossover] Somniloquium Serenum
+DATE: 2026 - 02 - 23 14:37 | LEVEL: INFO | MSG: Sent: [Rerun] Ending a Grand Overture Rerun
+DATE: 2026 - 02 - 23 14:37 | LEVEL: INFO | MSG: Event Name: [Side Story – Crossover] Somniloquium Serenum | CN: Sep 04, 2025 – Sep 18, 2025 | Global: Feb 10, 2026 – Feb 24, 2026
+DATE: 2026 - 02 - 23 14:37 | LEVEL: INFO | MSG: Event Name: [Rerun] Ending a Grand Overture Rerun | CN: Sep 19, 2025 – Sep 29, 2025 | Global: Feb 24, 2026 – Mar 06, 2026
+DATE: 2026 - 02 - 23 14:43 | LEVEL: INFO | MSG: User is up to date. Current date is: February, 23, 2026
+DATE: 2026 - 02 - 23 14:44 | LEVEL: INFO | MSG: Currently in Arknights
+DATE: 2026 - 02 - 23 14:44 | LEVEL: INFO | MSG: Appending [Side Story – Crossover] Somniloquium Serenum to row_data...
+DATE: 2026 - 02 - 23 14:44 | LEVEL: INFO | MSG: Appending CN:2025/09/04 – 2025/09/18Global:2026/02/10 – 2026/02/24 to row_data...
+DATE: 2026 - 02 - 23 14:44 | LEVEL: INFO | MSG: Appending [Rerun] Ending a Grand Overture Rerun to row_data...
+DATE: 2026 - 02 - 23 14:44 | LEVEL: INFO | MSG: Appending CN:2025/09/19 – 2025/09/29Global:2026/02/24 – 2026/03/06 to row_data...
+DATE: 2026 - 02 - 23 14:44 | LEVEL: INFO | MSG: Deduplication done.
+DATE: 2026 - 02 - 23 14:44 | LEVEL: INFO | MSG: Current event: [Side Story – Crossover] Somniloquium Serenum
+DATE: 2026 - 02 - 23 14:44 | LEVEL: WARNING | MSG: No images linked with [Side Story – Crossover] Somniloquium Serenum
+DATE: 2026 - 02 - 23 14:44 | LEVEL: INFO | MSG: Current event: [Rerun] Ending a Grand Overture Rerun
+DATE: 2026 - 02 - 23 14:44 | LEVEL: WARNING | MSG: No images linked with [Rerun] Ending a Grand Overture Rerun
+DATE: 2026 - 02 - 23 14:44 | LEVEL: INFO | MSG: Sent: [Side Story – Crossover] Somniloquium Serenum
+DATE: 2026 - 02 - 23 14:44 | LEVEL: INFO | MSG: Sent: [Rerun] Ending a Grand Overture Rerun
+DATE: 2026 - 02 - 23 14:44 | LEVEL: INFO | MSG: Event Name: [Side Story – Crossover] Somniloquium Serenum | CN: Sep 04, 2025 – Sep 18, 2025 | Global: Feb 10, 2026 – Feb 24, 2026
+DATE: 2026 - 02 - 23 14:44 | LEVEL: INFO | MSG: Event Name: [Rerun] Ending a Grand Overture Rerun | CN: Sep 19, 2025 – Sep 29, 2025 | Global: Feb 24, 2026 – Mar 06, 2026
+DATE: 2026 - 02 - 23 14:47 | LEVEL: INFO | MSG: Currently in Arknights
+DATE: 2026 - 02 - 23 14:47 | LEVEL: INFO | MSG: Appending [Side Story – Crossover] Somniloquium Serenum to row_data...
+DATE: 2026 - 02 - 23 14:47 | LEVEL: INFO | MSG: Appending CN:2025/09/04 – 2025/09/18Global:2026/02/10 – 2026/02/24 to row_data...
+DATE: 2026 - 02 - 23 14:47 | LEVEL: INFO | MSG: Appending [Rerun] Ending a Grand Overture Rerun to row_data...
+DATE: 2026 - 02 - 23 14:47 | LEVEL: INFO | MSG: Appending CN:2025/09/19 – 2025/09/29Global:2026/02/24 – 2026/03/06 to row_data...
+DATE: 2026 - 02 - 23 14:47 | LEVEL: INFO | MSG: Deduplication done.
+DATE: 2026 - 02 - 23 14:47 | LEVEL: INFO | MSG: Current event: [Side Story – Crossover] Somniloquium Serenum
+DATE: 2026 - 02 - 23 14:47 | LEVEL: WARNING | MSG: No images linked with [Side Story – Crossover] Somniloquium Serenum
+DATE: 2026 - 02 - 23 14:47 | LEVEL: INFO | MSG: Current event: [Rerun] Ending a Grand Overture Rerun
+DATE: 2026 - 02 - 23 14:47 | LEVEL: WARNING | MSG: No images linked with [Rerun] Ending a Grand Overture Rerun
+DATE: 2026 - 02 - 23 14:47 | LEVEL: INFO | MSG: Sent: [Side Story – Crossover] Somniloquium Serenum
+DATE: 2026 - 02 - 23 14:47 | LEVEL: INFO | MSG: Sent: [Rerun] Ending a Grand Overture Rerun
+DATE: 2026 - 02 - 23 14:47 | LEVEL: INFO | MSG: Event Name: [Side Story – Crossover] Somniloquium Serenum | CN: Sep 04, 2025 – Sep 18, 2025 | Global: Feb 10, 2026 – Feb 24, 2026
+DATE: 2026 - 02 - 23 14:47 | LEVEL: INFO | MSG: Event Name: [Rerun] Ending a Grand Overture Rerun | CN: Sep 19, 2025 – Sep 29, 2025 | Global: Feb 24, 2026 – Mar 06, 2026
+DATE: 2026 - 02 - 23 14:50 | LEVEL: INFO | MSG: Currently in Arknights
+DATE: 2026 - 02 - 23 14:50 | LEVEL: INFO | MSG: Appending [Side Story – Crossover] Somniloquium Serenum to row_data...
+DATE: 2026 - 02 - 23 14:50 | LEVEL: INFO | MSG: Appending CN:2025/09/04 – 2025/09/18Global:2026/02/10 – 2026/02/24 to row_data...
+DATE: 2026 - 02 - 23 14:50 | LEVEL: INFO | MSG: Appending [Rerun] Ending a Grand Overture Rerun to row_data...
+DATE: 2026 - 02 - 23 14:50 | LEVEL: INFO | MSG: Appending CN:2025/09/19 – 2025/09/29Global:2026/02/24 – 2026/03/06 to row_data...
+DATE: 2026 - 02 - 23 14:50 | LEVEL: INFO | MSG: Deduplication done.
+DATE: 2026 - 02 - 23 14:50 | LEVEL: INFO | MSG: Current event: [Side Story – Crossover] Somniloquium Serenum
+DATE: 2026 - 02 - 23 14:50 | LEVEL: INFO | MSG: Matching wiki.gg logo to [Side Story – Crossover] Somniloquium Serenum
+DATE: 2026 - 02 - 23 14:50 | LEVEL: INFO | MSG: Matching EN Somniloquium Serenum banner.png to [Side Story – Crossover] Somniloquium Serenum
+DATE: 2026 - 02 - 23 14:50 | LEVEL: INFO | MSG: Matching EN Ending a Grand Overture Rerun banner.png to [Side Story – Crossover] Somniloquium Serenum
+DATE: 2026 - 02 - 23 14:50 | LEVEL: INFO | MSG: Matching  to [Side Story – Crossover] Somniloquium Serenum
+DATE: 2026 - 02 - 23 14:50 | LEVEL: INFO | MSG: Matched  to [Side Story – Crossover] Somniloquium Serenum.
+DATE: 2026 - 02 - 23 14:50 | LEVEL: INFO | MSG: Saved as:  and https://arknights.wiki.gg/images/thumb/SNS_sticker_63.png/75px-SNS_sticker_63.png?70fd87
+DATE: 2026 - 02 - 23 14:50 | LEVEL: INFO | MSG: Current event: [Rerun] Ending a Grand Overture Rerun
+DATE: 2026 - 02 - 23 14:50 | LEVEL: INFO | MSG: Matching wiki.gg logo to [Rerun] Ending a Grand Overture Rerun
+DATE: 2026 - 02 - 23 14:50 | LEVEL: INFO | MSG: Matching EN Somniloquium Serenum banner.png to [Rerun] Ending a Grand Overture Rerun
+DATE: 2026 - 02 - 23 14:50 | LEVEL: INFO | MSG: Matching EN Ending a Grand Overture Rerun banner.png to [Rerun] Ending a Grand Overture Rerun
+DATE: 2026 - 02 - 23 14:50 | LEVEL: INFO | MSG: Matching  to [Rerun] Ending a Grand Overture Rerun
+DATE: 2026 - 02 - 23 14:50 | LEVEL: INFO | MSG: Matched  to [Rerun] Ending a Grand Overture Rerun.
+DATE: 2026 - 02 - 23 14:50 | LEVEL: INFO | MSG: Saved as:  and https://arknights.wiki.gg/images/thumb/SNS_sticker_63.png/75px-SNS_sticker_63.png?70fd87
+DATE: 2026 - 02 - 23 14:50 | LEVEL: INFO | MSG: Sent: [Side Story – Crossover] Somniloquium Serenum
+DATE: 2026 - 02 - 23 14:50 | LEVEL: INFO | MSG: Sent: [Rerun] Ending a Grand Overture Rerun
+DATE: 2026 - 02 - 23 14:50 | LEVEL: INFO | MSG: Event Name: [Side Story – Crossover] Somniloquium Serenum | CN: Sep 04, 2025 – Sep 18, 2025 | Global: Feb 10, 2026 – Feb 24, 2026
+DATE: 2026 - 02 - 23 14:50 | LEVEL: INFO | MSG: Event Name: [Rerun] Ending a Grand Overture Rerun | CN: Sep 19, 2025 – Sep 29, 2025 | Global: Feb 24, 2026 – Mar 06, 2026
+DATE: 2026 - 02 - 23 14:55 | LEVEL: INFO | MSG: Currently in Arknights
+DATE: 2026 - 02 - 23 14:55 | LEVEL: INFO | MSG: Appending [Side Story – Crossover] Somniloquium Serenum to row_data...
+DATE: 2026 - 02 - 23 14:55 | LEVEL: INFO | MSG: Appending CN:2025/09/04 – 2025/09/18Global:2026/02/10 – 2026/02/24 to row_data...
+DATE: 2026 - 02 - 23 14:55 | LEVEL: INFO | MSG: Appending [Rerun] Ending a Grand Overture Rerun to row_data...
+DATE: 2026 - 02 - 23 14:55 | LEVEL: INFO | MSG: Appending CN:2025/09/19 – 2025/09/29Global:2026/02/24 – 2026/03/06 to row_data...
+DATE: 2026 - 02 - 23 14:55 | LEVEL: INFO | MSG: Deduplication done.
+DATE: 2026 - 02 - 23 14:55 | LEVEL: ERROR | MSG: A failure has occured.
+Traceback (most recent call last):
+  File "D:\python_scripts\Sect-Event-Handler\backend\flow.py", line 23, in flow
+    datas = self.ark_scrape.data_getter()
+  File "D:\python_scripts\Sect-Event-Handler\backend\games_wiki\arknights.py", line 214, in data_getter
+    imgs = self.find_img(soup, url, table, data)
+TypeError: ArkScraper.find_img() takes 4 positional arguments but 5 were given
+DATE: 2026 - 02 - 23 14:55 | LEVEL: INFO | MSG: Currently in Arknights
+DATE: 2026 - 02 - 23 14:55 | LEVEL: INFO | MSG: Appending [Side Story – Crossover] Somniloquium Serenum to row_data...
+DATE: 2026 - 02 - 23 14:55 | LEVEL: INFO | MSG: Appending CN:2025/09/04 – 2025/09/18Global:2026/02/10 – 2026/02/24 to row_data...
+DATE: 2026 - 02 - 23 14:55 | LEVEL: INFO | MSG: Appending [Rerun] Ending a Grand Overture Rerun to row_data...
+DATE: 2026 - 02 - 23 14:55 | LEVEL: INFO | MSG: Appending CN:2025/09/19 – 2025/09/29Global:2026/02/24 – 2026/03/06 to row_data...
+DATE: 2026 - 02 - 23 14:55 | LEVEL: INFO | MSG: Deduplication done.
+DATE: 2026 - 02 - 23 14:55 | LEVEL: ERROR | MSG: A failure has occured.
+Traceback (most recent call last):
+  File "D:\python_scripts\Sect-Event-Handler\backend\flow.py", line 23, in flow
+    datas = self.ark_scrape.data_getter()
+  File "D:\python_scripts\Sect-Event-Handler\backend\games_wiki\arknights.py", line 214, in data_getter
+    imgs = self.find_img(soup, url, data)
+  File "D:\python_scripts\Sect-Event-Handler\backend\games_wiki\arknights.py", line 85, in find_img
+    if img['Image_Name'].split() in dictionary_of_events['Event']:
+       ~~~^^^^^^^^^^^^^^
+  File "D:\python\Lib\site-packages\bs4\element.py", line 2401, in __getitem__
+    return self.attrs[key]
+           ~~~~~~~~~~^^^^^
+KeyError: 'Image_Name'
+DATE: 2026 - 02 - 23 14:56 | LEVEL: INFO | MSG: Currently in Arknights
+DATE: 2026 - 02 - 23 14:56 | LEVEL: INFO | MSG: Appending [Side Story – Crossover] Somniloquium Serenum to row_data...
+DATE: 2026 - 02 - 23 14:56 | LEVEL: INFO | MSG: Appending CN:2025/09/04 – 2025/09/18Global:2026/02/10 – 2026/02/24 to row_data...
+DATE: 2026 - 02 - 23 14:56 | LEVEL: INFO | MSG: Appending [Rerun] Ending a Grand Overture Rerun to row_data...
+DATE: 2026 - 02 - 23 14:56 | LEVEL: INFO | MSG: Appending CN:2025/09/19 – 2025/09/29Global:2026/02/24 – 2026/03/06 to row_data...
+DATE: 2026 - 02 - 23 14:56 | LEVEL: INFO | MSG: Deduplication done.
+DATE: 2026 - 02 - 23 14:56 | LEVEL: ERROR | MSG: A failure has occured.
+Traceback (most recent call last):
+  File "D:\python_scripts\Sect-Event-Handler\backend\flow.py", line 23, in flow
+    datas = self.ark_scrape.data_getter()
+  File "D:\python_scripts\Sect-Event-Handler\backend\games_wiki\arknights.py", line 214, in data_getter
+    imgs = self.find_img(soup, url, data)
+  File "D:\python_scripts\Sect-Event-Handler\backend\games_wiki\arknights.py", line 85, in find_img
+    if img['alt'].split() in dictionary_of_events['Event']:
+                             ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+TypeError: list indices must be integers or slices, not str
+DATE: 2026 - 02 - 23 14:56 | LEVEL: INFO | MSG: Currently in Arknights
+DATE: 2026 - 02 - 23 14:56 | LEVEL: INFO | MSG: Appending [Side Story – Crossover] Somniloquium Serenum to row_data...
+DATE: 2026 - 02 - 23 14:56 | LEVEL: INFO | MSG: Appending CN:2025/09/04 – 2025/09/18Global:2026/02/10 – 2026/02/24 to row_data...
+DATE: 2026 - 02 - 23 14:56 | LEVEL: INFO | MSG: Appending [Rerun] Ending a Grand Overture Rerun to row_data...
+DATE: 2026 - 02 - 23 14:56 | LEVEL: INFO | MSG: Appending CN:2025/09/19 – 2025/09/29Global:2026/02/24 – 2026/03/06 to row_data...
+DATE: 2026 - 02 - 23 14:56 | LEVEL: INFO | MSG: Deduplication done.
+DATE: 2026 - 02 - 23 14:56 | LEVEL: INFO | MSG: Current event: [Side Story – Crossover] Somniloquium Serenum
+DATE: 2026 - 02 - 23 14:56 | LEVEL: WARNING | MSG: No images linked with [Side Story – Crossover] Somniloquium Serenum
+DATE: 2026 - 02 - 23 14:56 | LEVEL: INFO | MSG: Current event: [Rerun] Ending a Grand Overture Rerun
+DATE: 2026 - 02 - 23 14:56 | LEVEL: WARNING | MSG: No images linked with [Rerun] Ending a Grand Overture Rerun
+DATE: 2026 - 02 - 23 14:56 | LEVEL: INFO | MSG: Sent: [Side Story – Crossover] Somniloquium Serenum
+DATE: 2026 - 02 - 23 14:56 | LEVEL: INFO | MSG: Sent: [Rerun] Ending a Grand Overture Rerun
+DATE: 2026 - 02 - 23 14:56 | LEVEL: INFO | MSG: Event Name: [Side Story – Crossover] Somniloquium Serenum | CN: Sep 04, 2025 – Sep 18, 2025 | Global: Feb 10, 2026 – Feb 24, 2026
+DATE: 2026 - 02 - 23 14:56 | LEVEL: INFO | MSG: Event Name: [Rerun] Ending a Grand Overture Rerun | CN: Sep 19, 2025 – Sep 29, 2025 | Global: Feb 24, 2026 – Mar 06, 2026
+DATE: 2026 - 02 - 23 15:02 | LEVEL: INFO | MSG: Currently in Arknights
+DATE: 2026 - 02 - 23 15:02 | LEVEL: INFO | MSG: Appending [Side Story – Crossover] Somniloquium Serenum to row_data...
+DATE: 2026 - 02 - 23 15:02 | LEVEL: INFO | MSG: Appending CN:2025/09/04 – 2025/09/18Global:2026/02/10 – 2026/02/24 to row_data...
+DATE: 2026 - 02 - 23 15:02 | LEVEL: INFO | MSG: Appending [Rerun] Ending a Grand Overture Rerun to row_data...
+DATE: 2026 - 02 - 23 15:02 | LEVEL: INFO | MSG: Appending CN:2025/09/19 – 2025/09/29Global:2026/02/24 – 2026/03/06 to row_data...
+DATE: 2026 - 02 - 23 15:02 | LEVEL: INFO | MSG: Deduplication done.
+DATE: 2026 - 02 - 23 15:02 | LEVEL: INFO | MSG: Current event: [Side Story – Crossover] Somniloquium Serenum
+DATE: 2026 - 02 - 23 15:02 | LEVEL: INFO | MSG: Matching Somniloquium Serenum to [Side Story – Crossover] Somniloquium Serenum
+DATE: 2026 - 02 - 23 15:02 | LEVEL: INFO | MSG: Matched Somniloquium Serenum to [Side Story – Crossover] Somniloquium Serenum.
+DATE: 2026 - 02 - 23 15:02 | LEVEL: INFO | MSG: Saved as: Somniloquium Serenum and https://arknights.wiki.gg/images/EN_Somniloquium_Serenum_banner.png?3cb24a
+DATE: 2026 - 02 - 23 15:02 | LEVEL: INFO | MSG: Current event: [Rerun] Ending a Grand Overture Rerun
+DATE: 2026 - 02 - 23 15:02 | LEVEL: INFO | MSG: Matching Somniloquium Serenum to [Rerun] Ending a Grand Overture Rerun
+DATE: 2026 - 02 - 23 15:02 | LEVEL: INFO | MSG: Matching Ending a Grand Overture Rerun to [Rerun] Ending a Grand Overture Rerun
+DATE: 2026 - 02 - 23 15:02 | LEVEL: INFO | MSG: Matched Ending a Grand Overture Rerun to [Rerun] Ending a Grand Overture Rerun.
+DATE: 2026 - 02 - 23 15:02 | LEVEL: INFO | MSG: Saved as: Ending a Grand Overture Rerun and https://arknights.wiki.gg/images/EN_Ending_a_Grand_Overture_Rerun_banner.png?178e50
+DATE: 2026 - 02 - 23 15:02 | LEVEL: INFO | MSG: Sent: [Side Story – Crossover] Somniloquium Serenum
+DATE: 2026 - 02 - 23 15:02 | LEVEL: INFO | MSG: Sent: [Rerun] Ending a Grand Overture Rerun
+DATE: 2026 - 02 - 23 15:02 | LEVEL: INFO | MSG: Event Name: [Side Story – Crossover] Somniloquium Serenum | CN: Sep 04, 2025 – Sep 18, 2025 | Global: Feb 10, 2026 – Feb 24, 2026
+DATE: 2026 - 02 - 23 15:02 | LEVEL: INFO | MSG: Event Name: [Rerun] Ending a Grand Overture Rerun | CN: Sep 19, 2025 – Sep 29, 2025 | Global: Feb 24, 2026 – Mar 06, 2026
+DATE: 2026 - 02 - 23 15:15 | LEVEL: INFO | MSG: User is up to date. Current date is: February, 23, 2026
+DATE: 2026 - 02 - 23 15:15 | LEVEL: INFO | MSG: Currently in Arknights
+DATE: 2026 - 02 - 23 15:15 | LEVEL: INFO | MSG: Appending [Side Story – Crossover] Somniloquium Serenum to row_data...
+DATE: 2026 - 02 - 23 15:15 | LEVEL: INFO | MSG: Appending CN:2025/09/04 – 2025/09/18Global:2026/02/10 – 2026/02/24 to row_data...
+DATE: 2026 - 02 - 23 15:15 | LEVEL: INFO | MSG: Appending [Rerun] Ending a Grand Overture Rerun to row_data...
+DATE: 2026 - 02 - 23 15:15 | LEVEL: INFO | MSG: Appending CN:2025/09/19 – 2025/09/29Global:2026/02/24 – 2026/03/06 to row_data...
+DATE: 2026 - 02 - 23 15:15 | LEVEL: INFO | MSG: Deduplication done.
+DATE: 2026 - 02 - 23 15:15 | LEVEL: INFO | MSG: Current event: [Side Story – Crossover] Somniloquium Serenum
+DATE: 2026 - 02 - 23 15:15 | LEVEL: WARNING | MSG: No images linked with [Side Story – Crossover] Somniloquium Serenum
+DATE: 2026 - 02 - 23 15:15 | LEVEL: INFO | MSG: Current event: [Rerun] Ending a Grand Overture Rerun
+DATE: 2026 - 02 - 23 15:15 | LEVEL: WARNING | MSG: No images linked with [Rerun] Ending a Grand Overture Rerun
+DATE: 2026 - 02 - 23 15:15 | LEVEL: INFO | MSG: Sent: [Side Story – Crossover] Somniloquium Serenum
+DATE: 2026 - 02 - 23 15:15 | LEVEL: INFO | MSG: Sent: [Rerun] Ending a Grand Overture Rerun
+DATE: 2026 - 02 - 23 15:15 | LEVEL: INFO | MSG: Event Name: [Side Story – Crossover] Somniloquium Serenum | CN: Sep 04, 2025 – Sep 18, 2025 | Global: Feb 10, 2026 – Feb 24, 2026
+DATE: 2026 - 02 - 23 15:15 | LEVEL: INFO | MSG: Event Name: [Rerun] Ending a Grand Overture Rerun | CN: Sep 19, 2025 – Sep 29, 2025 | Global: Feb 24, 2026 – Mar 06, 2026
+DATE: 2026 - 02 - 23 15:16 | LEVEL: INFO | MSG: User is up to date. Current date is: February, 23, 2026
+DATE: 2026 - 02 - 23 15:16 | LEVEL: INFO | MSG: User is up to date. Current date is: February, 23, 2026
+DATE: 2026 - 02 - 23 15:16 | LEVEL: INFO | MSG: Currently in Arknights
+DATE: 2026 - 02 - 23 15:16 | LEVEL: INFO | MSG: Appending [Side Story – Crossover] Somniloquium Serenum to row_data...
+DATE: 2026 - 02 - 23 15:16 | LEVEL: INFO | MSG: Appending CN:2025/09/04 – 2025/09/18Global:2026/02/10 – 2026/02/24 to row_data...
+DATE: 2026 - 02 - 23 15:16 | LEVEL: INFO | MSG: Appending [Rerun] Ending a Grand Overture Rerun to row_data...
+DATE: 2026 - 02 - 23 15:16 | LEVEL: INFO | MSG: Appending CN:2025/09/19 – 2025/09/29Global:2026/02/24 – 2026/03/06 to row_data...
+DATE: 2026 - 02 - 23 15:16 | LEVEL: INFO | MSG: Deduplication done.
+DATE: 2026 - 02 - 23 15:16 | LEVEL: INFO | MSG: Current event: [Side Story – Crossover] Somniloquium Serenum
+DATE: 2026 - 02 - 23 15:16 | LEVEL: WARNING | MSG: No images linked with [Side Story – Crossover] Somniloquium Serenum
+DATE: 2026 - 02 - 23 15:16 | LEVEL: INFO | MSG: Current event: [Rerun] Ending a Grand Overture Rerun
+DATE: 2026 - 02 - 23 15:16 | LEVEL: WARNING | MSG: No images linked with [Rerun] Ending a Grand Overture Rerun
+DATE: 2026 - 02 - 23 15:16 | LEVEL: INFO | MSG: Sent: [Side Story – Crossover] Somniloquium Serenum
+DATE: 2026 - 02 - 23 15:16 | LEVEL: INFO | MSG: Sent: [Rerun] Ending a Grand Overture Rerun
+DATE: 2026 - 02 - 23 15:16 | LEVEL: INFO | MSG: Event Name: [Side Story – Crossover] Somniloquium Serenum | CN: Sep 04, 2025 – Sep 18, 2025 | Global: Feb 10, 2026 – Feb 24, 2026
+DATE: 2026 - 02 - 23 15:16 | LEVEL: INFO | MSG: Event Name: [Rerun] Ending a Grand Overture Rerun | CN: Sep 19, 2025 – Sep 29, 2025 | Global: Feb 24, 2026 – Mar 06, 2026
+DATE: 2026 - 02 - 23 15:17 | LEVEL: INFO | MSG: User is up to date. Current date is: February, 23, 2026
+DATE: 2026 - 02 - 23 15:17 | LEVEL: INFO | MSG: User is up to date. Current date is: February, 23, 2026
+DATE: 2026 - 02 - 23 15:17 | LEVEL: INFO | MSG: Currently in Arknights
+DATE: 2026 - 02 - 23 15:17 | LEVEL: INFO | MSG: Appending [Side Story – Crossover] Somniloquium Serenum to row_data...
+DATE: 2026 - 02 - 23 15:17 | LEVEL: INFO | MSG: Appending CN:2025/09/04 – 2025/09/18Global:2026/02/10 – 2026/02/24 to row_data...
+DATE: 2026 - 02 - 23 15:17 | LEVEL: INFO | MSG: Appending [Rerun] Ending a Grand Overture Rerun to row_data...
+DATE: 2026 - 02 - 23 15:17 | LEVEL: INFO | MSG: Appending CN:2025/09/19 – 2025/09/29Global:2026/02/24 – 2026/03/06 to row_data...
+DATE: 2026 - 02 - 23 15:17 | LEVEL: INFO | MSG: Deduplication done.
+DATE: 2026 - 02 - 23 15:17 | LEVEL: INFO | MSG: Current event: [Side Story – Crossover] Somniloquium Serenum
+DATE: 2026 - 02 - 23 15:17 | LEVEL: WARNING | MSG: No images linked with [Side Story – Crossover] Somniloquium Serenum
+DATE: 2026 - 02 - 23 15:17 | LEVEL: INFO | MSG: Current event: [Rerun] Ending a Grand Overture Rerun
+DATE: 2026 - 02 - 23 15:17 | LEVEL: WARNING | MSG: No images linked with [Rerun] Ending a Grand Overture Rerun
+DATE: 2026 - 02 - 23 15:17 | LEVEL: INFO | MSG: Sent: [Side Story – Crossover] Somniloquium Serenum
+DATE: 2026 - 02 - 23 15:17 | LEVEL: INFO | MSG: Sent: [Rerun] Ending a Grand Overture Rerun
+DATE: 2026 - 02 - 23 15:17 | LEVEL: INFO | MSG: Event Name: [Side Story – Crossover] Somniloquium Serenum | CN: Sep 04, 2025 – Sep 18, 2025 | Global: Feb 10, 2026 – Feb 24, 2026
+DATE: 2026 - 02 - 23 15:17 | LEVEL: INFO | MSG: Event Name: [Rerun] Ending a Grand Overture Rerun | CN: Sep 19, 2025 – Sep 29, 2025 | Global: Feb 24, 2026 – Mar 06, 2026
+DATE: 2026 - 02 - 23 15:20 | LEVEL: INFO | MSG: User is up to date. Current date is: February, 23, 2026
+DATE: 2026 - 02 - 23 15:20 | LEVEL: INFO | MSG: User is up to date. Current date is: February, 23, 2026
+DATE: 2026 - 02 - 23 15:20 | LEVEL: INFO | MSG: Currently in Arknights
+DATE: 2026 - 02 - 23 15:20 | LEVEL: INFO | MSG: Appending [Side Story – Crossover] Somniloquium Serenum to row_data...
+DATE: 2026 - 02 - 23 15:20 | LEVEL: INFO | MSG: Appending CN:2025/09/04 – 2025/09/18Global:2026/02/10 – 2026/02/24 to row_data...
+DATE: 2026 - 02 - 23 15:20 | LEVEL: INFO | MSG: Appending [Rerun] Ending a Grand Overture Rerun to row_data...
+DATE: 2026 - 02 - 23 15:20 | LEVEL: INFO | MSG: Appending CN:2025/09/19 – 2025/09/29Global:2026/02/24 – 2026/03/06 to row_data...
+DATE: 2026 - 02 - 23 15:20 | LEVEL: INFO | MSG: Deduplication done.
+DATE: 2026 - 02 - 23 15:20 | LEVEL: INFO | MSG: Current event: [Side Story – Crossover] Somniloquium Serenum
+DATE: 2026 - 02 - 23 15:20 | LEVEL: WARNING | MSG: No images linked with [Side Story – Crossover] Somniloquium Serenum
+DATE: 2026 - 02 - 23 15:20 | LEVEL: INFO | MSG: Current event: [Rerun] Ending a Grand Overture Rerun
+DATE: 2026 - 02 - 23 15:20 | LEVEL: WARNING | MSG: No images linked with [Rerun] Ending a Grand Overture Rerun
+DATE: 2026 - 02 - 23 15:20 | LEVEL: INFO | MSG: Sent: [Side Story – Crossover] Somniloquium Serenum
+DATE: 2026 - 02 - 23 15:20 | LEVEL: INFO | MSG: Sent: [Rerun] Ending a Grand Overture Rerun
+DATE: 2026 - 02 - 23 15:20 | LEVEL: INFO | MSG: Event Name: [Side Story – Crossover] Somniloquium Serenum | CN: Sep 04, 2025 – Sep 18, 2025 | Global: Feb 10, 2026 – Feb 24, 2026
+DATE: 2026 - 02 - 23 15:20 | LEVEL: INFO | MSG: Event Name: [Rerun] Ending a Grand Overture Rerun | CN: Sep 19, 2025 – Sep 29, 2025 | Global: Feb 24, 2026 – Mar 06, 2026
+DATE: 2026 - 02 - 23 15:22 | LEVEL: INFO | MSG: User is up to date. Current date is: February, 23, 2026
+DATE: 2026 - 02 - 23 15:22 | LEVEL: INFO | MSG: Currently in Arknights
+DATE: 2026 - 02 - 23 15:22 | LEVEL: INFO | MSG: Appending [Side Story – Crossover] Somniloquium Serenum to row_data...
+DATE: 2026 - 02 - 23 15:22 | LEVEL: INFO | MSG: Appending CN:2025/09/04 – 2025/09/18Global:2026/02/10 – 2026/02/24 to row_data...
+DATE: 2026 - 02 - 23 15:22 | LEVEL: INFO | MSG: Appending [Rerun] Ending a Grand Overture Rerun to row_data...
+DATE: 2026 - 02 - 23 15:22 | LEVEL: INFO | MSG: Appending CN:2025/09/19 – 2025/09/29Global:2026/02/24 – 2026/03/06 to row_data...
+DATE: 2026 - 02 - 23 15:22 | LEVEL: INFO | MSG: Deduplication done.
+DATE: 2026 - 02 - 23 15:22 | LEVEL: INFO | MSG: Current event: [Side Story – Crossover] Somniloquium Serenum
+DATE: 2026 - 02 - 23 15:22 | LEVEL: INFO | MSG: Matching Somniloquium Serenum to [Side Story – Crossover] Somniloquium Serenum
+DATE: 2026 - 02 - 23 15:22 | LEVEL: INFO | MSG: Matched Somniloquium Serenum to [Side Story – Crossover] Somniloquium Serenum.
+DATE: 2026 - 02 - 23 15:22 | LEVEL: INFO | MSG: Saved as: Somniloquium Serenum and https://arknights.wiki.gg/images/EN_Somniloquium_Serenum_banner.png?3cb24a
+DATE: 2026 - 02 - 23 15:22 | LEVEL: INFO | MSG: Current event: [Rerun] Ending a Grand Overture Rerun
+DATE: 2026 - 02 - 23 15:22 | LEVEL: INFO | MSG: Matching Somniloquium Serenum to [Rerun] Ending a Grand Overture Rerun
+DATE: 2026 - 02 - 23 15:22 | LEVEL: INFO | MSG: Matching Ending a Grand Overture Rerun to [Rerun] Ending a Grand Overture Rerun
+DATE: 2026 - 02 - 23 15:22 | LEVEL: INFO | MSG: Matched Ending a Grand Overture Rerun to [Rerun] Ending a Grand Overture Rerun.
+DATE: 2026 - 02 - 23 15:22 | LEVEL: INFO | MSG: Saved as: Ending a Grand Overture Rerun and https://arknights.wiki.gg/images/EN_Ending_a_Grand_Overture_Rerun_banner.png?178e50
+DATE: 2026 - 02 - 23 15:22 | LEVEL: INFO | MSG: Sent: [Side Story – Crossover] Somniloquium Serenum
+DATE: 2026 - 02 - 23 15:22 | LEVEL: INFO | MSG: Sent: [Rerun] Ending a Grand Overture Rerun
+DATE: 2026 - 02 - 23 15:22 | LEVEL: INFO | MSG: Event Name: [Side Story – Crossover] Somniloquium Serenum | CN: Sep 04, 2025 – Sep 18, 2025 | Global: Feb 10, 2026 – Feb 24, 2026
+DATE: 2026 - 02 - 23 15:22 | LEVEL: INFO | MSG: Event Name: [Rerun] Ending a Grand Overture Rerun | CN: Sep 19, 2025 – Sep 29, 2025 | Global: Feb 24, 2026 – Mar 06, 2026

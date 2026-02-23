@@ -22,6 +22,8 @@ class ScrapeFlow():
             # Arknights
                 datas = self.ark_scrape.data_getter()
                 arknights_webhook.send_to_discord(self.logger, datas)
+
+
                 for data in datas:
                     self.logger.log_info(f"Event Name: {data['Event']} | CN: {data['CN']} | Global: {data['Global']}")
         except Exception:

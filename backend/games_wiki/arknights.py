@@ -14,8 +14,9 @@ class ArkScraper(BaseScraper):
     def __init__(self, logger):
         super().__init__(logger=logger)
         self.path_imgs = Path(__file__).parent.parent.parent / "arknights_imgs"
+        self.game = self.user_data['arknights']
         
-    def find_events(self, soup, table_text, game_name):
+    def find_events(self, soup, table_text):
         '''
         searches tables for the events
 
@@ -36,7 +37,7 @@ class ArkScraper(BaseScraper):
         '''
         events = soup.find_all("table", class_=table_text)
 
-        self.logger.log_info(f"Currently in {game_name}")
+        self.logger.log_info(f"Currently in {self.game['proper_name']}")
         found_events = []
         try:
             for table in events:
@@ -57,16 +58,15 @@ class ArkScraper(BaseScraper):
             return None
         except Exception as e:
             self.logger.log_error(f"Unknown error occured: {e}")
-                        
-    def find_img(self, soup: BeautifulSoup, url: str, table_class: str, game: str) -> list[dict]:
+
+    def find_img(self, soup: BeautifulSoup, url: str, tables: str) -> list[dict]:
         '''
-        downloads images for local use and saves img url in case we need to request the image again
+        saves key image name for linking and saves img url in case we need to request the image again
         
         Args:
             soup: BeautifulSoup parser object
             url: url of the game for img
             table_class: CSS class name of images to find
-            game: Name of the game
             
         Returns:
             List of dictionaries with structure:
@@ -78,59 +78,35 @@ class ArkScraper(BaseScraper):
                 ...
             ]
         '''
-        filepath = self.path_imgs
-        filepath.mkdir(parents=True, exist_ok=True)
         saved_event_imgs = list()
-        
-        for img in soup.find_all("img", class_=table_class):
-            img_url = urljoin(url, img["src"])
-            filename = img["alt"]
-            response = self.session.get(img_url)
-            if not utils.request_error_handling(response, self.logger):
-                self.logger.log_warning(f"Could not get image {img}. find_img function.")
-                continue
-            data = response.content
-            text = filename
-            if "CN" in text:
-                text_part_temp = text.split("CN", 1)[1].strip()
-            elif "EN" in text:
-                text_part_temp = text.split("EN", 1)[1].strip()
-            else:
-                text_part_temp = text.strip()
-            text_part = text_part_temp.split("banner")[0].strip() if "banner" in text_part_temp else text_part_temp.split(".png")[0]
+        for table in soup.find_all("table", class_=tables):
+            for tr in table.find_all("tr"):
+                for td in tr.find_all("td"):
+                    for img in td.find_all("img"):
+                        alt = img.get("alt", "")
+                        if alt == "":
+                            self.logger.log_info(f"{img} has no <img alt> tag. Skipping")
+                            continue
 
-            save_path = filepath / (text_part + ".png")
+                        src = img.get("src", "")
+                        if src == "":
+                            self.logger.log_info(f"{img} has no <img src> tag. Skipping")
+                            continue
+                        if alt.startswith("EN") or alt.startswith("CN"):
+                            img_url = urljoin(url, src)
+                            if "CN" in alt:
+                                text_part_temp = alt.split("CN", 1)[1].strip()
+                            elif "EN" in alt:
+                                text_part_temp = alt.split("EN", 1)[1].strip()
+                            else:
+                                text_part_temp = alt.strip()
+                            text_part = text_part_temp.split("banner")[0].strip() if "banner" in text_part_temp else text_part_temp.split(".png")[0]
 
-            with open(save_path, "wb") as file:
-                file.write(data)
-            saved_event_imgs.append({
-                "Image_Name": text_part,
-                "Image_URL": img_url
-            })
+                            saved_event_imgs.append({
+                                "Image_Name": text_part,
+                                "Image_URL": img_url
+                            })
         return saved_event_imgs
-
-    def delete_imgs(self, list_of_imgs: list[dict[str, str]]):
-        '''
-        Removes imgs from the arknights_imgs if the event is no longer active.
-        
-        Args:
-            list_of_imgs:
-            List of dictionaries with structure:
-            [
-                {
-                    "Image_Name": str (cleaned filename without extension),
-                    "Image_URL": str (full URL to the image)
-                },
-                ...
-            ]
-        '''
-        
-        filepath = self.path_imgs
-        valid_imgs = set(d['Image_Name'] for d in list_of_imgs)
-        
-        for img_path in filepath.glob("*.png"):
-            if img_path.stem not in valid_imgs:
-                img_path.unlink()
 
     def format_events(self, row_data: list[list[str]]) -> list[dict]:
         '''
@@ -228,7 +204,6 @@ class ArkScraper(BaseScraper):
             if not matched:
                 self.logger.log_warning(f"No images linked with {event['Event']}")
         return dictionary_of_events
-
             
     def data_getter(self):
         '''    
@@ -246,16 +221,16 @@ class ArkScraper(BaseScraper):
         '''
         try:
             site_config = self.sites[0]
-            table, url, game = site_config
+            table, url = site_config
             soup = self.get_response(url)
             if soup is None:
                 raise ValueError("Could not get HTML data in BaseScraper get_response function.")
             
-            events = self.find_events(soup, table, game)
+            events = self.find_events(soup, table)
             data = self.format_events(events)
-            imgs_list = self.find_img(soup, url, "banner", game)
-            self.delete_imgs(imgs_list)
-            formatted_data = self.link_imgs(data, imgs_list)
+            imgs = self.find_img(soup, url, table)
+            formatted_data = self.link_imgs(data, imgs)
+            print(imgs)
             return formatted_data
         except Exception:
             raise

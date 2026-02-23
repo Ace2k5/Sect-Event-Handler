@@ -2,9 +2,6 @@ import requests
 from pathlib import Path
 import json
 from .. import json_handler
-
-user_data = json_handler.get_user_data()
-
 def send_to_discord(logger: object, data: list):
     '''
     sends to discord webhook obviously
@@ -17,7 +14,9 @@ def send_to_discord(logger: object, data: list):
                 "Event_PNG_URL": str (URL to event banner image, if none sends a "NO IMAGE" image)
             }
     '''
-    webhook = user_data.get("arknights_webhook")
+    user_data = json_handler.get_user_data()
+    game = user_data['arknights']
+    webhook = game.get("webhook")
     if webhook.startswith("https"):
         for event in data:
             event_name = event["Event"]
