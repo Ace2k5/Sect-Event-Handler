@@ -29,7 +29,7 @@ class BaseScraper(ABC):
                 return soup
             else:
                 self.logger.info(f"Response status: {response.status_code}")
-                return None
+                raise requests.ConnectionError
         except requests.RequestException as e:
             raise requests.RequestException(f"get_response returned as {e}")
     
@@ -51,6 +51,10 @@ class BaseScraper(ABC):
         pass
     
     @abstractmethod
+    def find_img(self, soup: BeautifulSoup, url: str, tables: str) -> list[dict]:
+        pass
+
+    @abstractmethod
     def format_events(self, row_data):
         '''
         Abstract method for formatting raw event data.
@@ -64,6 +68,9 @@ class BaseScraper(ABC):
         '''
         pass
     
+    def link_imgs(self, dictionary_of_events: list[dict], list_of_imgs: list[dict]) -> list[dict]:
+        pass
+
     @abstractmethod
     def data_getter(self):
         '''

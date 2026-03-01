@@ -58,7 +58,8 @@ def is_relevant_date(date_text: str, lookback_days: int = 30) -> bool:
         return end_date >= cutoff_date
     if start_date:
         return True
-    return False
+    if end_date or start_date is None:
+        return False
 
 def normalize_date_range(date_text):
     """

@@ -1,11 +1,17 @@
-from .games_wiki import arknights, arknights_webhook
+from .games_wiki import arknights, arknights_webhook, limbus
 from . import json_handler, logger
 
 class ScrapeFlow():
     def __init__(self, signals=None):
         self.logger = logger.Log(signals=signals)
         self.ark_scrape = arknights.ArkScraper(self.logger)
-        
+        self.limbus = limbus.LimbusScraper(self.logger)    
+
+    def test(self):
+        datas = self.limbus.data_getter()
+        return datas
+
+
     def flow(self, forced=False):
         '''
         Main execution flow for the web scraper.
@@ -31,4 +37,4 @@ class ScrapeFlow():
         
 if __name__ == "__main__": # for windows task scheduler
     runner = ScrapeFlow()
-    runner.flow(forced=False)
+    print(runner.test())

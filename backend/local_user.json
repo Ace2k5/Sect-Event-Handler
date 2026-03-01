@@ -3,14 +3,14 @@
         "webhook": "https://discord.com/api/webhooks/1470711602071212124/9tSmfqwA4HcnyjWdXKPHVwa0garkieyXt75uwSdBFT97gmAzb8FzpQoFZqYcwlWu91NA",
         "proper_name": "Arknights"
     },
-    "limbus_webhook": {
+    "limbus": {
         "webhook": "",
         "proper_name": "Limbus Company"
     },
-    "azur_lane_webhook": {
+    "azur_lane": {
         "webhook": "",
         "proper_name": "Azur Lane"
     },
     "lookback_days": 30,
-    "date_today": "February, 23, 2026"
+    "date_today": "March, 01, 2026"
 }

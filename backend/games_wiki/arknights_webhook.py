@@ -4,7 +4,7 @@ import json
 from .. import json_handler
 def send_to_discord(logger: object, data: list):
     '''
-    sends to discord webhook obviously
+    sends to discord webhook
     Args:
         data: List of event dictionaries with structure:
             {

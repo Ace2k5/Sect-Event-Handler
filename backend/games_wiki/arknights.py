@@ -13,6 +13,12 @@ class ArkScraper(BaseScraper):
     '''
     def __init__(self, logger):
         super().__init__(logger=logger)
+        '''base class contains:
+        self.user_data = {game {webhook, proper game name}}
+        self.sites {table class, link to game wiki}
+        self.sessions
+        self.logger
+        '''
         self.path_imgs = Path(__file__).parent.parent.parent / "arknights_imgs"
         self.game = self.user_data['arknights']
         
@@ -220,18 +226,21 @@ class ArkScraper(BaseScraper):
             ]
         '''
         try:
-            site_config = self.sites[0]
-            table, url = site_config
-            soup = self.get_response(url)
-            if soup is None:
-                raise ValueError("Could not get HTML data in BaseScraper get_response function.")
-            
-            events = self.find_events(soup, table)
-            data = self.format_events(events)
-            imgs = self.find_img(soup, url, table)
-            formatted_data = self.link_imgs(data, imgs)
-            print(imgs)
-            return formatted_data
+            if self.user_data['arknights']['webhook']:
+                site_config = self.sites[0]
+                table, url = site_config
+                soup = self.get_response(url)
+                if soup is None:
+                    raise ValueError("Could not get HTML data in BaseScraper get_response function.")
+                
+                events = self.find_events(soup, table)
+                data = self.format_events(events)
+                imgs = self.find_img(soup, url, table)
+                formatted_data = self.link_imgs(data, imgs)
+                print(imgs)
+                return formatted_data
+            else:
+                self.logger.log_info("Arknights has no active webhook, skipping...")
         except Exception:
             raise
         finally:
