@@ -29,13 +29,14 @@ class LimbusScraper(BaseScraper):
             self.logger.log_info("Soup is none in Limbus Company")
             raise
         found_events = []
-        self.logger.log_info(f"Currently in {self.game["proper_name"]}")
+        self.logger.log_info(f"Currently in {self.game['proper_name']}")
         events = soup.find_all("table", class_=table_class)
         for table in events: # iterates everything inside the table_class
             rows = table.find_all("tr")
             for row in rows: # delves deeper into tr
                 cells = row.find_all("td") # gets string from td
                 if cells:
+                    img = None
                     row_data = []
                     for cell in cells: # ['', 'event', 'event_start', 'event_end']
                         img = cell.find("img")

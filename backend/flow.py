@@ -1,4 +1,4 @@
-from .games_wiki import arknights, arknights_webhook, limbus
+from .games_wiki import arknights, arknights_webhook, limbus, limbus_webhook
 from . import json_handler, logger
 
 class ScrapeFlow():
@@ -9,6 +9,7 @@ class ScrapeFlow():
 
     def test(self):
         datas = self.limbus.data_getter()
+        limbus_webhook.send_to_discord(self.logger, datas)
         return datas
 
 
