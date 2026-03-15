@@ -1,0 +1,16 @@
+{
+    "arknights": {
+        "webhook": "https://discord.com/api/webhooks/1470711602071212124/9tSmfqwA4HcnyjWdXKPHVwa0garkieyXt75uwSdBFT97gmAzb8FzpQoFZqYcwlWu91NA",
+        "proper_name": "Arknights"
+    },
+    "limbus": {
+        "webhook": "",
+        "proper_name": "Limbus Company"
+    },
+    "azur_lane": {
+        "webhook": "",
+        "proper_name": "Azur Lane"
+    },
+    "lookback_days": 30,
+    "date_today": "March, 06, 2026"
+}

@@ -22,7 +22,7 @@ def send_to_discord(logger: object, data: list):
             event_name = event["Event"]
             cn_date = event["CN"]
             gb_date = event["Global"]
-            img_url = event.get("Event_PNG_URL", "https://upload.wikimedia.org/wikipedia/commons/1/14/No_Image_Available.jpg?20200913095930") # send a "no-image" png in case no image
+            img_url = event.get("Event_PNG", "https://upload.wikimedia.org/wikipedia/commons/1/14/No_Image_Available.jpg?20200913095930") # send a "no-image" png in case no image
             embed = {
                 "title": event_name,
                 "fields": [

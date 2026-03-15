@@ -36,7 +36,7 @@ class LimbusScraper(BaseScraper):
             for row in rows: # delves deeper into tr
                 cells = row.find_all("td") # gets string from td
                 if cells:
-                    img = None
+                    img = ""
                     row_data = []
                     for cell in cells: # ['', 'event', 'event_start', 'event_end']
                         img = cell.find("img")
@@ -49,9 +49,8 @@ class LimbusScraper(BaseScraper):
                         else:
                             row_data.append(text)
                     row_data.append(img_url)
-                    clean_row_data = utils.deduplication(row_data, self.logger)
-                    found_events.append(clean_row_data)
-                    found_events = utils.deduplication(found_events, self.logger)
+                    found_events.append(row_data)
+        found_events = utils.deduplication(found_events, self.logger)
         return found_events
 
     def find_img(self, soup, url, tables):

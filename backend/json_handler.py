@@ -4,6 +4,30 @@ from pathlib import Path
 
 JSON_FILE = Path(__file__).parent / "local_user.json"
 
+def create_user_data(logger):
+        logger.log_info("No user json detected, creating a new one.")
+        local_user = {
+            "arknights": {
+                "webhook": "",
+                "proper_name": "Arknights"
+            },
+            "limbus": {
+                "webhook": "",
+                "proper_name": "Limbus Company"
+            },
+            "azur_lane": {
+                "webhook": "",
+                "proper_name": "Azur Lane"
+            },
+            "lookback_days": 30,
+            "date_today": "March, 06, 2026"
+        }
+        try:
+            with open(JSON_FILE, "w") as json_file:
+                json.dump(local_user, json_file, indent=4)
+        except Exception as e:
+            logger.log_error(f"Failed to create user data, error occured as: {e}")
+
 def get_user_data():
     '''
     Reads and returns user configuration data from local JSON file.

@@ -22,7 +22,7 @@ class ArkScraper(BaseScraper):
         self.path_imgs = Path(__file__).parent.parent.parent / "arknights_imgs"
         self.game = self.user_data['arknights']
         
-    def find_events(self, soup, table_text):
+    def find_events(self, soup, table_text, url):
         '''
         searches tables for the events
 
@@ -52,12 +52,18 @@ class ArkScraper(BaseScraper):
                     cells = row.find_all('td') # find all data cells
                     if cells:
                         row_data = []
+                        img = ""
                         for cell in cells:
+                            img = cell.find("img")
+                            if img:
+                                src = img.get("src", "")
+                                img_url = urljoin(url, src)
                             text = cell.get_text(strip=True)
                             self.logger.log_info(f"Appending {text} to row_data...")
                             row_data.append(text)
-                        if len(row_data) > 1:
-                            found_events.append(row_data)
+                        row_data.append(img_url)
+                        found_events.append(row_data)
+            print(found_events)
             return found_events
         except requests.ConnectionError as e:
             self.logger.log_error(f"Connection error: {e}")
@@ -66,53 +72,7 @@ class ArkScraper(BaseScraper):
             self.logger.log_error(f"Unknown error occured: {e}")
 
     def find_img(self, soup: BeautifulSoup, url: str, tables: str) -> list[dict]:
-        '''
-        saves key image name for linking and saves img url in case we need to request the image again
-        
-        Args:
-            soup: BeautifulSoup parser object
-            url: url of the game for img
-            table_class: CSS class name of images to find
-            
-        Returns:
-            List of dictionaries with structure:
-            [
-                {
-                    "Image_Name": str (cleaned filename without extension),
-                    "Image_URL": str (full URL to the image)
-                },
-                ...
-            ]
-        '''
-        saved_event_imgs = list()
-        for table in soup.find_all("table", class_=tables):
-            for tr in table.find_all("tr"):
-                for td in tr.find_all("td"):
-                    for img in td.find_all("img"):
-                        alt = img.get("alt", "")
-                        if alt == "":
-                            self.logger.log_info(f"{img} has no <img alt> tag. Skipping")
-                            continue
-
-                        src = img.get("src", "")
-                        if src == "":
-                            self.logger.log_info(f"{img} has no <img src> tag. Skipping")
-                            continue
-                        if alt.startswith("EN") or alt.startswith("CN"):
-                            img_url = urljoin(url, src)
-                            if "CN" in alt:
-                                text_part_temp = alt.split("CN", 1)[1].strip()
-                            elif "EN" in alt:
-                                text_part_temp = alt.split("EN", 1)[1].strip()
-                            else:
-                                text_part_temp = alt.strip()
-                            text_part = text_part_temp.split("banner")[0].strip() if "banner" in text_part_temp else text_part_temp.split(".png")[0]
-
-                            saved_event_imgs.append({
-                                "Image_Name": text_part,
-                                "Image_URL": img_url
-                            })
-        return saved_event_imgs
+        pass
 
     def format_events(self, row_data: list[list[str]]) -> list[dict]:
         '''
@@ -146,6 +106,7 @@ class ArkScraper(BaseScraper):
         for row in list_events:
             event_name = row[0]
             date_str = row[1]
+            event_png = row[2]
 
             if "CN:" in date_str:
                 cn_date_part = date_str.split("CN:")[1]
@@ -167,49 +128,13 @@ class ArkScraper(BaseScraper):
             clean_format.append({
                 "Event": event_name,
                 "CN": normalized_cn,
-                "Global": normalized_global
+                "Global": normalized_global,
+                "Event_PNG": event_png
             })
         return clean_format
     
     def link_imgs(self, dictionary_of_events: list[dict], list_of_imgs: list[dict]) -> list[dict]:
-        '''
-        links event and imgs by using substring match then append into existing dictionary(dictionary_of_events)
-        Args:
-            dictionary_of_events (list of dict):
-                {
-                    "Event": str (event name),
-                    "CN": str (CN date range (DATE ONLY)),
-                    "Global": str (Global date range (DATE ONLY))
-                }
-                
-            list_of_imgs (list of dict):
-                {
-                    "Image_Name": str (cleaned image filename),
-                    "Image_URL": str (URL to the image)
-                }
-                    
-        Returns:
-            adds new keys inside of dictionary_of_events:
-                "Event_PNG": str (image filename)
-                "Event_PNG_URL": str (image URL)
-        '''
-        
-        for event in dictionary_of_events:
-            self.logger.log_info(f"Current event: {event['Event']}")
-            event_name = event["Event"].replace(":", "").replace("-", "").replace("_", "")
-            matched = False
-            for imgs in list_of_imgs:
-                self.logger.log_info(f"Matching {imgs['Image_Name']} to {event_name}")
-                if imgs["Image_Name"] in event_name:
-                    event["Event_PNG"] = imgs["Image_Name"]
-                    event["Event_PNG_URL"] = imgs["Image_URL"]
-                    matched = True
-                    self.logger.log_info(f"Matched {imgs['Image_Name']} to {event_name}.")
-                    self.logger.log_info(f"Saved as: {event['Event_PNG']} and {event['Event_PNG_URL']}")
-                    break
-            if not matched:
-                self.logger.log_warning(f"No images linked with {event['Event']}")
-        return dictionary_of_events
+        pass
             
     def data_getter(self):
         '''    
@@ -220,7 +145,7 @@ class ArkScraper(BaseScraper):
                     "Matched_Event_IMGS": dict (matched event metadata),
                     "CN": str (CN release date range (DATE ONLY)),
                     "Global": str (Global release date range (DATE ONLY)),
-                    "Image_URL": str (URL to event banner image)
+                    "Event_PNG": str (URL to event banner image)
                 },
                 ...
             ]
@@ -233,11 +158,8 @@ class ArkScraper(BaseScraper):
                 if soup is None:
                     raise ValueError("Could not get HTML data in BaseScraper get_response function.")
                 
-                events = self.find_events(soup, table)
-                data = self.format_events(events)
-                imgs = self.find_img(soup, url, table)
-                formatted_data = self.link_imgs(data, imgs)
-                print(imgs)
+                events = self.find_events(soup, table, url)
+                formatted_data = self.format_events(events)
                 return formatted_data
             else:
                 self.logger.log_info("Arknights has no active webhook, skipping...")
