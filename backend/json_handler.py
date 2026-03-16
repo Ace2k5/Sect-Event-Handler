@@ -7,11 +7,11 @@ JSON_FILE = Path(__file__).parent / "local_user.json"
 def create_user_data(logger):
         logger.log_info("No user json detected, creating a new one.")
         local_user = {
-            "arknights": {
+            "Arknights": {
                 "webhook": "",
                 "proper_name": "Arknights"
             },
-            "limbus": {
+            "Limbus Company": {
                 "webhook": "",
                 "proper_name": "Limbus Company"
             },

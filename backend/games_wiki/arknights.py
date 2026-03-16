@@ -20,7 +20,7 @@ class ArkScraper(BaseScraper):
         self.logger
         '''
         self.path_imgs = Path(__file__).parent.parent.parent / "arknights_imgs"
-        self.game = self.user_data['arknights']
+        self.game = self.user_data['Arknights']
         
     def find_events(self, soup, table_text, url):
         '''
@@ -126,10 +126,12 @@ class ArkScraper(BaseScraper):
                 raise ValueError(f"Could not normalize Global date in {date_str}, format_events function")
 
             clean_format.append({
-                "Event": event_name,
-                "CN": normalized_cn,
-                "Global": normalized_global,
-                "Event_PNG": event_png
+                "name": event_name,
+                "image": event_png,
+                "fields": [
+                    {"name": "CN Date", "value": normalized_cn, "inline":True},
+                    {"name": "Global Date", "value": normalized_global, "inline":True}
+                ]
             })
         return clean_format
     
@@ -151,7 +153,7 @@ class ArkScraper(BaseScraper):
             ]
         '''
         try:
-            if self.user_data['arknights']['webhook']:
+            if self.user_data['Arknights']['webhook'].startswith("https"):
                 site_config = self.sites[0]
                 table, url = site_config
                 soup = self.get_response(url)
@@ -163,6 +165,7 @@ class ArkScraper(BaseScraper):
                 return formatted_data
             else:
                 self.logger.log_info("Arknights has no active webhook, skipping...")
+                return None
         except Exception:
             raise
         finally:

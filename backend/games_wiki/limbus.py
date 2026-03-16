@@ -9,8 +9,8 @@ class LimbusScraper(BaseScraper):
     def __init__(self, logger):
         super().__init__(logger=logger)
         self.logger = logger
-        self.game = self.user_data["limbus"]
-
+        self.game = self.user_data["Limbus Company"]
+ 
     def find_events(self, soup, url, table_class) -> list:
         '''
         Searches for Limbus Company events in the HTML table for a specific month/year.
@@ -67,24 +67,36 @@ class LimbusScraper(BaseScraper):
                 event_img_url = data[3]
                 if utils.is_relevant_date(event_date, lookback):
                     format_events.append({
-                        "Event_Name": event_name,
-                        "Event_Date": event_date,
-                        "Event_PNG": event_img_url
+                        "name": event_name,
+                        "image": event_img_url,
+                        "fields": [
+                            {"name": "Date", "value":event_date, "inline":True}
+                        ]
                     })
             else:
                 self.logger.log_info(f"{data} did not meet the requirements, skipping...")
                 continue
+        
         return format_events
 
     def link_imgs(self, formatted_events: list[dict[str,str]], found_imgs: list[dict[str,str]]):
         pass
 
     def data_getter(self):
-        site_config = self.sites[1]
-        table, url = site_config
-        soup = self.get_response(url)
-        if soup is None:
-            raise ValueError("Could not get HTML data in BaseScraper get_response function.")
-        data = self.find_events(soup, url, table)
-        formatted = self.format_events(data)
-        return formatted
+        try:
+            if self.game["webhook"].startswith("https"):
+                site_config = self.sites[1]
+                table, url = site_config
+                soup = self.get_response(url)
+                if soup is None:
+                    raise ValueError("Could not get HTML data in BaseScraper get_response function.")
+                data = self.find_events(soup, url, table)
+                formatted = self.format_events(data)
+                return formatted
+            else:
+                self.logger.log_error("Limbus Company does not have a valid URL in the local files.")
+                return None
+        except Exception as e:
+            self.logger.log_error(f"Error occured as {e} in Limbus Company")
+        finally:
+            self.session.close()

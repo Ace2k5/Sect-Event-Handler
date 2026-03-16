@@ -39,7 +39,7 @@ def is_relevant_date(date_text: str, lookback_days: int = 30) -> bool:
     cutoff_date = today - timedelta(days=lookback_days)
 
     separators = [" - ", " – ", " ~ ", " to "]
-
+    parts = [date_text]
     for sep in separators:
         if sep in date_text:
             parts = date_text.split(sep)
@@ -56,10 +56,7 @@ def is_relevant_date(date_text: str, lookback_days: int = 30) -> bool:
 
     if end_date:
         return end_date >= cutoff_date
-    if start_date:
-        return True
-    if end_date or start_date is None:
-        return False
+    return False
 
 def normalize_date_range(date_text):
     """
@@ -144,3 +141,14 @@ def request_error_handling(response, logger) -> bool:
     except requests.RequestException as err:
         logger.log_error(f"An unexpected error occurred: {err}")
     return False
+
+def get_webhook(name: str, user:dict, logger: object):
+    game_name = user.get(name, "")
+    if game_name is None:
+        logger.log_error(f"There is no stored {name} in the local files.")
+    else:
+        webhook = game_name.get("webhook", "")
+        if webhook is None:
+            logger.log_error("There is no stored webhook in the local files.")
+        else:
+            return webhook
