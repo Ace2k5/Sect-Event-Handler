@@ -54,6 +54,11 @@ class ScrapeFlow():
             self.logger.log_info("There are no new events.")
         else:
             self.send(datas, "Arknights")
+        datas = self.limbus.data_getter()
+        if not datas or datas is None:
+            self.logger.log_info("There are no new events.")
+        else:
+            self.send(datas, "Limbus Company")
 
 
 
@@ -70,7 +75,7 @@ class ScrapeFlow():
            - Sends notifications to Discord webhook
         3. Logs completion or errors
         
-        Args:
+        Args:`
             forced: If True, forces execution regardless of date check.
                    Used for manual triggering from GUI vs scheduled runs.
             
@@ -89,7 +94,8 @@ class ScrapeFlow():
                 if not self.webhook("Arknights"):
                     self.logger.log_error("Local files does not have a valid webhook URL for Arknights. Skipping Arknights.")
                 else:
-                    datas = self.ark_scrape.data_getter()
+                    print(forced)
+                    datas = self.ark_scrape.data_getter(forced)
                     if datas is None:
                         self.logger.log_error("Nothing was returned, skipping Arknights...")
                     self.send(datas, "Arknights")
@@ -97,7 +103,7 @@ class ScrapeFlow():
                 if not self.webhook("Limbus Company"):
                     self.logger.log_error("Local files does not have a valid webhook URL for Limbus Company. Skipping Limbus Company.")
                 else:
-                    datas = self.limbus.data_getter()
+                    datas = self.limbus.data_getter(forced)
                     if datas is None:
                         self.logger.log_error("Nothing was returned, skipping Limbus Company...")
                     self.send(datas, "Limbus Company")

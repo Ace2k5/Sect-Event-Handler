@@ -83,7 +83,6 @@ class ArkScraper(BaseScraper):
                             row_data.append(text)
                         row_data.append(img_url)
                         found_events.append(row_data)
-            print(found_events)
             return found_events
         except requests.ConnectionError as e:
             self.logger.log_error(f"Connection error: {e}")
@@ -166,69 +165,7 @@ class ArkScraper(BaseScraper):
             })
         return clean_format
         
-    def update_local_events(self, clean_format):
-        """
-        Tracks seen events to prevent duplicate notifications.
-        
-        Compares newly found events with previously seen events stored in
-        user configuration, returns only new events, and updates the
-        seen events list for future runs.
-        
-        Args:
-            clean_format: List of formatted event dictionaries from format_events()
-            
-        Returns:
-            list: List containing only new events (not previously seen)
-            
-        Notes:
-            - Uses set operations to find difference between seen and new events
-            - Updates self.game['seen_events'] in memory
-            - Persists updated seen events to JSON file
-            - Returns empty list if no new events found
-        """
-        try:
-            formatted_data = list()
-            saved_events = set(self.game['seen_events'])
-            seen_events = set()
-
-            print(clean_format)
-            
-            self.logger.log_info("Updating local events...")
-            for event in clean_format:
-                if event['name'] != "":
-                    self.logger.log_info(f"Adding {event['name']} for intersection.")
-                    seen_events.add(event['name'])
-            self.logger.log_info("Currently finding the difference of events.")
-            new_events = seen_events - saved_events
-            saved_events = new_events | saved_events
-            if not saved_events:
-                saved_events = seen_events
-            all_saved_events = seen_events & saved_events
-
-            if not all_saved_events:
-                all_saved_events = seen_events
-
-            self.logger.log_info(f"Found {new_events} as the difference.")
-
-            self.logger.log_info(f"Currently fetching {new_events}'s dict structure.")
-            for event in clean_format:
-                if event['name'] in new_events:
-                    formatted_data.append(event)
-                    self.logger.log_info(f"Found {event['name']}'s dict structure.")
-
-            self.game['seen_events'] = list(all_saved_events)
-            print(self.user_data)
-            json_handler.save_to_json(self.user_data)
-            self.logger.log_info("Updated seen events in the local json.")
-
-            return formatted_data
-        except Exception as e:
-            self.logger.log_error(f"Error occured as {e} when trying to update local events.")
-            
-            
-
-
-    def data_getter(self):
+    def data_getter(self, forced=False):
         """
         Main public method to retrieve and process Arknights event data.
         
@@ -260,7 +197,10 @@ class ArkScraper(BaseScraper):
                 
                 events = self.find_events(soup, table, url)
                 formatted_data = self.format_events(events)
-                formatted_formatted_data = self.update_local_events(formatted_data)
+
+                # If formatted_formatted_data is None, will automatically stop the program
+                # Indicates that currently scraped events have already been seen by program.
+                formatted_formatted_data = self.update_local_events(formatted_data, forced) # from base scraper
                 return formatted_formatted_data
             else:
                 self.logger.log_info("Arknights has no active webhook, skipping...")

@@ -53,9 +53,6 @@ class LimbusScraper(BaseScraper):
         found_events = utils.deduplication(found_events, self.logger)
         return found_events
 
-    def find_img(self, soup, url, tables):
-        pass
-
     def format_events(self, found_events):
         lookback = self.user_data['lookback_days']
         format_events = []
@@ -79,10 +76,7 @@ class LimbusScraper(BaseScraper):
         
         return format_events
 
-    def link_imgs(self, formatted_events: list[dict[str,str]], found_imgs: list[dict[str,str]]):
-        pass
-
-    def data_getter(self):
+    def data_getter(self, forced=False):
         try:
             if self.game["webhook"].startswith("https"):
                 site_config = self.sites[1]
@@ -92,7 +86,8 @@ class LimbusScraper(BaseScraper):
                     raise ValueError("Could not get HTML data in BaseScraper get_response function.")
                 data = self.find_events(soup, url, table)
                 formatted = self.format_events(data)
-                return formatted
+                formatted_formatted = self.update_local_events(formatted, forced)
+                return formatted_formatted
             else:
                 self.logger.log_error("Limbus Company does not have a valid URL in the local files.")
                 return None

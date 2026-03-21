@@ -122,6 +122,68 @@ class BaseScraper(ABC):
         """
         pass
 
+    def update_local_events(self, clean_format, forced=False):
+        try:
+            if not forced:
+                formatted_data = list()
+                saved_events = set(self.game['seen_events'])
+                seen_events = set()
+                
+                self.logger.log_info("Updating local events...")
+                for event in clean_format:
+                    if event['name'] != "":
+                        self.logger.log_info(f"Adding {event['name']} for intersection.")
+                        seen_events.add(event['name'])
+                self.logger.log_info("Currently finding the difference of events.")
+
+                '''
+                Accumulation of past events is not ideal as reruns can happen. There are events
+                that have the tag [Rerun] to them, but in my opinion it's best if we just drop
+                the events that are no longer active since we cannot be sure that different wikis
+                will contain the [Rerun] tag.
+                Steps:
+                1. new events gets the event that has not been stored yet within saved_events
+                2. saved_events temporarily accumulates new and old events so that intersection with 
+                   seen_events can phase out events that are no longer active
+                   (if local_user.json is freshly made, then saved_events is simply set as seen_events data)
+                3. all_saved_events finally grabs the currently active events by intersection
+                4. if for some reason all_saved_events is falsy, simply set all_saved_events
+                   to seen_events
+                5. if new events ends up falsy, means there's no new events.
+                6. lastly, turn all set into list so we can dump it into the json.
+                '''
+                new_events = seen_events - saved_events
+                saved_events = new_events | saved_events
+                if not saved_events:
+                    saved_events = seen_events
+                all_saved_events = seen_events & saved_events
+
+                if not all_saved_events:
+                    all_saved_events = seen_events
+
+                if not new_events:
+                    self.logger.log_info("Finding new events ended up falsy.")
+                    return None
+                
+                self.logger.log_info(f"Found {new_events} as the difference.")
+
+                self.logger.log_info(f"Currently fetching {new_events}'s dict structure.")
+                for event in clean_format:
+                    if event['name'] in new_events:
+                        formatted_data.append(event)
+                        self.logger.log_info(f"Found {event['name']}'s dict structure.")
+
+                self.game['seen_events'] = list(all_saved_events)
+                json_handler.save_to_json(self.user_data)
+                self.logger.log_info("Updated seen events in the local json.")
+
+                return formatted_data
+            else:
+                self.logger.log_info("User forced events, sending all events.")
+                return clean_format
+        except Exception as e:
+            self.logger.log_error(f"Error occured as {e} when trying to update local events.")
+
     @abstractmethod
     def data_getter(self):
         """
