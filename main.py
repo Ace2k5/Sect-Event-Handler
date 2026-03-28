@@ -1,10 +1,10 @@
-from frontend import init_window
+from frontend import main_window
 import sys
 from PySide6.QtWidgets import QApplication
 
 
 
 app = QApplication(sys.argv)
-init_window = init_window.Window()
-init_window.show()
+main_window = main_window.Window()
+main_window.show()
 app.exec()

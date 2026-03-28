@@ -94,7 +94,6 @@ class ScrapeFlow():
                 if not self.webhook("Arknights"):
                     self.logger.log_error("Local files does not have a valid webhook URL for Arknights. Skipping Arknights.")
                 else:
-                    print(forced)
                     datas = self.ark_scrape.data_getter(forced)
                     if datas is None:
                         self.logger.log_error("Nothing was returned, skipping Arknights...")
@@ -115,7 +114,7 @@ class ScrapeFlow():
         
 if __name__ == "__main__":
     runner = ScrapeFlow()
-    check = int(input("Check GUI (1) Test program (2):"))
+    check = int(input("Check Main (1) Test program (2):"))
     if check == 1:
         runner.flow()
     elif check == 2:
