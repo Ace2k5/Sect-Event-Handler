@@ -9,7 +9,7 @@ for game-specific HTML parsing and data formatting.
 import requests
 from bs4 import BeautifulSoup
 from abc import ABC, abstractmethod
-from .. import inits, json_handler
+from .. import backend_inits, json_handler
 from pathlib import Path
 import json
 
@@ -28,7 +28,7 @@ class BaseScraper(ABC):
     - format_events(): Game-specific data formatting
     - data_getter(): Main data retrieval workflow
     """
-    def __init__(self, logger):
+    def __init__(self, logger, user_data=None):
         """
         Initializes the base scraper with common dependencies.
         
@@ -41,8 +41,8 @@ class BaseScraper(ABC):
             session: requests.Session for HTTP requests
             logger: Logger instance for logging
         """
-        self.user_data = json_handler.get_user_data()
-        self.sites = inits.SITES
+        self.user_data = user_data
+        self.sites = backend_inits.SITES
         self.session = requests.Session()
         self.logger = logger
 
@@ -141,26 +141,18 @@ class BaseScraper(ABC):
                 that have the tag [Rerun] to them, but in my opinion it's best if we just drop
                 the events that are no longer active since we cannot be sure that different wikis
                 will contain the [Rerun] tag.
+                
                 Steps:
                 1. new events gets the event that has not been stored yet within saved_events
-                2. saved_events temporarily accumulates new and old events so that intersection with 
-                   seen_events can phase out events that are no longer active
-                   (if local_user.json is freshly made, then saved_events is simply set as seen_events data)
-                3. all_saved_events finally grabs the currently active events by intersection
-                4. if for some reason all_saved_events is falsy, simply set all_saved_events
-                   to seen_events
-                5. if new events ends up falsy, means there's no new events.
-                6. lastly, turn all set into list so we can dump it into the json.
+                2. all_saved_events acquires the currently up to date events that are up in the wiki.
+                3. checks each event in clean_format to see if event['name'] is inside of the set new_events
+                4. new events are saved inside of the JSON file.
+                5. formatted data will be appended and this data will be sent to discord.
+                
                 '''
                 new_events = seen_events - saved_events
-                saved_events = new_events | saved_events
-                if not saved_events:
-                    saved_events = seen_events
-                all_saved_events = seen_events & saved_events
 
-                if not all_saved_events:
-                    all_saved_events = seen_events
-
+                all_saved_events = seen_events
                 if not new_events:
                     self.logger.log_info("Finding new events ended up falsy.")
                     return None
@@ -171,7 +163,7 @@ class BaseScraper(ABC):
                 for event in clean_format:
                     if event['name'] in new_events:
                         formatted_data.append(event)
-                        self.logger.log_info(f"Found {event['name']}'s dict structure.")
+                        self.logger.log_info(f"Found {event['name']}'s dict structure. Preparing to send to Discord.")
 
                 self.game['seen_events'] = list(all_saved_events)
                 json_handler.save_to_json(self.user_data)

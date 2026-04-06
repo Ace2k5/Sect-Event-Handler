@@ -34,8 +34,9 @@ class ScrapeFlow():
         self.logger = logger.Log(signals=signals)
         if not json_handler.JSON_FILE.exists():
             json_handler.create_user_data(self.logger)
-        self.ark_scrape = arknights.ArkScraper(self.logger)
-        self.limbus = limbus.LimbusScraper(self.logger)
+        self.user_data = json_handler.get_user_data()
+        self.ark_scrape = arknights.ArkScraper(self.logger, self.user_data)
+        self.limbus = limbus.LimbusScraper(self.logger, self.user_data)
         self.send = partial(base_webhook.send_to_discord, logger=self.logger)
         self.webhook = partial(utils.get_webhook, user=json_handler.get_user_data(), logger=self.logger)
 

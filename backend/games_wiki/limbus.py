@@ -2,12 +2,12 @@ import requests
 from .base_scraper import BaseScraper
 from bs4 import BeautifulSoup
 from datetime import date
-from .. import inits, utils
+from .. import backend_inits, utils
 from urllib.parse import urljoin
 
 class LimbusScraper(BaseScraper):
-    def __init__(self, logger):
-        super().__init__(logger=logger)
+    def __init__(self, logger, user_data=None):
+        super().__init__(logger=logger, user_data=user_data)
         self.logger = logger
         self.game = self.user_data["Limbus Company"]
  

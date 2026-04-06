@@ -19,4 +19,3 @@ class Worker(QRunnable):
             self.signals.error.emit(str(e))
         finally:
             self.signals.finished.emit()
-

@@ -20,6 +20,6 @@ def send_to_discord(config, name, logger):
             if response.status_code != 204:
                 logger.log_info(f"Failed to send: {response.status_code}, {response.text}")
             else:
-                logger.log_info(f"Sent: {event["name"]}")
+                logger.log_info(f"Sent: {event['name']}")
     else:
         raise ValueError("Webhook does not start with HTTPS, please input a valid Webhook URL.")

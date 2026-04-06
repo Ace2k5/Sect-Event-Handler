@@ -3,7 +3,7 @@ import json
 from .base_scraper import BaseScraper
 from bs4 import BeautifulSoup
 from datetime import date
-from .. import inits, utils, json_handler
+from .. import backend_inits, utils, json_handler
 from pathlib import Path
 from urllib.parse import urljoin
 
@@ -19,7 +19,7 @@ class ArkScraper(BaseScraper):
     
     Inherits from BaseScraper which provides common scraping functionality.
     """
-    def __init__(self, logger):
+    def __init__(self, logger, user_data=None):
         """
         Initializes the ArkScraper with Arknights-specific configuration.
         
@@ -35,7 +35,7 @@ class ArkScraper(BaseScraper):
             - Sets up path for Arknights image storage
             - References Arknights-specific configuration from user_data
         """
-        super().__init__(logger=logger)
+        super().__init__(logger=logger, user_data=user_data)
         self.path_imgs = Path(__file__).parent.parent.parent / "arknights_imgs"
         self.game = self.user_data['Arknights']
         
