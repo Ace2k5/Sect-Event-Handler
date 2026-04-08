@@ -6,15 +6,16 @@ class WorkerSignals(QObject):
     error = Signal(str)
 
 class Worker(QRunnable):
-    def __init__(self, job):
+    def __init__(self, job, forced=False):
         super().__init__()
         self.job = job
         self.signals = WorkerSignals()
+        self.forced = forced
 
     @Slot()
     def run(self):
         try:
-            self.job(self.signals)
+            self.job(self.signals, self.forced)
         except Exception as e:
             self.signals.error.emit(str(e))
         finally:

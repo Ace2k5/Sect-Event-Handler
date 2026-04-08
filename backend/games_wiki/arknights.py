@@ -35,7 +35,8 @@ class ArkScraper(BaseScraper):
             - Sets up path for Arknights image storage
             - References Arknights-specific configuration from user_data
         """
-        super().__init__(logger=logger, user_data=user_data)
+        name = "Arknights"
+        super().__init__(name_of_game=name, logger=logger, user_data=user_data)
         self.path_imgs = Path(__file__).parent.parent.parent / "arknights_imgs"
         self.game = self.user_data['Arknights']
         

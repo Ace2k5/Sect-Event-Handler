@@ -12,6 +12,7 @@ from abc import ABC, abstractmethod
 from .. import backend_inits, json_handler
 from pathlib import Path
 import json
+import time
 
 class BaseScraper(ABC):
     """
@@ -28,7 +29,7 @@ class BaseScraper(ABC):
     - format_events(): Game-specific data formatting
     - data_getter(): Main data retrieval workflow
     """
-    def __init__(self, logger, user_data=None):
+    def __init__(self, name_of_game, logger, user_data=None):
         """
         Initializes the base scraper with common dependencies.
         
@@ -36,11 +37,12 @@ class BaseScraper(ABC):
             logger: Logger object for logging messages
             
         Attributes:
-            user_data: Dictionary of user configuration from JSON file
+            user_data['Arknights']: Dictionary of user configuration from JSON file
             sites: List of (table_class, url) tuples for scraping
             session: requests.Session for HTTP requests
             logger: Logger instance for logging
         """
+        self.game_name = name_of_game
         self.user_data = user_data
         self.sites = backend_inits.SITES
         self.session = requests.Session()
@@ -124,9 +126,9 @@ class BaseScraper(ABC):
 
     def update_local_events(self, clean_format, forced=False):
         try:
+            saved_events = set(self.game['seen_events'])
             if not forced:
                 formatted_data = list()
-                saved_events = set(self.game['seen_events'])
                 seen_events = set()
                 
                 self.logger.log_info("Updating local events...")
@@ -146,7 +148,7 @@ class BaseScraper(ABC):
                 1. new events gets the event that has not been stored yet within saved_events
                 2. all_saved_events acquires the currently up to date events that are up in the wiki.
                 3. checks each event in clean_format to see if event['name'] is inside of the set new_events
-                4. new events are saved inside of the JSON file.
+                4. new events are saved inside of the JSON file
                 5. formatted data will be appended and this data will be sent to discord.
                 
                 '''
@@ -171,7 +173,19 @@ class BaseScraper(ABC):
 
                 return formatted_data
             else:
-                self.logger.log_info("User forced events, sending all events.")
+                self.logger.log_info("User forced events, sending all events and saving currently found events.")
+                seen_events = set()
+                for event in clean_format:
+                    if event['name'] != "":
+                        self.logger.log_info(f"Adding {event['name']} for saving.")
+                        seen_events.add(event['name'])
+                if saved_events == seen_events:
+                    self.logger.log_info(f"The currently saved events in {self.game_name} is equal to scraped events. Will not save.")
+                else:
+                    self.user_data[self.game_name]['seen_events'] = list(seen_events)
+                    self.logger.log_info(f"Updating locally saved events.")
+                    json_handler.save_to_json(self.user_data)
+        
                 return clean_format
         except Exception as e:
             self.logger.log_error(f"Error occured as {e} when trying to update local events.")

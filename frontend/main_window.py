@@ -10,12 +10,14 @@ class Window(QWidget):
     def __init__(self):
         super().__init__()
         self.runner = None
+        self.work_signals = None
         self.pool = QThreadPool()
         self.sizes = settings.pyside_size
         self.window_settings()
         self._init_event_widgets()
         self._init_webhook_widgets()
         self._set_stylesheet()
+        self.worker_thread(forced=False)
 
     def switch_buttons(self, mode):
         if mode == "events":
@@ -53,16 +55,15 @@ class Window(QWidget):
         layout.addLayout(self.vbox2, 3)
 
     # Worker thread for backend.
-    def job(self, signals):
+    def job(self, signals, forced=True):
         if self.runner is None:   
             self.runner = flow.ScrapeFlow(signals)
-            self.runner.flow(forced=True)
-        else:
-            self.runner.flow(forced=True)
+        self.runner.flow(forced=forced)
 
-    def worker_thread(self):
-        work = worker.Worker(self.job)
-        work.signals.log.connect(self.log_menu.append)
+    def worker_thread(self, forced=True):
+        work = worker.Worker(self.job, forced=forced)
+        if not self.work_signals:
+            self.work_signals = work.signals.log.connect(self.log_menu.append)
         self.pool.start(work)
     ######################################################
 

@@ -7,7 +7,8 @@ from urllib.parse import urljoin
 
 class LimbusScraper(BaseScraper):
     def __init__(self, logger, user_data=None):
-        super().__init__(logger=logger, user_data=user_data)
+        name = "Limbus Company"
+        super().__init__(name_of_game=name, logger=logger, user_data=user_data)
         self.logger = logger
         self.game = self.user_data["Limbus Company"]
  
