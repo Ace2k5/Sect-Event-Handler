@@ -7,14 +7,14 @@ from . import settings, worker
 from backend import json_handler
 
 class SubWindow(QWidget):
-    def __init__(self, runner):
+    def __init__(self, save_json):
         super().__init__()
-        self.setup(runner)
+        self.setup(save_json)
         self.scroll_area()
         self.webhook_layout()
     
-    def setup(self, runner):
-        self.runner = runner
+    def setup(self, save_json):
+        self.save_json = lambda g=None, w=None, v=None, u=None: save_json(g,w,v)
         self.json_handler = json_handler
         self.setObjectName("SubWindow")
         self.setAttribute(Qt.WA_StyledBackground, True)
@@ -71,8 +71,8 @@ class SubWindow(QWidget):
             print("INVALID")
         else:
             game_name = label.text()
-            self.runner.get_json()
-            self.runner.save_data(game_name, "webhook", text)
+            print(game_name, text)
+            self.save_json(g=game_name, w="webhook", v=text)
         
         
         

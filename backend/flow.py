@@ -60,9 +60,6 @@ class ScrapeFlow():
             self.logger.log_info("There are no new events.")
         else:
             self.send(datas, "Limbus Company")
-
-    def get_json(self):
-        return self.user_data
     
     def save_data(self, game, key, value):
         self.user_data[game][key] = value

@@ -12,7 +12,7 @@ class Window(QWidget):
         self.setup()
         
     def setup(self):
-        self.runner = None
+        self.save_json = None
         self.work_signals = None
         self.web_subwindow = None
         self.pool = QThreadPool()
@@ -32,7 +32,7 @@ class Window(QWidget):
             self.log_menu.show()
         elif mode == "webhook":
             if self.web_subwindow is None:
-                self._init_webhook_widgets(self.runner)
+                self._init_webhook_widgets()
             self.log_menu.hide()
             self.webhook.show()
             for game in self.webhook.games_dict:
@@ -60,10 +60,10 @@ class Window(QWidget):
         layout.addLayout(self.vbox2, 3)
 
     # Worker thread for backend.
-    def job(self, signals, forced=True):
-        if self.runner is None:   
-            self.runner = flow.ScrapeFlow(signals)
-        self.runner.flow(forced=forced)
+    def job(self, signals, forced=True):  
+        runner = flow.ScrapeFlow(signals)
+        self.save_json = runner.save_data
+        runner.flow(forced=forced)
 
     def worker_thread(self, forced=True):
         work = worker.Worker(self.job, forced=forced)
@@ -95,8 +95,8 @@ class Window(QWidget):
         self.log_menu.setMinimumWidth(self.log_size)
         self.log_menu.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Expanding)
         self.vbox2.addWidget(self.log_menu)
-    def _init_webhook_widgets(self, runner):
-        self.webhook = webhook_subwindow.SubWindow(runner=runner)
+    def _init_webhook_widgets(self):
+        self.webhook = webhook_subwindow.SubWindow(self.save_json)
         self.vbox2.addWidget(self.webhook)
         self.webhook.hide()
 
