@@ -74,16 +74,28 @@ class ArkScraper(BaseScraper):
                     if cells:
                         row_data = []
                         img = ""
+                        title_span = ""
                         for cell in cells:
+                            title_span = cell.find("span")
                             img = cell.find("img")
                             if img:
                                 src = img.get("src", "")
                                 img_url = urljoin(url, src)
-                            text = cell.get_text(strip=True)
+                                self.logger.log_info(f"Found image as {img_url}")
+                            else:
+                                missing = cell.find("a", class_="new")
+                                if missing:
+                                    img_url = "https://www.shutterstock.com/image-vector/image-not-found-failure-network-600w-2330163829.jpg"
+                                    self.logger.log_info(f"Missing image. Using default image...")  
+                            if title_span:
+                                text = title_span.get_text(strip=True)
+                            else:
+                                text = cell.get_text(strip=True)
                             self.logger.log_info(f"Appending {text} to row_data...")
                             row_data.append(text)
                         row_data.append(img_url)
                         found_events.append(row_data)
+                        print(found_events)
             return found_events
         except requests.ConnectionError as e:
             self.logger.log_error(f"Connection error: {e}")

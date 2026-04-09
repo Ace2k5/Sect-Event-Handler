@@ -9,30 +9,35 @@ from backend import flow
 class Window(QWidget):
     def __init__(self):
         super().__init__()
+        self.setup()
+        
+    def setup(self):
         self.runner = None
         self.work_signals = None
+        self.web_subwindow = None
         self.pool = QThreadPool()
         self.sizes = settings.pyside_size
         self.window_settings()
         self._init_event_widgets()
-        self._init_webhook_widgets()
-        self._set_stylesheet()
         self.worker_thread(forced=False)
+        self._set_stylesheet()
 
     def switch_buttons(self, mode):
         if mode == "events":
             self.webhook.hide()
             for game in self.webhook.games_dict:
                 self.webhook.games_dict[game]['label'].hide()
-                self.webhook.games_dict[game]['webhook_button'].hide()
+                self.webhook.games_dict[game]['webhook_line'].hide()
                 self.webhook.games_dict[game]['save_button'].hide()
             self.log_menu.show()
         elif mode == "webhook":
+            if self.web_subwindow is None:
+                self._init_webhook_widgets(self.runner)
             self.log_menu.hide()
             self.webhook.show()
             for game in self.webhook.games_dict:
                 self.webhook.games_dict[game]['label'].show()
-                self.webhook.games_dict[game]['webhook_button'].show()
+                self.webhook.games_dict[game]['webhook_line'].show()
                 self.webhook.games_dict[game]['save_button'].show()
         
     def window_settings(self):
@@ -90,8 +95,8 @@ class Window(QWidget):
         self.log_menu.setMinimumWidth(self.log_size)
         self.log_menu.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Expanding)
         self.vbox2.addWidget(self.log_menu)
-    def _init_webhook_widgets(self):
-        self.webhook = webhook_subwindow.SubWindow()
+    def _init_webhook_widgets(self, runner):
+        self.webhook = webhook_subwindow.SubWindow(runner=runner)
         self.vbox2.addWidget(self.webhook)
         self.webhook.hide()
 

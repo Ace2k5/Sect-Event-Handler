@@ -61,7 +61,12 @@ class ScrapeFlow():
         else:
             self.send(datas, "Limbus Company")
 
-
+    def get_json(self):
+        return self.user_data
+    
+    def save_data(self, game, key, value):
+        self.user_data[game][key] = value
+        json_handler.save_to_json(self.user_data)
 
     def flow(self, forced=False):
         """
