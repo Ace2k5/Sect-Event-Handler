@@ -2,7 +2,6 @@ from PySide6.QtCore import QThreadPool, QRunnable, Slot, Signal, QObject
 
 class WorkerSignals(QObject):
     finished = Signal()
-    log = Signal(str)
     error = Signal(str)
 
 class Worker(QRunnable):
@@ -15,7 +14,7 @@ class Worker(QRunnable):
     @Slot()
     def run(self):
         try:
-            self.job(self.signals, self.forced)
+            self.job(self.forced)
         except Exception as e:
             self.signals.error.emit(str(e))
         finally:

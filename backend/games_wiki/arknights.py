@@ -74,21 +74,21 @@ class ArkScraper(BaseScraper):
                     if cells:
                         row_data = []
                         img = ""
-                        title_span = ""
+                        title = ""
                         for cell in cells:
-                            title_span = cell.find("span")
+                            title = cell.find('a', class_="title")
                             img = cell.find("img")
                             if img:
                                 src = img.get("src", "")
                                 img_url = urljoin(url, src)
                                 self.logger.log_info(f"Found image as {img_url}")
                             else:
-                                missing = cell.find("a", class_="new")
+                                missing = cell.find("a", class_="title")
                                 if missing:
                                     img_url = "https://www.shutterstock.com/image-vector/image-not-found-failure-network-600w-2330163829.jpg"
-                                    self.logger.log_info(f"Missing image. Using default image...")  
-                            if title_span:
-                                text = title_span.get_text(strip=True)
+                                    self.logger.log_info("Missing image. Using default image...")  
+                            if title:
+                                text = title.get_text(strip=True)
                             else:
                                 text = cell.get_text(strip=True)
                             self.logger.log_info(f"Appending {text} to row_data...")

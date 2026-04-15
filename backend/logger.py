@@ -72,7 +72,7 @@ class Log():
         """
         self.logger.info(str)
         if self.signals:
-            self.signals.log.emit(f"INFO: {str}")
+            self.signals.emit(f"INFO: {str}")
         
     def log_warning(self, str: str):
         """
@@ -88,7 +88,7 @@ class Log():
         """
         self.logger.warning(str)
         if self.signals:
-            self.signals.log.emit(f"WARNING: {str}")
+            self.signals.emit(f"WARNING: {str}")
         
     def log_error(self, str: str):
         """
@@ -105,7 +105,7 @@ class Log():
         """
         self.logger.error(str, exc_info=True)
         if self.signals:
-            self.signals.log.emit(f"ERORR: {str}")
+            self.signals.emit(f"ERORR: {str}")
         
     def check_handlers(self):
         """

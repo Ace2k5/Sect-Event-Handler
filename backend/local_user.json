@@ -3,8 +3,12 @@
         "webhook": "https://discord.com/api/webhooks/1470711602071212124/9tSmfqwA4HcnyjWdXKPHVwa0garkieyXt75uwSdBFT97gmAzb8FzpQoFZqYcwlWu91NA",
         "proper_name": "Arknights",
         "seen_events": [
-            "Icebreaker Games #2",
-            "Retracing Our Steps 1101"
+            "[Rerun] Exodus from the Pale Sea Rerun",
+            "[Side Story] Unrealized Realities",
+            "[Rerun] I Portatori Dei Velluti Rerun",
+            "[Side Story \u2013 Celebration] Retracing Our Steps",
+            "Stronghold Protocol: Alliance",
+            "Icebreaker Games #2"
         ]
     },
     "Limbus Company": {
@@ -25,5 +29,5 @@
     },
     "total_supported_games": 3,
     "lookback_days": 30,
-    "date_today": "April, 09, 2026"
+    "date_today": "April, 15, 2026"
 }

@@ -14,7 +14,7 @@ class SubWindow(QWidget):
         self.webhook_layout()
     
     def setup(self, save_json):
-        self.save_json = lambda g=None, w=None, v=None, u=None: save_json(g,w,v)
+        self.save_json = save_json
         self.json_handler = json_handler
         self.setObjectName("SubWindow")
         self.setAttribute(Qt.WA_StyledBackground, True)
@@ -65,14 +65,14 @@ class SubWindow(QWidget):
             self.content_layout.addWidget(container)
     
     def on_click(self, webhook_line, label):
-        text = str(webhook_line.text())
+        text = webhook_line.text()
         if not text.startswith("https"):
             # perchance invalid popup
             print("INVALID")
         else:
             game_name = label.text()
             print(game_name, text)
-            self.save_json(g=game_name, w="webhook", v=text)
+            self.save_json(game_name, "webhook", text)
         
         
         
