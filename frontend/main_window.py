@@ -40,8 +40,9 @@ class Window(QWidget):
             self.settings_bool = True
             
         if mode == "events":
-            if self.webhook_window.isVisible():
+            if self.webhook_window.isVisible() and self.settings_window.isVisible():
                 self.webhook_window.hide()
+                self.settings_window.button.hide()
             self.log_menu.show()
         elif mode == "webhook":
                 if self.webhook_window.isVisible():
@@ -49,8 +50,9 @@ class Window(QWidget):
                     print("FRONTEND: Webhook window is already visible.") # Frontend does not know logger exists, just print to console.
                 else:
                     self.log_menu.hide()
+                    self.settings_window.button.hide()
                     self.webhook_window.show()
-                    for game in self.webhook.games_dict:
+                    for game in self.webhook_window.games_dict:
                         self.webhook_window.games_dict[game]['label'].show()
                         self.webhook_window.games_dict[game]['webhook_line'].show()
                         self.webhook_window.games_dict[game]['save_button'].show()
@@ -72,7 +74,7 @@ class Window(QWidget):
         w, h = settings.window_settings['resolution']
         
         self.setWindowTitle(window_title)
-        self.resize(w, h)
+        self.setFixedSize(w, h)
     
         self._set_up_buttons()
 
@@ -92,14 +94,13 @@ class Window(QWidget):
     ######################################################
 
     def _set_up_buttons(self):
-        self.event_button = QPushButton()
-        self.webhook_button = QPushButton()
+        self.event_button = QPushButton("Force Send Events")
+        self.webhook_button = QPushButton("Manage Webhook")
         self.settings_button = QPushButton("Settings")
-        self.event_button.setText("Force Send Events")
-        self.webhook_button.setText("Manage Webhooks")
 
         self.event_button.setFixedHeight(self.buttons_size)
         self.webhook_button.setFixedHeight(self.buttons_size)
+        self.settings_button.setFixedHeight(self.buttons_size)
 
         self.vbox1.addWidget(self.event_button)
         self.vbox1.addWidget(self.webhook_button)
@@ -156,7 +157,7 @@ class Window(QWidget):
                         
                         #StyleWebhook {
                             background-color: #1b1b1f;
-                            border: 1px solid white
+                            border: 3px solid rgb(70, 70, 80)
                         }
                         ''')
 
