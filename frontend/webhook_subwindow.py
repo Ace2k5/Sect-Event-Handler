@@ -2,19 +2,20 @@ import sys
 from PySide6.QtCore import Qt, QThreadPool
 from PySide6.QtWidgets import (QApplication, QWidget, QVBoxLayout,
                                 QHBoxLayout, QPushButton, QTextEdit,
-                                QSizePolicy, QLineEdit, QLabel, QScrollArea)
+                                QSizePolicy, QLineEdit, QLabel, QScrollArea, QSpacerItem)
 from . import settings, worker
 from backend import json_handler
 
 class SubWindow(QWidget):
-    def __init__(self, save_json):
+    def __init__(self, save_json, log_signal):
         super().__init__()
-        self.setup(save_json)
+        self.setup(save_json, log_signal)
         self.scroll_area()
         self.webhook_layout()
     
-    def setup(self, save_json):
+    def setup(self, save_json, log_signal):
         self.save_json = save_json
+        self.log_signal = log_signal
         self.json_handler = json_handler
         self.setObjectName("SubWindow")
         self.setAttribute(Qt.WA_StyledBackground, True)
@@ -31,6 +32,8 @@ class SubWindow(QWidget):
         content.setAttribute(Qt.WA_StyledBackground, True)
         self.content_layout = QVBoxLayout(content)
         
+        self.content_layout.setSpacing(6)
+        
         scroll.setWidget(content)
         self.main_layout.addWidget(scroll)
         
@@ -45,11 +48,14 @@ class SubWindow(QWidget):
             save_button = QPushButton("Save")
             
             vbox = QVBoxLayout(container)
+            vbox.setContentsMargins(10,10,10,10)
+            vbox.setSpacing(2)
             hbox = QHBoxLayout()
+            hbox.setContentsMargins(0, 0, 0, 0)
 
             vbox.addWidget(label)
-            hbox.addWidget(webhook_line)
-            hbox.addWidget(save_button)
+            hbox.addWidget(webhook_line, 3)
+            hbox.addWidget(save_button, 1)
             
             save_button.clicked.connect(lambda checked, webhook=webhook_line, label=label: self.on_click(webhook,label))
             
@@ -68,12 +74,10 @@ class SubWindow(QWidget):
         text = webhook_line.text()
         if not text.startswith("https"):
             # perchance invalid popup
-            print("INVALID")
+            self.log_signal("Invalid link.")
+            print("Invalid link.")
         else:
             game_name = label.text()
             print(game_name, text)
             self.save_json(game_name, "webhook", text)
-        
-        
-        
         

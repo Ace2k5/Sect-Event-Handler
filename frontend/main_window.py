@@ -10,22 +10,23 @@ class Window(QWidget):
     def __init__(self):
         super().__init__()
         
-    def setup(self, run, save):
-        self.set_actions(run, save)
-        self.webhook_bool = None
-        self.settings_bool = None
+    def setup(self, run, save_game, save_settings):
+        self.set_actions(run, save_game, save_settings)
         self.pool = QThreadPool()
         self.sizes = settings.pyside_size
         self.window_settings()
         self._init_event_widgets()
         self._set_stylesheet()
-
         self.log_signal.connect(self.log_menu.append)
         self.run_on_startup()
+        
+        self.webhook_bool = None
+        self.settings_bool = None
 
-    def set_actions(self, run, save):
+    def set_actions(self, run, save_game, save_settings):
         self.run_request = run
-        self.save_request = save
+        self.save_request = save_game
+        self.save_settings = save_settings
 
     def run_on_startup(self):
         if self.run_request and self.save_request:
@@ -42,15 +43,14 @@ class Window(QWidget):
         if mode == "events":
             if self.webhook_window.isVisible() and self.settings_window.isVisible():
                 self.webhook_window.hide()
-                self.settings_window.button.hide()
+                self.settings_window.hide()
             self.log_menu.show()
         elif mode == "webhook":
                 if self.webhook_window.isVisible():
                     self.log_signal.emit("FRONTEND: Webhook window is already visible.")
                     print("FRONTEND: Webhook window is already visible.") # Frontend does not know logger exists, just print to console.
                 else:
-                    self.log_menu.hide()
-                    self.settings_window.button.hide()
+                    self.settings_window.hide()
                     self.webhook_window.show()
                     for game in self.webhook_window.games_dict:
                         self.webhook_window.games_dict[game]['label'].show()
@@ -61,7 +61,7 @@ class Window(QWidget):
                 self.webhook_window.hide()
             if self.log_menu.isVisible():
                 self.log_menu.hide()
-            self.settings_window.button.show()        
+            self.settings_window.show()
     def window_settings(self):
         self.buttons_size = self.sizes['button_size']
         self.log_size = self.sizes['log_menu_size']
@@ -117,13 +117,13 @@ class Window(QWidget):
         self.log_menu.setReadOnly(True)
         self.log_menu.setMinimumWidth(self.log_size)
         self.log_menu.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Expanding)
-        self.vbox2.addWidget(self.log_menu)
+        self.vbox2.addWidget(self.log_menu, 1)
     def _init_webhook_widgets(self):
-        self.webhook_window = webhook_subwindow.SubWindow(self.save_request)
-        self.vbox2.addWidget(self.webhook_window)
+        self.webhook_window = webhook_subwindow.SubWindow(self.save_request, self.log_signal.emit)
+        self.vbox2.addWidget(self.webhook_window, 3)
         self.webhook_window.hide()
     def _init_settings_widgets(self):
-        self.settings_window = settings_subwindow.SubWindow()
+        self.settings_window = settings_subwindow.SubWindow(self.save_settings, self.log_signal.emit)
         self.vbox2.addWidget(self.settings_window)
         
 
@@ -139,17 +139,20 @@ class Window(QWidget):
                             color: white;
                             font-size: 12px;
                             background-color: #141417;
+                            border: 1px solid rgb(70, 70, 80)
                         }
                            
                         QTextEdit {
                            background-color: #141417;
+                           border: 1px solid rgb(70, 70, 80)
                            }
                            
                         #ScrollArea {
-                            background-color: #121210;
+                            background-color: #141417;
                         }
                         #SubWindow {
-                            background-color: #1b1b1f;
+                            background-color: #141417;
+                            border: 1px solid rgb(70, 70, 80)
                         }
                         #SubWindow QScrollArea {
                             border: none;
@@ -158,6 +161,9 @@ class Window(QWidget):
                         #StyleWebhook {
                             background-color: #1b1b1f;
                             border: 3px solid rgb(70, 70, 80)
+                        }
+                        #StyleWebhook QLineEdit {
+                            border: 1px solid rgb(70, 70, 80)
                         }
                         ''')
 

@@ -8,15 +8,36 @@ from backend import json_handler
 
 class SubWindow(QWidget):
     settings_signal = Signal(str)
-    def __init__(self):
+    def __init__(self, save_settings, log_signal):
         super().__init__()
-        self.setup()
+        self.setup(save_settings, log_signal)
         
-    def setup(self):
+    def setup(self, save_settings, log_signal):
+        self.save_settings = save_settings
+        self.log_signal = log_signal
+        
         self.button = QPushButton("Click")
         self.vbox = QVBoxLayout()
+        self.hbox = QHBoxLayout()
         
+        self.lookback = QLineEdit("Add days to look back")
+        self.save = QPushButton("Save")
+        self.save.clicked.connect(lambda: self.on_click_lookback())
+        self.hbox.addWidget(self.lookback)
+        self.hbox.addWidget(self.save)
+        
+        self.vbox.addLayout(self.hbox)
         self.vbox.addWidget(self.button)
         
         self.main_layout = QVBoxLayout(self)
         self.main_layout.addLayout(self.vbox)
+        
+    def on_click_lookback(self):
+        try:
+            text = int(self.lookback.text())
+            self.save_settings("lookback_days", text)
+            self.log_signal("FRONTEND: Successfully changed days to look back.")
+            print("FRONTEND: Successfully changed days to look back.")
+        except ValueError as e:
+            self.log_signal("FRONTEND: Invalid value. Please use integers only.")
+            print("FRONTEND: Invalid value. Please use integers only.")
