@@ -11,6 +11,7 @@ from datetime import date
 from pathlib import Path
 
 JSON_FILE = Path(__file__).parent / "local_user.json"
+COOKIES_FILE = Path(__file__).parent / "local_cookies.json"
 
 def create_user_data(logger):
     """
@@ -41,7 +42,7 @@ def create_user_data(logger):
             "proper_name": "Limbus Company",
             "seen_events": []
         },
-        "azur_lane": {
+        "Azur Lane": {
             "webhook": "",
             "proper_name": "Azur Lane",
             "seen_events": []

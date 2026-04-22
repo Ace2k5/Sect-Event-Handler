@@ -45,6 +45,7 @@ class Window(QWidget):
                 self.webhook_window.hide()
                 self.settings_window.hide()
             self.log_menu.show()
+            
         elif mode == "webhook":
                 if self.webhook_window.isVisible():
                     self.log_signal.emit("FRONTEND: Webhook window is already visible.")
@@ -56,12 +57,12 @@ class Window(QWidget):
                         self.webhook_window.games_dict[game]['label'].show()
                         self.webhook_window.games_dict[game]['webhook_line'].show()
                         self.webhook_window.games_dict[game]['save_button'].show()
+
         elif mode == "settings":
             if self.webhook_window.isVisible():
                 self.webhook_window.hide()
-            if self.log_menu.isVisible():
-                self.log_menu.hide()
             self.settings_window.show()
+
     def window_settings(self):
         self.buttons_size = self.sizes['button_size']
         self.log_size = self.sizes['log_menu_size']
@@ -144,7 +145,7 @@ class Window(QWidget):
                            
                         QTextEdit {
                            background-color: #141417;
-                           border: 1px solid rgb(70, 70, 80)
+                           border: None
                            }
                            
                         #ScrollArea {

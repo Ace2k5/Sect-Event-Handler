@@ -72,9 +72,8 @@ class LimbusScraper(BaseScraper):
                         ]
                     })
             else:
-                self.logger.log_info(f"{data} did not meet the requirements, skipping...")
+                self.logger.log_info(f"{data} did not meet the requirements for look back days, skipping...")
                 continue
-        
         return format_events
 
     def data_getter(self, forced=False):

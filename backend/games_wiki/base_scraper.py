@@ -29,7 +29,7 @@ class BaseScraper(ABC):
     - format_events(): Game-specific data formatting
     - data_getter(): Main data retrieval workflow
     """
-    def __init__(self, name_of_game, logger, user_data=None):
+    def __init__(self, name_of_game, logger, user_data=None, headers=None):
         """
         Initializes the base scraper with common dependencies.
         
@@ -47,6 +47,7 @@ class BaseScraper(ABC):
         self.sites = backend_inits.SITES
         self.session = requests.Session()
         self.logger = logger
+        self.headers = headers
 
 
         
@@ -70,7 +71,7 @@ class BaseScraper(ABC):
             - Logs non-200 status codes before raising exception
         """
         try:
-            response = self.session.get(url)
+            response = self.session.get(url, headers=self.headers)
             if response.status_code == 200:
                 soup = BeautifulSoup(response.text, 'html.parser')
                 return soup

@@ -1,6 +1,6 @@
 {
     "Arknights": {
-        "webhook": "https://discord.com/api/webhooks/1470711602071212124/9tSmfqwA4HcnyjWdXKPHVwa0garkieyXt75uwSdBFT97gmAzb8FzpQoFZqYcwlWu91NA",
+        "webhook": "",
         "proper_name": "Arknights",
         "seen_events": [
             "[Rerun] Exodus from the Pale Sea Rerun",
@@ -12,22 +12,22 @@
         ]
     },
     "Limbus Company": {
-        "webhook": "https://discord.com/api/webhooks/1478028651298554026/u933MBe26c08OmixUstcLkuz06hmaD385cR1XWXbvUG_ExCf_R0Fza-C5m9OWc8UubkH",
+        "webhook": "",
         "proper_name": "Limbus Company",
         "seen_events": [
             "Limbus Company 3rd Anniversary Daily Login Event",
             "LCB Regular Check-up BokGak",
-            "The Dusk of Amber",
+            "Twining Threads",
             "New Manager Attendance Check Event",
             "A Midspring Night's Dream 3"
         ]
     },
-    "azur_lane": {
+    "Azur Lane": {
         "webhook": "",
         "proper_name": "Azur Lane",
         "seen_events": []
     },
     "total_supported_games": 3,
     "lookback_days": 30,
-    "date_today": "April, 17, 2026"
+    "date_today": "April, 20, 2026"
 }

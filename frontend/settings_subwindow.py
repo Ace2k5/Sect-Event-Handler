@@ -2,7 +2,7 @@ import sys
 from PySide6.QtCore import Qt, QThreadPool, Signal
 from PySide6.QtWidgets import (QApplication, QWidget, QVBoxLayout,
                                 QHBoxLayout, QPushButton, QTextEdit,
-                                QSizePolicy, QLineEdit, QLabel, QScrollArea)
+                                QSizePolicy, QLineEdit, QLabel, QScrollArea, QSpacerItem)
 from . import settings, worker
 from backend import json_handler
 
@@ -23,11 +23,13 @@ class SubWindow(QWidget):
         self.lookback = QLineEdit("Add days to look back")
         self.save = QPushButton("Save")
         self.save.clicked.connect(lambda: self.on_click_lookback())
-        self.hbox.addWidget(self.lookback)
-        self.hbox.addWidget(self.save)
+        self.hbox.addWidget(self.lookback, 3)
+        self.hbox.addWidget(self.save, 1)
+        
         
         self.vbox.addLayout(self.hbox)
         self.vbox.addWidget(self.button)
+        self.vbox.addSpacerItem(QSpacerItem(50, 1000, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Maximum))
         
         self.main_layout = QVBoxLayout(self)
         self.main_layout.addLayout(self.vbox)

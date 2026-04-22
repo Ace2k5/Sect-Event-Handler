@@ -1,5 +1,5 @@
-from .games_wiki import arknights, limbus, base_webhook
-from . import json_handler, logger, utils
+from .games_wiki import arknights, limbus, base_webhook, azurlane
+from . import json_handler, logger, utils, backend_inits
 from functools import partial
 
 class ScrapeFlow():
@@ -50,17 +50,25 @@ class ScrapeFlow():
         Returns:
             None: Sends test data directly to Discord webhook if events found
         """
-        datas = self.ark_scrape.data_getter()
-        if not datas or datas is None:
-            self.logger.log_info("There are no new events.")
-        else:
-            self.send(datas, "Arknights")
-        datas = self.limbus.data_getter()
-        if not datas or datas is None:
-            self.logger.log_info("There are no new events.")
-        else:
-            self.send(datas, "Limbus Company")
-    
+        inp = input("1 for ark 2 for limbabs 3 for azure: ")
+        if int(inp) == 1:
+            datas = self.ark_scrape.data_getter()
+            if not datas or datas is None:
+                self.logger.log_info("There are no new events.")
+            else:
+                self.send(datas, "Arknights")
+        elif int(inp) == 2:
+            datas = self.limbus.data_getter()
+            if not datas or datas is None:
+                self.logger.log_info("There are no new events.")
+            else:
+                self.send(datas, "Limbus Company")
+        elif int(inp) == 3:
+            self.azur_lane = azurlane.AzurLaneScraper(self.logger, self.user_data, backend_inits.HEADERS)
+            datas = self.azur_lane.data_getter()
+            if not datas or datas is None:
+                self.logger.log_info("There are no new events.")
+        
     def save_data_game(self, game, key, value):
         self.user_data[game][key] = value
         json_handler.save_to_json(self.user_data)
